@@ -22,12 +22,12 @@
         .anchor-link {
             scroll-margin-top: 20px;
         }
-        /* 캐러셀에 필요한 추가 스타일입니다. */
+        /* Styles for the carousel */
         .carousel-container {
-            -webkit-tap-highlight-color: transparent; /* 모바일 터치 시 하이라이트 제거 */
-            transition: height 0.5s ease-in-out; /* 높이가 변경될 때 부드러운 전환 효과 */
+            -webkit-tap-highlight-color: transparent; /* Remove highlight on mobile touch */
+            transition: height 0.5s ease-in-out; /* Smooth transition for height changes */
         }
-        /* 툴팁 화살표 스타일 */
+        /* Styles for tooltip arrow */
         .tooltip-arrow {
             content: '';
             position: absolute;
@@ -42,22 +42,22 @@
         }
         
         #carousel-wrapper {
-            align-items: flex-start; /* 슬라이드들이 컨테이너 높이에 맞춰 늘어나는 것을 방지 */
-            gap: 1rem; /* 슬라이드 간의 간격 (16px) */
+            align-items: flex-start; /* Prevents slides from stretching to container height */
+            gap: 1rem; /* Gap between slides (16px) */
         }
 
         .carousel-slide {
-            flex: 0 0 90%; /* 각 슬라이드가 컨테이너의 90% 너비를 차지 */
+            flex: 0 0 90%; /* Each slide takes 90% of the container width */
             min-width: 0;
             box-sizing: border-box;
             transition: transform 0.5s ease, opacity 0.5s ease;
-            transform: scale(0.95); /* 비활성 슬라이드는 약간 작게 */
-            opacity: 0.7; /* 비활성 슬라이드는 약간 투명하게 */
+            transform: scale(0.95); /* Inactive slides are slightly smaller */
+            opacity: 0.7; /* Inactive slides are slightly transparent */
         }
 
         .carousel-slide.is-active {
-            transform: scale(1); /* 활성 슬라이드는 원래 크기 */
-            opacity: 1; /* 활성 슬라이드는 완전 불투명 */
+            transform: scale(1); /* Active slide is original size */
+            opacity: 1; /* Active slide is fully opaque */
         }
     </style>
 </head>
@@ -68,7 +68,7 @@
         <header class="text-center mb-12">
              <a href="#" id="top-anchor"></a>
             <h1 class="text-4xl md:text-5xl font-bold text-gray-800">부동산 시장 종합 분석</h1>
-            <p class="mt-4 text-lg text-gray-600">2025년 최신 규제부터 서울 아파트 급지까지 한눈에 보기</p>
+            <p class="mt-4 text-lg text-gray-600">2025년 최신 규제부터 추천 매물까지 한눈에 보기</p>
         </header>
 
         <!-- Section: Accordion Apartment List -->
@@ -80,14 +80,14 @@
         </section>
 
         <!-- Section: Price Bracket Listings -->
-        <div class="w-full max-w-4xl mx-auto p-4 font-sans">
+        <div class="w-full max-w-4xl mx-auto p-4 font-sans mb-16">
         <h1 class="text-3xl font-bold text-gray-800 border-b-2 border-emerald-500 pb-2 mb-8">가격 구간별 주요 매물 분석 💰</h1>
 
-        <!-- 캐러셀 컨테이너 -->
+        <!-- Carousel container -->
         <div id="carousel-container" class="relative overflow-hidden">
             <div id="carousel-wrapper" class="flex transition-transform duration-500 ease-in-out">
                 
-                <!-- 슬라이드 1: 4억대 매물 -->
+                <!-- Slide 1: 400 Million KRW Listings -->
                 <div class="carousel-slide">
                     <div class="bg-emerald-50 p-4 rounded-lg h-full">
                         <h3 class="text-2xl font-semibold text-emerald-800 mb-4 text-center">4억대</h3>
@@ -146,7 +146,7 @@
                     </div>
                 </div>
 
-                <!-- 슬라이드 2: 5억대 매물 -->
+                <!-- Slide 2: 500 Million KRW Listings -->
                 <div class="carousel-slide">
                     <div class="bg-yellow-50 p-4 rounded-lg h-full">
                         <h3 class="text-2xl font-semibold text-yellow-800 mb-4 text-center">5억대</h3>
@@ -215,7 +215,7 @@
                     </div>
                 </div>
 
-                <!-- 슬라이드 3: 6억대 매물 -->
+                <!-- Slide 3: 600 Million KRW Listings -->
                 <div class="carousel-slide">
                    <div class="bg-red-50 p-4 rounded-lg h-full">
                        <h3 class="text-2xl font-semibold text-red-800 mb-4 text-center">6억대</h3>
@@ -236,7 +236,7 @@
 
             </div>
 
-            <!-- 이전/다음 버튼 -->
+            <!-- Previous/Next buttons -->
             <button id="prevBtn" class="absolute top-1/2 left-2 transform -translate-y-1/2 bg-white/60 hover:bg-white rounded-full p-2 transition-colors focus:outline-none z-20">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
@@ -248,15 +248,15 @@
                 </svg>
             </button>
 
-            <!-- 페이지 표시기 (Dots) -->
+            <!-- Page indicators (Dots) -->
             <div id="dots-container" class="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2 z-20">
-                <!-- JavaScript로 동적으로 생성됩니다. -->
+                <!-- Dots will be dynamically generated by JavaScript. -->
             </div>
         </div>
     </div>
 
 
-        <!-- Section 1: 2025 주택시장 안정화 대책 -->
+        <!-- Section 1: 2025 Housing Market Stabilization Measures -->
         <section id="regulations" class="mb-16 anchor-link">
             <h2 class="text-3xl font-bold text-gray-800 border-b-2 border-blue-500 pb-2 mb-8">2025 주택시장 안정화 대책 📜</h2>
             <div class="bg-white p-6 rounded-lg shadow-md mb-8">
@@ -265,7 +265,7 @@
             </div>
 
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
-                <!-- Card 1: 대출 규제 -->
+                <!-- Card 1: Loan Regulations -->
                 <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
                     <div class="flex items-center mb-4">
                         <svg class="w-8 h-8 text-red-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v.01"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
@@ -278,7 +278,7 @@
                         <li>- **전세대출 DSR**: 1주택자 전세대출 이자분 DSR 반영</li>
                     </ul>
                 </div>
-                <!-- Card 2: 규제지역 확대 -->
+                <!-- Card 2: Expansion of Regulated Areas -->
                 <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
                     <div class="flex items-center mb-4">
                         <svg class="w-8 h-8 text-yellow-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 0118 0z"></path></svg>
@@ -289,7 +289,7 @@
                         <li>- **토지거래허가구역**: 위와 동일 지역 내 아파트 등</li>
                     </ul>
                 </div>
-                <!-- Card 3: 세금 및 거래 단속 -->
+                <!-- Card 3: Tax and Transaction Crackdown -->
                 <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
                     <div class="flex items-center mb-4">
                          <svg class="w-8 h-8 text-green-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"></path></svg>
@@ -336,7 +336,7 @@
             </div>
         </section>
 
-        <!-- Section 2: 서울 부동산 급지 -->
+        <!-- Section 2: Seoul Real Estate Tiers -->
         <section id="tiers" class="mb-16 anchor-link">
             <h2 class="text-3xl font-bold text-gray-800 border-b-2 border-green-500 pb-2 mb-8">한눈에 보는 서울 부동산 급지 🗺️</h2>
             <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
@@ -380,7 +380,7 @@
             </div>
         </section>
         
-        <!-- Section 4: 4억대 투자처 분석 -->
+        <!-- Section 4: Investment Analysis for 400 Million KRW -->
         <section id="investment-analysis" class="mb-16 anchor-link">
             <h2 class="text-3xl font-bold text-gray-800 border-b-2 border-orange-500 pb-2 mb-8">초기 투자금 4억 원대, 미래의 대장타운 후보지 📈</h2>
             <div class="bg-white p-6 rounded-lg shadow-md mb-8">
@@ -389,12 +389,12 @@
             </div>
         
             <div class="grid md:grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
-                <!-- Card 1: 광명뉴타운 -->
+                <!-- Card 1: Gwangmyeong New Town -->
                 <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
                     <h3 class="text-xl font-bold text-gray-800 mb-2">1. 광명뉴타운 (경기도 광명시)</h3>
                     <p class="text-gray-600"><strong class="text-blue-600">가장 현실적인 대안.</strong> 서울과 바로 인접한 '준서울' 입지에 약 2.5만 세대의 신도시급으로 변모 중입니다. 사업 속도가 빠른 구역의 소형 매물은 4억 원대 초기 투자금으로 접근 가능한 매물을 찾아볼 수 있습니다.</p>
                 </div>
-                <!-- Card 2: 장위/이문·휘경뉴타운 -->
+                <!-- Card 2: Jangwi/Imun·Hwigyeong New Town -->
                 <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
                     <h3 class="text-xl font-bold text-gray-800 mb-2">2. 장위 / 이문·휘경뉴타운 (서울 성북구/동대문구)</h3>
                     <p class="text-gray-600"><strong class="text-blue-600">서울 동북권 최대 규모.</strong> 4억 원대 예산으로는 다소 빠듯할 수 있으나, 구역 내 소형 저평가 매물을 발품 팔면 4억 후반~5억 초반대 초기 투자금으로 접근 가능성이 있는 지역입니다.</p>
@@ -411,7 +411,7 @@
             </div>
         </section>
 
-        <!-- Section 5: 운정신도시 분석 -->
+        <!-- Section 5: Unjeong New City Analysis -->
         <section id="unjeong-analysis" class="mb-16 anchor-link">
             <h2 class="text-3xl font-bold text-gray-800 border-b-2 border-teal-500 pb-2 mb-8">파주 운정신도시 분석 🚆</h2>
             <div class="bg-white p-6 rounded-lg shadow-md mb-8">
@@ -594,6 +594,7 @@
             <div class="bg-white p-6 rounded-lg shadow-md mb-8">
                 <h3 class="text-xl font-semibold text-cyan-600 mb-2">핵심 지역: 평택 고덕국제신도시</h3>
                 <p class="text-gray-700">유튜브 부동산 전문가는 미래의 부가 집중될 핵심 지역으로 '서해안 산업 벨트'를 지목하며, 그 중심지로 세계 최대 반도체 공장인 **삼성전자 평택캠퍼스**를 품은 **'평택 고덕국제신도시'**의 성장 잠재력을 매우 높게 평가했습니다. 단순한 베드타운이 아닌, 거대 산업 클러스터를 중심으로 성장하는 자족도시라는 점이 핵심입니다.</p>
+                
             </div>
 
             <div class="grid md:grid-cols-2 gap-8 mb-8">
@@ -649,6 +650,7 @@
             <div class="bg-white p-6 rounded-lg shadow-md mb-8">
                 <h3 class="text-xl font-semibold text-rose-600 mb-2">핵심 지역: 용산 국제업무지구(YIBD) 및 한강 변</h3>
                 <p class="text-gray-700">영상에서는 서해안 산업 벨트에서 창출된 부가 최종적으로 모일 서울의 최상급지로 **용산**을 지목했습니다. **용산국제업무지구(YIBD)**라는 대한민국 최대 규모의 개발 사업과 **용산공원, 한강 변 개발**이 맞물려 서울의 중심을 넘어 글로벌 중심지로 도약할 잠재력을 가졌다고 평가했습니다. 노량진, 노들섬까지 이어지는 거대한 개발 축의 핵심입니다.</p>
+                
             </div>
 
             <div class="grid md:grid-cols-2 gap-8 mb-8">
@@ -717,10 +719,10 @@
         </section>
 
         <!-- Section 9: Seoul Redevelopment Analysis -->
-        <section id="redevelopment-analysis" class="anchor-link">
+        <section id="redevelopment-analysis" class="mb-16 anchor-link">
             <h2 class="text-3xl font-bold text-gray-800 border-b-2 border-amber-500 pb-2 mb-8">서울 주요 재개발·재건축 지역 분석 🏗️</h2>
             <div class="space-y-12">
-                <!-- 1. 이문·휘경 뉴타운 -->
+                <!-- 1. Imun·Hwigyeong New Town -->
                 <div class="bg-white p-6 rounded-lg shadow-md">
                     <h3 class="text-2xl font-semibold text-amber-600 mb-4">1. 이문·휘경 뉴타운 (동대문구)</h3>
                     <p class="text-gray-700 mb-4">서울 동북권 최대 규모의 뉴타운 사업으로, 약 1.4만 세대의 신흥 주거타운으로 변모 중입니다. 1호선(외대앞역, 회기역)과 GTX-B/C 노선이 예정된 청량리역과 인접하여 교통 호재의 직접적인 수혜가 기대되는 지역입니다.</p>
@@ -741,7 +743,7 @@
                     </div>
                 </div>
 
-                <!-- 2. 북아현 뉴타운 -->
+                <!-- 2. Bugahyeon New Town -->
                 <div class="bg-white p-6 rounded-lg shadow-md">
                     <h3 class="text-2xl font-semibold text-amber-600 mb-4">2. 북아현 뉴타운 (서대문구)</h3>
                     <p class="text-gray-700 mb-4">도심(광화문/시청) 접근성이 뛰어난 직주근접 뉴타운입니다. 2호선 아현역, 5호선 충정로역을 이용 가능하며, 대부분의 구역이 사업 막바지 단계에 접어들어 마포/서대문 일대의 신흥 대장주로 자리매김하고 있습니다.</p>
@@ -763,7 +765,7 @@
                     </div>
                 </div>
 
-                <!-- 3. 흑석 뉴타운 -->
+                <!-- 3. Heukseok New Town -->
                 <div class="bg-white p-6 rounded-lg shadow-md">
                     <h3 class="text-2xl font-semibold text-amber-600 mb-4">3. 흑석 뉴타운 (동작구)</h3>
                     <p class="text-gray-700 mb-4">'준강남'으로 불리며 한강 변에 위치한 알짜 뉴타운입니다. 9호선 흑석역을 통해 강남 접근성이 매우 뛰어나며, 중앙대병원과 학군 등 인프라가 우수합니다. 대부분의 구역이 입주를 마쳤고, 남은 구역들도 사업이 빠르게 진행 중입니다.</p>
@@ -784,7 +786,7 @@
                     </div>
                 </div>
 
-                 <!-- 4. 고덕지구 재건축 -->
+                 <!-- 4. Godeok District Redevelopment -->
                 <div class="bg-white p-6 rounded-lg shadow-md">
                     <h3 class="text-2xl font-semibold text-amber-600 mb-4">4. 고덕지구 재건축 (강동구)</h3>
                     <p class="text-gray-700 mb-4">오래된 저층 주공아파트 단지들이 대규모 신축 브랜드 타운으로 완벽하게 탈바꿈한 재건축의 대표적인 성공 사례입니다. 5호선과 9호선이 지나는 더블 역세권과 고덕천, 대규모 공원 등 쾌적한 주거환경으로 강동구의 대장 지역으로 자리 잡았습니다.</p>
@@ -807,12 +809,172 @@
             </div>
         </section>
 
+        <!-- Section 10: Merged Recommended Apartments -->
+        <section id="recommendations" class="mb-16 anchor-link">
+            <h2 class="text-3xl font-bold text-gray-800 border-b-2 border-sky-500 pb-2 mb-8">추천 단지 심층 분석 (5억대 예산) 🧐</h2>
+            <div class="space-y-8">
+                <!-- Card 1: Dongtan Station Easy The One -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-2xl font-semibold text-sky-600 mb-4">동탄역 이지더원</h3>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="font-semibold text-lg text-gray-700 mb-2">단지 개요</h4>
+                            <ul class="list-disc list-inside text-sm text-gray-600 space-y-1">
+                                <li><strong>위치:</strong> 경기도 화성시 영천동 (동탄2신도시)</li>
+                                <li><strong>특징:</strong> 동탄역(SRT, GTX-A) 인접, 롯데백화점 등 편의시설</li>
+                                <li><strong>강점:</strong> 수도권 남부 교통 허브 수혜, 완성된 신도시 인프라</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-lg text-gray-700 mb-2">5억대 매물 분석</h4>
+                            <p class="text-sm text-gray-600">
+                                <strong>24평형</strong> 기준, 최근 1개월 평균 실거래가는 <strong>5억 5,000만 원</strong>입니다. 현재 나와있는 매물 평균은 <strong>5억 9,543만 원</strong>으로, 저층이나 급매물의 경우 5억 후반대에서 접근을 시도해볼 수 있으나, 예산이 다소 빠듯할 수 있습니다.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 2: Gwangmyeong Hoban Summit Grand Avenue -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-2xl font-semibold text-sky-600 mb-4">광명호반써밋 그랜드에비뉴</h3>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="font-semibold text-lg text-gray-700 mb-2">단지 개요</h4>
+                            <ul class="list-disc list-inside text-sm text-gray-600 space-y-1">
+                                <li><strong>위치:</strong> 경기도 광명시 광명동 (광명뉴타운 1R구역)</li>
+                                <li><strong>특징:</strong> 1,051세대의 신축 단지, 광명뉴타운의 미래가치</li>
+                                <li><strong>강점:</strong> 서울 접근성이 뛰어난 '준서울' 입지, 신축 아파트의 쾌적함</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-lg text-gray-700 mb-2">5억대 매물 분석</h4>
+                            <p class="text-sm text-gray-600">
+                                <strong>21평형</strong> 기준, 분양권 평균 실거래가는 <strong>5억 3,850만 원</strong>입니다. 이는 입주 전 분양권 및 입주권 단계의 가격으로, 신축 아파트가 된 현재 시점에서는 <strong>5억 원대 매물을 찾기 어렵습니다.</strong> 현재는 6억 원 이상으로 시세가 형성되어 있습니다.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 3: Guro Doosan -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-2xl font-semibold text-sky-600 mb-2">구로두산</h3>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="inline-block bg-green-100 text-green-800 text-xs font-semibold px-2.5 py-0.5 rounded-full">#부동산러_추천매물</span>
+                        <span class="inline-block bg-gray-100 text-gray-800 text-xs font-semibold px-2.5 py-0.5 rounded-full">#1200세대이상_대단지</span>
+                        <span class="inline-block bg-gray-100 text-gray-800 text-xs font-semibold px-2.5 py-0.5 rounded-full">#더블역세권</span>
+                    </div>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="font-semibold text-lg text-gray-700 mb-2">단지 개요</h4>
+                            <ul class="list-disc list-inside text-sm text-gray-600 space-y-1">
+                                <li><strong>위치:</strong> 서울시 구로구 구로동</li>
+                                <li><strong>규모:</strong> 1,286세대, 1998년 준공 (27년차)</li>
+                                <li><strong>강점:</strong> 2호선 구로디지털단지역, 7호선 남구로역 인접. G밸리 직주근접.</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-lg text-gray-700 mb-2">5억대 매물 분석</h4>
+                            <p class="text-sm text-gray-600">
+                                <strong>24평형</strong> 기준, 최근 실거래가는 <strong>6억 초반대</strong>에 형성되어 있습니다. 현재 최저 호가는 <strong>5억 8,000만 원</strong>부터 시작하여, 5억대 예산으로 접근 가능한 마지막 기회일 수 있습니다. 리모델링 추진에 대한 기대감도 있는 단지입니다.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 4: Gaebong Hanjin Town -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-2xl font-semibold text-sky-600 mb-2">개봉한진타운</h3>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="inline-block bg-gray-100 text-gray-800 text-xs font-semibold px-2.5 py-0.5 rounded-full">#1300세대이상_대단지</span>
+                        <span class="inline-block bg-gray-100 text-gray-800 text-xs font-semibold px-2.5 py-0.5 rounded-full">#1호선_역세권</span>
+                    </div>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="font-semibold text-lg text-gray-700 mb-2">단지 개요</h4>
+                            <ul class="list-disc list-inside text-sm text-gray-600 space-y-1">
+                                <li><strong>위치:</strong> 서울시 구로구 개봉동</li>
+                                <li><strong>규모:</strong> 1,371세대, 2000년 준공 (25년차)</li>
+                                <li><strong>강점:</strong> 1호선 개봉역 역세권, 대단지 관리의 이점, 주변 개발 압력 증가.</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-lg text-gray-700 mb-2">5억대 매물 분석</h4>
+                            <p class="text-sm text-gray-600">
+                                <strong>26평형 (전용 59㎡)</strong> 기준, 현재 호가는 <strong>5억 원</strong>부터 시작하는 매물이 있어 5억대 예산으로 충분히 접근 가능합니다. 용적률(345%)이 높아 재건축보다는 리모델링에 대한 기대감이 있는 단지입니다.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- NEW Section: Homebuyer's Checklist -->
+        <section id="checklist" class="mb-16 anchor-link">
+            <h2 class="text-3xl font-bold text-gray-800 border-b-2 border-fuchsia-500 pb-2 mb-8 text-center">성공적인 내 집 마련을 위한 최종 체크리스트 ✅</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Checklist Card 1: Location -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex items-center mb-3">
+                        <svg class="w-7 h-7 text-fuchsia-600 mr-2.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 6.75V15m6-6v8.25m.503-10.454l-2.284-2.285a.75.75 0 00-1.06 0l-2.285 2.285m1.06-1.061L12 3m2.716 3.716l2.285 2.285a.75.75 0 010 1.06l-2.285 2.285m-1.06 1.061L12 15.25m-2.716-3.716l-2.285-2.285a.75.75 0 00-1.06 0L3.75 9.25m1.06-1.061L6 6m6 9.75a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" /></svg>
+                        <h3 class="font-bold text-lg text-fuchsia-800">입지 & 교통</h3>
+                    </div>
+                    <ul class="list-disc list-inside text-sm text-gray-600 space-y-2">
+                        <li>직장까지 대중교통/자차 소요 시간</li>
+                        <li>가장 가까운 지하철/버스 정류장 거리</li>
+                        <li>주변 도로망 및 상습 정체 구간</li>
+                        <li>향후 교통망 개선 계획(GTX, 신설역 등)</li>
+                    </ul>
+                </div>
+                <!-- Checklist Card 2: Finances -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex items-center mb-3">
+                        <svg class="w-7 h-7 text-fuchsia-600 mr-2.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.75A.75.75 0 013 4.5h.75m0 0h.75A.75.75 0 015.25 6v.75m0 0v-.75A.75.75 0 015.25 4.5h-.75m0 0l-2.25.001M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                        <h3 class="font-bold text-lg text-fuchsia-800">자금 & 대출</h3>
+                    </div>
+                    <ul class="list-disc list-inside text-sm text-gray-600 space-y-2">
+                        <li>총 예산 및 자기 자본 확인</li>
+                        <li>주택담보대출 가능 금액(LTV, DSR)</li>
+                        <li>취득세, 중개수수료 등 부대 비용</li>
+                        <li>매년 납부할 보유세(재산세, 종부세)</li>
+                    </ul>
+                </div>
+                <!-- Checklist Card 3: Environment -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex items-center mb-3">
+                        <svg class="w-7 h-7 text-fuchsia-600 mr-2.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418" /></svg>
+                        <h3 class="font-bold text-lg text-fuchsia-800">주변 환경</h3>
+                    </div>
+                    <ul class="list-disc list-inside text-sm text-gray-600 space-y-2">
+                        <li>초/중/고등학교 배정 및 학군 수준</li>
+                        <li>대형마트, 백화점, 병원 등 편의시설</li>
+                        <li>공원, 산책로 등 녹지 공간</li>
+                        <li>유해시설(공장, 소음시설 등) 유무</li>
+                    </ul>
+                </div>
+                <!-- Checklist Card 4: Property -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex items-center mb-3">
+                        <svg class="w-7 h-7 text-fuchsia-600 mr-2.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 21v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21m0 0h4.5V3.545M12.75 21h7.5V10.75M2.25 21h1.5m18 0h-18M2.25 9l4.5-1.636M18.75 3l-1.5.545m0 6.205l3 1m-3-1l-1.5-.545m0 0l-2.25 2.25" /></svg>
+                        <h3 class="font-bold text-lg text-fuchsia-800">매물 자체</h3>
+                    </div>
+                    <ul class="list-disc list-inside text-sm text-gray-600 space-y-2">
+                        <li>향(남향/동향 등) 및 조망권, 일조량</li>
+                        <li>누수, 결로, 곰팡이 등 하자 여부</li>
+                        <li>총 주차대수 및 세대당 주차 공간</li>
+                        <li>등기부등본상 권리관계(근저당 등)</li>
+                        <li>총 세대수 (500세대 이상, 800+ 권장)</li>
+                        <li>건물 연식 (20년 이하)</li>
+                        <li>용적률 (300% 이하)</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+
     </div>
 
     <!-- Floating "Back to Top" Button -->
     <a href="#top-anchor" id="to-top-button" class="hidden fixed bottom-8 right-8 bg-blue-500 text-white p-3 rounded-full shadow-lg hover:bg-blue-600 transition">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7" />
         </svg>
     </a>
 
@@ -827,10 +989,12 @@
                     name: '철산리버빌주공',
                     location: '경기도 광명시 철산동',
                     tier: '경기도 내 상급지',
-                    price: '약 2,083만 원',
+                    price: '약 2,954만 원',
                     price_context: '철산동 평균(약 3,101만 원)보다 낮음. 주변 신축 재건축으로 평균 시세 상승.',
                     redev: '낮음',
-                    redev_context: '2001년 준공 (24년차). 재건축 연한 미도래. 주변 노후 단지 사업 완료 후 장기적 검토 가능.'
+                    redev_context: '2001년 준공 (24년차). 재건축 연한 미도래. 주변 노후 단지 사업 완료 후 장기적 검토 가능.',
+                    pros: ['안양천 조망 가능 세대', '초등학교 인접', '주변 신축 인프라 공유'],
+                    cons: ['재건축 기대감 낮음', '연식으로 인한 노후화', '주차 공간 부족']
                 },
                 {
                     name: '양평역 상록수 아파트',
@@ -839,7 +1003,9 @@
                     price: '약 10억 ~ 11.5억 (32평)',
                     price_context: '양평동 평균 시세와 비슷하나, 리모델링 사업 추진으로 가치 상승 기대감이 높음.',
                     redev: '높음 (리모델링 추진)',
-                    redev_context: '1997년 준공. 현재 리모델링 주택조합 설립 인가를 받고 사업에 속도를 내고 있음. 성공 시 1,000세대 이상의 신축급 대단지로 변모 예정.'
+                    redev_context: '1997년 준공. 현재 리모델링 주택조합 설립 인가를 받고 사업에 속도를 내고 있음. 성공 시 1,000세대 이상의 신축급 대단지로 변모 예정.',
+                    pros: ['리모델링 사업 기대감', '5호선 양평역 초역세권', '안양천, 한강공원 접근성'],
+                    cons: ['리모델링 사업 기간 및 추가분담금 리스크', '현재 구축 아파트 상태', '주변 학군 아쉬움']
                 },
                 {
                     name: '구로한신1차',
@@ -847,8 +1013,10 @@
                     tier: '5급지 (중하급지)',
                     price: '약 2,408만 원',
                     price_context: '구로동 평균(약 2,447만 원)과 유사한 수준.',
-                    redev: '초기 단계',
-                    redev_context: '1988년 준공 (37년차). 재건축 예비안전진단 접수 완료. 구로차량기지 이전 등 대형 호재 기대.'
+                    redev: '높음 (재건축 초기)',
+                    redev_context: '1988년 준공 (37년차). 재건축 예비안전진단 접수 완료. 구로차량기지 이전 등 대형 호재 기대.',
+                    pros: ['높은 재건축 사업성 기대', '구로차량기지 이전 개발 호재', '상대적으로 낮은 초기 투자금'],
+                    cons: ['매우 노후된 현재 주거 환경', '재건축까지 장시간 소요 예상', '주변 생활 인프라 다소 부족']
                 },
                 {
                     name: '운정신도시 푸르지오 더 스마트',
@@ -857,21 +1025,31 @@
                     price: '분양가 약 5.4억 ~ 5.9억 (84㎡)',
                     price_context: '주변 대장 단지(힐스테이트 운정 등)는 9억 초반대. 분양가 상한제 적용으로 가격 경쟁력이 매우 높음.',
                     redev: '신축 (분양)',
-                    redev_context: 'GTX-A 운정역 개통 호재의 최대 수혜 단지 중 하나. 서울 접근성 획기적 개선 기대. 쾌적한 신도시 인프라와 가격 경쟁력이 장점.'
+                    redev_context: 'GTX-A 운정역 개통 호재의 최대 수혜 단지 중 하나. 서울 접근성 획기적 개선 기대. 쾌적한 신도시 인프라와 가격 경쟁력이 장점.',
+                    pros: ['GTX-A 운정역 개통 최대 수혜', '분양가 상한제로 인한 높은 가격 경쟁력', '신도시의 쾌적한 인프라'],
+                    cons: ['서울 중심부까지의 물리적 거리', '대규모 공급 물량으로 인한 단기 시세 압박', '자족 기능 미흡']
                 }
             ];
             
             const accordionContainer = document.getElementById('accordion-container');
             apartmentData.forEach((data, index) => {
-                let investmentHtml = '';
-                if (data.investment_analysis) {
-                    investmentHtml = `
-                        <div class="mt-6 pt-4 border-t border-gray-200">
-                            <p class="font-semibold text-purple-700">${data.investment_analysis.title}</p>
-                            <div class="text-gray-600 text-sm mt-2 space-y-3">${data.investment_analysis.content}</div>
+                const prosConsHtml = `
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6 pt-4 border-t border-gray-200">
+                        <div>
+                            <h4 class="font-semibold text-green-600 mb-2">👍 장점 (Pros)</h4>
+                            <ul class="list-disc list-inside text-sm text-gray-600 space-y-1">
+                                ${data.pros.map(p => `<li>${p}</li>`).join('')}
+                            </ul>
                         </div>
-                    `;
-                }
+                        <div>
+                            <h4 class="font-semibold text-red-600 mb-2">👎 단점 (Cons)</h4>
+                            <ul class="list-disc list-inside text-sm text-gray-600 space-y-1">
+                                ${data.cons.map(c => `<li>${c}</li>`).join('')}
+                            </ul>
+                        </div>
+                    </div>
+                `;
+
                 const contentHtml = `
                     <div class="space-y-4">
                         <div>
@@ -884,10 +1062,10 @@
                         </div>
                         <div>
                             <p class="font-semibold text-purple-700">개발 가능성</p>
-                            <p class="text-gray-600"><span class="font-medium ${data.redev.includes('낮음') ? 'text-yellow-600' : (data.redev.includes('신축') || data.redev.includes('리모델링') || data.redev.includes('재개발') || data.redev.includes('초기 단계') || data.redev.includes('높음')) ? 'text-blue-600' : 'text-green-600'}">${data.redev}</span><br><span class="text-sm">${data.redev_context}</span></p>
+                            <p class="text-gray-600"><span class="font-medium ${data.redev.includes('낮음') ? 'text-yellow-600' : 'text-blue-600'}">${data.redev}</span><br><span class="text-sm">${data.redev_context}</span></p>
                         </div>
                     </div>
-                    ${investmentHtml}
+                    ${prosConsHtml}
                 `;
 
                 const accordionItem = document.createElement('div');
@@ -916,13 +1094,18 @@
 
                     // Close all other accordions
                     accordionHeaders.forEach(otherHeader => {
-                        otherHeader.nextElementSibling.style.maxHeight = null;
-                        otherHeader.querySelector('svg').classList.remove('rotate-180');
+                        if (otherHeader !== header) {
+                           otherHeader.nextElementSibling.style.maxHeight = null;
+                           otherHeader.querySelector('svg').classList.remove('rotate-180');
+                        }
                     });
 
                     if (isOpening) {
                         content.style.maxHeight = content.scrollHeight + "px";
                         icon.classList.add('rotate-180');
+                    } else {
+                        content.style.maxHeight = null;
+                        icon.classList.remove('rotate-180');
                     }
                 });
             });
@@ -968,102 +1151,97 @@
                 }
             });
         });
-         // 이 스크립트는 캐러셀이 포함된 부모 요소 안에서 실행되어야 합니다.
-        // 고유한 ID를 사용하기 위해 캐러셀 컨테이너를 변수로 지정합니다.
-        const carouselComponent = document.getElementById('carousel-container').parentElement;
+         // Carousel script
+         const carouselComponent = document.querySelector('.w-full.max-w-4xl.mx-auto');
+         if (carouselComponent) {
+            const carouselContainer = carouselComponent.querySelector('#carousel-container');
+            const wrapper = carouselComponent.querySelector('#carousel-wrapper');
+            const slides = carouselComponent.querySelectorAll('.carousel-slide');
+            const prevBtn = carouselComponent.querySelector('#prevBtn');
+            const nextBtn = carouselComponent.querySelector('#nextBtn');
+            const dotsContainer = carouselComponent.querySelector('#dots-container');
 
-        const carouselContainer = carouselComponent.querySelector('#carousel-container');
-        const wrapper = carouselComponent.querySelector('#carousel-wrapper');
-        const slides = carouselComponent.querySelectorAll('.carousel-slide');
-        const prevBtn = carouselComponent.querySelector('#prevBtn');
-        const nextBtn = carouselComponent.querySelector('#nextBtn');
-        const dotsContainer = carouselComponent.querySelector('#dots-container');
+            let currentIndex = 0;
+            const totalSlides = slides.length;
+            const gap = 16; 
 
-        let currentIndex = 0;
-        const totalSlides = slides.length;
-        const gap = 16; // CSS에서 설정한 gap 값 (1rem)
-
-        // 페이지 표시기(dot) 생성
-        for (let i = 0; i < totalSlides; i++) {
-            const dot = document.createElement('button');
-            dot.classList.add('w-3', 'h-3', 'rounded-full', 'transition-colors', 'duration-300');
-            dot.addEventListener('click', () => {
-                goToSlide(i);
-            });
-            dotsContainer.appendChild(dot);
-        }
-        const dots = dotsContainer.children;
-        
-        // 높이 조절 함수
-        function adjustContainerHeight() {
-            const currentSlide = slides[currentIndex];
-            if (currentSlide) {
-                carouselContainer.style.height = currentSlide.offsetHeight + 'px';
+            // Create dots
+            if (dotsContainer.children.length === 0) {
+                for (let i = 0; i < totalSlides; i++) {
+                    const dot = document.createElement('button');
+                    dot.classList.add('w-3', 'h-3', 'rounded-full', 'transition-colors', 'duration-300');
+                    dot.addEventListener('click', () => {
+                        goToSlide(i);
+                    });
+                    dotsContainer.appendChild(dot);
+                }
             }
-        }
-
-        // 레이아웃 업데이트 함수
-        function updateCarouselLayout() {
-            const containerWidth = carouselContainer.offsetWidth;
-            const slideWidth = slides[0].offsetWidth;
-            const offset = (containerWidth - slideWidth) / 2;
-
-            wrapper.style.paddingLeft = `${offset}px`;
-            wrapper.style.paddingRight = `${offset}px`;
-
-            positionSlides();
-        }
-
-        // 슬라이드 위치 계산 함수
-        function positionSlides() {
-            const slideWidth = slides[0].offsetWidth;
-            const step = slideWidth + gap;
-            const newTransform = -currentIndex * step;
-            wrapper.style.transform = `translateX(${newTransform}px)`;
-            adjustContainerHeight();
-        }
-
-        // 슬라이드 이동 및 UI 업데이트 함수
-        function goToSlide(index) {
-            if (index < 0 || index >= totalSlides) {
-                return;
+            const dots = dotsContainer.children;
+            
+            function adjustContainerHeight() {
+                const currentSlide = slides[currentIndex];
+                if (currentSlide) {
+                    // Give a bit of extra space for padding/margin inside the slide
+                    carouselContainer.style.height = (currentSlide.offsetHeight + 10) + 'px';
+                }
             }
-            currentIndex = index;
-            positionSlides();
 
-            slides.forEach(slide => slide.classList.remove('is-active'));
-            slides[currentIndex].classList.add('is-active');
+            function updateCarouselLayout() {
+                 if (slides.length === 0) return;
+                const containerWidth = carouselContainer.offsetWidth;
+                const slideWidth = slides[0].offsetWidth;
+                const offset = (containerWidth - slideWidth) / 2;
 
-            for (let i = 0; i < totalSlides; i++) {
-                dots[i].classList.remove('bg-gray-800');
-                dots[i].classList.add('bg-gray-300');
+                wrapper.style.paddingLeft = `${offset}px`;
+                wrapper.style.paddingRight = `${offset}px`;
+
+                positionSlides();
             }
-            dots[currentIndex].classList.remove('bg-gray-300');
-            dots[currentIndex].classList.add('bg-gray-800');
 
-            // 버튼 보이기/숨기기
-            prevBtn.classList.toggle('hidden', currentIndex === 0);
-            nextBtn.classList.toggle('hidden', currentIndex === totalSlides - 1);
-        }
+            function positionSlides() {
+                 if (slides.length === 0) return;
+                const slideWidth = slides[0].offsetWidth;
+                const step = slideWidth + gap;
+                const newTransform = -currentIndex * step;
+                wrapper.style.transform = `translateX(${newTransform}px)`;
+                adjustContainerHeight();
+            }
 
-        // 이벤트 리스너
-        nextBtn.addEventListener('click', () => goToSlide(currentIndex + 1));
-        prevBtn.addEventListener('click', () => goToSlide(currentIndex - 1));
-        window.addEventListener('resize', updateCarouselLayout);
+            function goToSlide(index) {
+                if (slides.length === 0 || index < 0 || index >= totalSlides) {
+                    return;
+                }
+                currentIndex = index;
+                positionSlides();
 
-        // 초기 설정
-        // 모든 이미지가 로드된 후 레이아웃을 계산해야 정확한 높이를 얻을 수 있습니다.
-        window.addEventListener('load', () => {
-            updateCarouselLayout();
-            goToSlide(0);
-        });
+                slides.forEach(slide => slide.classList.remove('is-active'));
+                slides[currentIndex].classList.add('is-active');
 
-        // 만약 load 이벤트가 이미 발생했다면 즉시 실행
-        if (document.readyState === 'complete') {
-            updateCarouselLayout();
-            goToSlide(0);
-        }
+                for (let i = 0; i < totalSlides; i++) {
+                    dots[i].classList.remove('bg-gray-800');
+                    dots[i].classList.add('bg-gray-300');
+                }
+                dots[currentIndex].classList.remove('bg-gray-300');
+                dots[currentIndex].classList.add('bg-gray-800');
+
+                prevBtn.classList.toggle('hidden', currentIndex === 0);
+                nextBtn.classList.toggle('hidden', currentIndex === totalSlides - 1);
+            }
+            
+            if (nextBtn && prevBtn) {
+                nextBtn.addEventListener('click', () => goToSlide(currentIndex + 1));
+                prevBtn.addEventListener('click', () => goToSlide(currentIndex - 1));
+            }
+            
+            window.addEventListener('resize', updateCarouselLayout);
+
+            // Use a small delay to ensure all content is rendered before calculating sizes
+            setTimeout(() => {
+                updateCarouselLayout();
+                goToSlide(0);
+            }, 100);
+
+         }
     </script>
 </body>
 </html>
-
