@@ -22,6 +22,43 @@
         .anchor-link {
             scroll-margin-top: 20px;
         }
+        /* 캐러셀에 필요한 추가 스타일입니다. */
+        .carousel-container {
+            -webkit-tap-highlight-color: transparent; /* 모바일 터치 시 하이라이트 제거 */
+            transition: height 0.5s ease-in-out; /* 높이가 변경될 때 부드러운 전환 효과 */
+        }
+        /* 툴팁 화살표 스타일 */
+        .tooltip-arrow {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: -8px;
+            width: 0;
+            height: 0;
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-top: 8px solid #1f2937; /* bg-gray-800 */
+        }
+        
+        #carousel-wrapper {
+            align-items: flex-start; /* 슬라이드들이 컨테이너 높이에 맞춰 늘어나는 것을 방지 */
+            gap: 1rem; /* 슬라이드 간의 간격 (16px) */
+        }
+
+        .carousel-slide {
+            flex: 0 0 90%; /* 각 슬라이드가 컨테이너의 90% 너비를 차지 */
+            min-width: 0;
+            box-sizing: border-box;
+            transition: transform 0.5s ease, opacity 0.5s ease;
+            transform: scale(0.95); /* 비활성 슬라이드는 약간 작게 */
+            opacity: 0.7; /* 비활성 슬라이드는 약간 투명하게 */
+        }
+
+        .carousel-slide.is-active {
+            transform: scale(1); /* 활성 슬라이드는 원래 크기 */
+            opacity: 1; /* 활성 슬라이드는 완전 불투명 */
+        }
     </style>
 </head>
 <body class="bg-gray-50">
@@ -43,156 +80,180 @@
         </section>
 
         <!-- Section: Price Bracket Listings -->
-        <section id="price-bracket-listings" class="mb-16 anchor-link">
-            <h2 class="text-3xl font-bold text-gray-800 border-b-2 border-emerald-500 pb-2 mb-8">가격 구간별 주요 매물 분석 💰</h2>
-            <table class="w-full border-collapse">
-                <tbody>
-                    <tr>
-                        <td class="w-1/3 p-2 align-top">
-                            <div class="bg-emerald-50 p-4 rounded-lg h-full">
-                                <h3 class="text-2xl font-semibold text-emerald-800 mb-4 text-center">4억대</h3>
-                                <div class="space-y-2">
-                                    <div class="relative group bg-white p-3 rounded-lg shadow">
-                                        <div class="flex justify-between items-center space-x-2">
-                                            <p class="font-bold text-gray-800 truncate">구로한신1차</p>
-                                            <p class="text-blue-600 font-semibold whitespace-nowrap">4억 2,000</p>
-                                        </div>
-                                        <div class="absolute bottom-full mb-2 w-64 left-1/2 -translate-x-1/2 hidden group-hover:block bg-gray-800 text-white text-xs rounded-lg p-3 shadow-lg z-10">
-                                            <p><strong>아파트:</strong> 18평 (전용 13평)</p><p><strong>층/향:</strong> 5/15층, 북동향</p><p><strong>확인매물:</strong> 2025.10.14</p>
-                                            <div class="absolute left-1/2 -translate-x-1/2 bottom-[-8px] w-0 h-0 border-l-8 border-l-transparent border-r-8 border-r-transparent border-t-8 border-t-gray-800"></div>
-                                        </div>
-                                    </div>
-                                    <div class="relative group bg-white p-3 rounded-lg shadow">
-                                        <div class="flex justify-between items-center space-x-2">
-                                            <p class="font-bold text-gray-800 truncate">라인</p>
-                                            <p class="text-blue-600 font-semibold whitespace-nowrap">4억 5,000</p>
-                                        </div>
-                                        <div class="absolute bottom-full mb-2 w-64 left-1/2 -translate-x-1/2 hidden group-hover:block bg-gray-800 text-white text-xs rounded-lg p-3 shadow-lg z-10">
-                                            <p><strong>아파트:</strong> 24평 (전용 18평)</p><p><strong>층/향:</strong> 20/22층, 남향</p><p><strong>확인매물:</strong> 2025.10.13</p>
-                                            <div class="absolute left-1/2 -translate-x-1/2 bottom-[-8px] w-0 h-0 border-l-8 border-l-transparent border-r-8 border-r-transparent border-t-8 border-t-gray-800"></div>
-                                        </div>
-                                    </div>
-                                    <div class="relative group bg-white p-3 rounded-lg shadow">
-                                        <div class="flex justify-between items-center space-x-2">
-                                            <p class="font-bold text-gray-800 truncate">구일우성</p>
-                                            <p class="text-blue-600 font-semibold whitespace-nowrap">4억 6,000</p>
-                                        </div>
-                                        <div class="absolute bottom-full mb-2 w-64 left-1/2 -translate-x-1/2 hidden group-hover:block bg-gray-800 text-white text-xs rounded-lg p-3 shadow-lg z-10">
-                                            <p><strong>아파트:</strong> 24평 (전용 17평)</p><p><strong>층/향:</strong> 1/25층, 동향</p><p><strong>확인매물:</strong> 2025.10.15</p>
-                                            <div class="absolute left-1/2 -translate-x-1/2 bottom-[-8px] w-0 h-0 border-l-8 border-l-transparent border-r-8 border-r-transparent border-t-8 border-t-gray-800"></div>
-                                        </div>
-                                    </div>
-                                    <div class="relative group bg-white p-3 rounded-lg shadow">
-                                        <div class="flex justify-between items-center space-x-2">
-                                            <p class="font-bold text-gray-800 truncate">개봉대상</p>
-                                            <p class="text-blue-600 font-semibold whitespace-nowrap">4억 6,000</p>
-                                        </div>
-                                        <div class="absolute bottom-full mb-2 w-64 left-1/2 -translate-x-1/2 hidden group-hover:block bg-gray-800 text-white text-xs rounded-lg p-3 shadow-lg z-10">
-                                            <p><strong>아파트:</strong> 26평 (전용 18평)</p><p><strong>층/향:</strong> 17/25층, 남향</p><p><strong>확인매물:</strong> 2025.09.25</p>
-                                            <div class="absolute left-1/2 -translate-x-1/2 bottom-[-8px] w-0 h-0 border-l-8 border-l-transparent border-r-8 border-r-transparent border-t-8 border-t-gray-800"></div>
-                                        </div>
-                                    </div>
-                                     <div class="relative group bg-white p-3 rounded-lg shadow">
-                                        <div class="flex justify-between items-center space-x-2">
-                                            <p class="font-bold text-gray-800 truncate">철산리버빌주공</p>
-                                            <p class="text-blue-600 font-semibold whitespace-nowrap">4억 8,000</p>
-                                        </div>
-                                         <div class="absolute bottom-full mb-2 w-64 left-1/2 -translate-x-1/2 hidden group-hover:block bg-gray-800 text-white text-xs rounded-lg p-3 shadow-lg z-10">
-                                            <p><strong>아파트:</strong> 22평 (전용 15평)</p><p><strong>층/향:</strong> 11/20층, 남향</p><p><strong>확인매물:</strong> 2025.10.11</p>
-                                            <div class="absolute left-1/2 -translate-x-1/2 bottom-[-8px] w-0 h-0 border-l-8 border-l-transparent border-r-8 border-r-transparent border-t-8 border-t-gray-800"></div>
-                                        </div>
-                                    </div>
+        <div class="w-full max-w-4xl mx-auto p-4 font-sans">
+        <h1 class="text-3xl font-bold text-gray-800 border-b-2 border-emerald-500 pb-2 mb-8">가격 구간별 주요 매물 분석 💰</h1>
+
+        <!-- 캐러셀 컨테이너 -->
+        <div id="carousel-container" class="relative overflow-hidden">
+            <div id="carousel-wrapper" class="flex transition-transform duration-500 ease-in-out">
+                
+                <!-- 슬라이드 1: 4억대 매물 -->
+                <div class="carousel-slide">
+                    <div class="bg-emerald-50 p-4 rounded-lg h-full">
+                        <h3 class="text-2xl font-semibold text-emerald-800 mb-4 text-center">4억대</h3>
+                        <div class="space-y-2">
+                            <div class="relative group bg-white p-3 rounded-lg shadow">
+                                <div class="flex justify-between items-center space-x-2">
+                                    <p class="font-bold text-gray-800 truncate">구로한신1차</p>
+                                    <p class="text-blue-600 font-semibold whitespace-nowrap">4억 2,000</p>
+                                </div>
+                                <div class="absolute bottom-full mb-2 w-64 left-1/2 -translate-x-1/2 hidden group-hover:block bg-gray-800 text-white text-xs rounded-lg p-3 shadow-lg z-10">
+                                    <p><strong>아파트:</strong> 18평 (전용 13평)</p><p><strong>층/향:</strong> 5/15층, 북동향</p><p><strong>확인매물:</strong> 2025.10.14</p>
+                                    <div class="tooltip-arrow"></div>
                                 </div>
                             </div>
-                        </td>
-                        <td class="w-1/3 p-4 align-top">
-                            <div class="bg-yellow-50 p-6 rounded-lg h-full">
-                                <h3 class="text-2xl font-semibold text-yellow-800 mb-4 text-center">5억대</h3>
-                                <div class="space-y-3">
-                                    <div class="relative group bg-white p-3 rounded-lg shadow">
-                                         <div class="flex justify-between items-center space-x-2">
-                                            <p class="font-bold text-gray-800 truncate">건영3차</p>
-                                            <p class="text-blue-600 font-semibold whitespace-nowrap">5억</p>
-                                        </div>
-                                        <div class="absolute bottom-full mb-2 w-64 left-1/2 -translate-x-1/2 hidden group-hover:block bg-gray-800 text-white text-xs rounded-lg p-3 shadow-lg z-10">
-                                            <p><strong>아파트:</strong> 23평 (전용 17평)</p><p><strong>층/향:</strong> 1/15층, 남향</p><p><strong>확인매물:</strong> 2025.09.18</p>
-                                            <div class="absolute left-1/2 -translate-x-1/2 bottom-[-8px] w-0 h-0 border-l-8 border-l-transparent border-r-8 border-r-transparent border-t-8 border-t-gray-800"></div>
-                                        </div>
-                                    </div>
-                                    <div class="relative group bg-white p-3 rounded-lg shadow">
-                                        <div class="flex justify-between items-center space-x-2">
-                                            <p class="font-bold text-gray-800 truncate">신개봉삼환</p>
-                                            <p class="text-blue-600 font-semibold whitespace-nowrap">5억</p>
-                                        </div>
-                                         <div class="absolute bottom-full mb-2 w-64 left-1/2 -translate-x-1/2 hidden group-hover:block bg-gray-800 text-white text-xs rounded-lg p-3 shadow-lg z-10">
-                                            <p><strong>아파트:</strong> 25평 (전용 18평)</p><p><strong>층/향:</strong> 2/19층, 동향</p><p><strong>확인매물:</strong> 2025.09.30</p>
-                                            <div class="absolute left-1/2 -translate-x-1/2 bottom-[-8px] w-0 h-0 border-l-8 border-l-transparent border-r-8 border-r-transparent border-t-8 border-t-gray-800"></div>
-                                        </div>
-                                    </div>
-                                    <div class="relative group bg-white p-3 rounded-lg shadow">
-                                         <div class="flex justify-between items-center space-x-2">
-                                            <p class="font-bold text-gray-800 truncate">삼환</p>
-                                            <p class="text-blue-600 font-semibold whitespace-nowrap">5억 5,000</p>
-                                        </div>
-                                         <div class="absolute bottom-full mb-2 w-64 left-1/2 -translate-x-1/2 hidden group-hover:block bg-gray-800 text-white text-xs rounded-lg p-3 shadow-lg z-10">
-                                            <p><strong>아파트:</strong> 25평 (전용 17평)</p><p><strong>층/향:</strong> 4/21층, 동향</p><p><strong>확인매물:</strong> 2025.10.13</p>
-                                            <div class="absolute left-1/2 -translate-x-1/2 bottom-[-8px] w-0 h-0 border-l-8 border-l-transparent border-r-8 border-r-transparent border-t-8 border-t-gray-800"></div>
-                                        </div>
-                                    </div>
-                                    <div class="relative group bg-white p-3 rounded-lg shadow">
-                                        <div class="flex justify-between items-center space-x-2">
-                                            <p class="font-bold text-gray-800 truncate">삼천리</p>
-                                            <p class="text-blue-600 font-semibold whitespace-nowrap">5억 5,000</p>
-                                        </div>
-                                         <div class="absolute bottom-full mb-2 w-64 left-1/2 -translate-x-1/2 hidden group-hover:block bg-gray-800 text-white text-xs rounded-lg p-3 shadow-lg z-10">
-                                            <p><strong>아파트:</strong> 23평 (전용 18평)</p><p><strong>층/향:</strong> 23/25층, 동향</p><p><strong>확인매물:</strong> 2025.09.29</p>
-                                            <div class="absolute left-1/2 -translate-x-1/2 bottom-[-8px] w-0 h-0 border-l-8 border-l-transparent border-r-8 border-r-transparent border-t-8 border-t-gray-800"></div>
-                                        </div>
-                                    </div>
-                                     <div class="relative group bg-white p-3 rounded-lg shadow">
-                                        <div class="flex justify-between items-center space-x-2">
-                                            <p class="font-bold text-gray-800 truncate">우림필유</p>
-                                            <p class="text-blue-600 font-semibold whitespace-nowrap">5억 6,000</p>
-                                        </div>
-                                         <div class="absolute bottom-full mb-2 w-64 left-1/2 -translate-x-1/2 hidden group-hover:block bg-gray-800 text-white text-xs rounded-lg p-3 shadow-lg z-10">
-                                            <p><strong>아파트:</strong> 23평 (전용 18평)</p><p><strong>층/향:</strong> 9/15층, 남향</p><p><strong>확인매물:</strong> 2025.10.13</p>
-                                            <div class="absolute left-1/2 -translate-x-1/2 bottom-[-8px] w-0 h-0 border-l-8 border-l-transparent border-r-8 border-r-transparent border-t-8 border-t-gray-800"></div>
-                                        </div>
-                                    </div>
-                                    <div class="relative group bg-white p-3 rounded-lg shadow">
-                                         <div class="flex justify-between items-center space-x-2">
-                                            <p class="font-bold text-gray-800 truncate">상록수</p>
-                                            <p class="text-blue-600 font-semibold whitespace-nowrap">5억 8,000</p>
-                                        </div>
-                                         <div class="absolute bottom-full mb-2 w-64 left-1/2 -translate-x-1/2 hidden group-hover:block bg-gray-800 text-white text-xs rounded-lg p-3 shadow-lg z-10">
-                                            <p><strong>아파트:</strong> 23평 (전용 18평)</p><p><strong>층/향:</strong> 2/20층, 남향</p><p><strong>확인매물:</strong> 2025.09.19</p>
-                                            <div class="absolute left-1/2 -translate-x-1/2 bottom-[-8px] w-0 h-0 border-l-8 border-l-transparent border-r-8 border-r-transparent border-t-8 border-t-gray-800"></div>
-                                        </div>
-                                    </div>
+                            <div class="relative group bg-white p-3 rounded-lg shadow">
+                                <div class="flex justify-between items-center space-x-2">
+                                    <p class="font-bold text-gray-800 truncate">라인</p>
+                                    <p class="text-blue-600 font-semibold whitespace-nowrap">4억 5,000</p>
+                                </div>
+                                <div class="absolute bottom-full mb-2 w-64 left-1/2 -translate-x-1/2 hidden group-hover:block bg-gray-800 text-white text-xs rounded-lg p-3 shadow-lg z-10">
+                                    <p><strong>아파트:</strong> 24평 (전용 18평)</p><p><strong>층/향:</strong> 20/22층, 남향</p><p><strong>확인매물:</strong> 2025.10.13</p>
+                                    <div class="tooltip-arrow"></div>
                                 </div>
                             </div>
-                        </td>
-                        <td class="w-1/3 p-4 align-top">
-                           <div class="bg-red-50 p-6 rounded-lg h-full">
-                               <h3 class="text-2xl font-semibold text-red-800 mb-4 text-center">6억대</h3>
-                               <div class="space-y-3">
-                                   <div class="relative group bg-white p-3 rounded-lg shadow">
-                                        <div class="flex justify-between items-center space-x-2">
-                                            <p class="font-bold text-gray-800 truncate">영등포현대프라자</p>
-                                            <p class="text-blue-600 font-semibold whitespace-nowrap">6억 5,000</p>
-                                        </div>
-                                        <div class="absolute bottom-full mb-2 w-64 left-1/2 -translate-x-1/2 hidden group-hover:block bg-gray-800 text-white text-xs rounded-lg p-3 shadow-lg z-10">
-                                            <p><strong>종류:</strong> 주상복합</p><p><strong>평형:</strong> 31평 (전용 20평)</p><p><strong>층/향:</strong> 중/18층, 북향</p><p><strong>확인매물:</strong> 2025.10.01</p>
-                                            <div class="absolute left-1/2 -translate-x-1/2 bottom-[-8px] w-0 h-0 border-l-8 border-l-transparent border-r-8 border-r-transparent border-t-8 border-t-gray-800"></div>
-                                        </div>
-                                    </div>
-                               </div>
-                           </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
+                            <div class="relative group bg-white p-3 rounded-lg shadow">
+                                <div class="flex justify-between items-center space-x-2">
+                                    <p class="font-bold text-gray-800 truncate">구일우성</p>
+                                    <p class="text-blue-600 font-semibold whitespace-nowrap">4억 6,000</p>
+                                </div>
+                                <div class="absolute bottom-full mb-2 w-64 left-1/2 -translate-x-1/2 hidden group-hover:block bg-gray-800 text-white text-xs rounded-lg p-3 shadow-lg z-10">
+                                    <p><strong>아파트:</strong> 24평 (전용 17평)</p><p><strong>층/향:</strong> 1/25층, 동향</p><p><strong>확인매물:</strong> 2025.10.15</p>
+                                    <div class="tooltip-arrow"></div>
+                                </div>
+                            </div>
+                            <div class="relative group bg-white p-3 rounded-lg shadow">
+                                <div class="flex justify-between items-center space-x-2">
+                                    <p class="font-bold text-gray-800 truncate">개봉대상</p>
+                                    <p class="text-blue-600 font-semibold whitespace-nowrap">4억 6,000</p>
+                                </div>
+                                <div class="absolute bottom-full mb-2 w-64 left-1/2 -translate-x-1/2 hidden group-hover:block bg-gray-800 text-white text-xs rounded-lg p-3 shadow-lg z-10">
+                                    <p><strong>아파트:</strong> 26평 (전용 18평)</p><p><strong>층/향:</strong> 17/25층, 남향</p><p><strong>확인매물:</strong> 2025.09.25</p>
+                                    <div class="tooltip-arrow"></div>
+                                </div>
+                            </div>
+                             <div class="relative group bg-white p-3 rounded-lg shadow">
+                                <div class="flex justify-between items-center space-x-2">
+                                    <p class="font-bold text-gray-800 truncate">철산리버빌주공</p>
+                                    <p class="text-blue-600 font-semibold whitespace-nowrap">4억 8,000</p>
+                                </div>
+                                 <div class="absolute bottom-full mb-2 w-64 left-1/2 -translate-x-1/2 hidden group-hover:block bg-gray-800 text-white text-xs rounded-lg p-3 shadow-lg z-10">
+                                    <p><strong>아파트:</strong> 22평 (전용 15평)</p><p><strong>층/향:</strong> 11/20층, 남향</p><p><strong>확인매물:</strong> 2025.10.11</p>
+                                    <div class="tooltip-arrow"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 슬라이드 2: 5억대 매물 -->
+                <div class="carousel-slide">
+                    <div class="bg-yellow-50 p-4 rounded-lg h-full">
+                        <h3 class="text-2xl font-semibold text-yellow-800 mb-4 text-center">5억대</h3>
+                        <div class="space-y-2">
+                            <div class="relative group bg-white p-3 rounded-lg shadow">
+                                 <div class="flex justify-between items-center space-x-2">
+                                    <p class="font-bold text-gray-800 truncate">건영3차</p>
+                                    <p class="text-blue-600 font-semibold whitespace-nowrap">5억</p>
+                                </div>
+                                <div class="absolute bottom-full mb-2 w-64 left-1/2 -translate-x-1/2 hidden group-hover:block bg-gray-800 text-white text-xs rounded-lg p-3 shadow-lg z-10">
+                                    <p><strong>아파트:</strong> 23평 (전용 17평)</p><p><strong>층/향:</strong> 1/15층, 남향</p><p><strong>확인매물:</strong> 2025.09.18</p>
+                                    <div class="tooltip-arrow"></div>
+                                </div>
+                            </div>
+                            <div class="relative group bg-white p-3 rounded-lg shadow">
+                                <div class="flex justify-between items-center space-x-2">
+                                    <p class="font-bold text-gray-800 truncate">신개봉삼환</p>
+                                    <p class="text-blue-600 font-semibold whitespace-nowrap">5억</p>
+                                </div>
+                                 <div class="absolute bottom-full mb-2 w-64 left-1/2 -translate-x-1/2 hidden group-hover:block bg-gray-800 text-white text-xs rounded-lg p-3 shadow-lg z-10">
+                                    <p><strong>아파트:</strong> 25평 (전용 18평)</p><p><strong>층/향:</strong> 2/19층, 동향</p><p><strong>확인매물:</strong> 2025.09.30</p>
+                                    <div class="tooltip-arrow"></div>
+                                </div>
+                            </div>
+                            <div class="relative group bg-white p-3 rounded-lg shadow">
+                                 <div class="flex justify-between items-center space-x-2">
+                                    <p class="font-bold text-gray-800 truncate">삼환</p>
+                                    <p class="text-blue-600 font-semibold whitespace-nowrap">5억 5,000</p>
+                                </div>
+                                 <div class="absolute bottom-full mb-2 w-64 left-1/2 -translate-x-1/2 hidden group-hover:block bg-gray-800 text-white text-xs rounded-lg p-3 shadow-lg z-10">
+                                    <p><strong>아파트:</strong> 25평 (전용 17평)</p><p><strong>층/향:</strong> 4/21층, 동향</p><p><strong>확인매물:</strong> 2025.10.13</p>
+                                    <div class="tooltip-arrow"></div>
+                                </div>
+                            </div>
+                            <div class="relative group bg-white p-3 rounded-lg shadow">
+                                <div class="flex justify-between items-center space-x-2">
+                                    <p class="font-bold text-gray-800 truncate">삼천리</p>
+                                    <p class="text-blue-600 font-semibold whitespace-nowrap">5억 5,000</p>
+                                </div>
+                                 <div class="absolute bottom-full mb-2 w-64 left-1/2 -translate-x-1/2 hidden group-hover:block bg-gray-800 text-white text-xs rounded-lg p-3 shadow-lg z-10">
+                                    <p><strong>아파트:</strong> 23평 (전용 18평)</p><p><strong>층/향:</strong> 23/25층, 동향</p><p><strong>확인매물:</strong> 2025.09.29</p>
+                                    <div class="tooltip-arrow"></div>
+                                </div>
+                            </div>
+                             <div class="relative group bg-white p-3 rounded-lg shadow">
+                                <div class="flex justify-between items-center space-x-2">
+                                    <p class="font-bold text-gray-800 truncate">우림필유</p>
+                                    <p class="text-blue-600 font-semibold whitespace-nowrap">5억 6,000</p>
+                                </div>
+                                 <div class="absolute bottom-full mb-2 w-64 left-1/2 -translate-x-1/2 hidden group-hover:block bg-gray-800 text-white text-xs rounded-lg p-3 shadow-lg z-10">
+                                    <p><strong>아파트:</strong> 23평 (전용 18평)</p><p><strong>층/향:</strong> 9/15층, 남향</p><p><strong>확인매물:</strong> 2025.10.13</p>
+                                    <div class="tooltip-arrow"></div>
+                                </div>
+                            </div>
+                            <div class="relative group bg-white p-3 rounded-lg shadow">
+                                 <div class="flex justify-between items-center space-x-2">
+                                    <p class="font-bold text-gray-800 truncate">상록수</p>
+                                    <p class="text-blue-600 font-semibold whitespace-nowrap">5억 8,000</p>
+                                </div>
+                                 <div class="absolute bottom-full mb-2 w-64 left-1/2 -translate-x-1/2 hidden group-hover:block bg-gray-800 text-white text-xs rounded-lg p-3 shadow-lg z-10">
+                                    <p><strong>아파트:</strong> 23평 (전용 18평)</p><p><strong>층/향:</strong> 2/20층, 남향</p><p><strong>확인매물:</strong> 2025.09.19</p>
+                                    <div class="tooltip-arrow"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 슬라이드 3: 6억대 매물 -->
+                <div class="carousel-slide">
+                   <div class="bg-red-50 p-4 rounded-lg h-full">
+                       <h3 class="text-2xl font-semibold text-red-800 mb-4 text-center">6억대</h3>
+                       <div class="space-y-2">
+                           <div class="relative group bg-white p-3 rounded-lg shadow">
+                                <div class="flex justify-between items-center space-x-2">
+                                    <p class="font-bold text-gray-800 truncate">영등포현대프라자</p>
+                                    <p class="text-blue-600 font-semibold whitespace-nowrap">6억 5,000</p>
+                                </div>
+                                <div class="absolute bottom-full mb-2 w-64 left-1/2 -translate-x-1/2 hidden group-hover:block bg-gray-800 text-white text-xs rounded-lg p-3 shadow-lg z-10">
+                                    <p><strong>종류:</strong> 주상복합</p><p><strong>평형:</strong> 31평 (전용 20평)</p><p><strong>층/향:</strong> 중/18층, 북향</p><p><strong>확인매물:</strong> 2025.10.01</p>
+                                    <div class="tooltip-arrow"></div>
+                                </div>
+                            </div>
+                       </div>
+                   </div>
+                </div>
+
+            </div>
+
+            <!-- 이전/다음 버튼 -->
+            <button id="prevBtn" class="absolute top-1/2 left-2 transform -translate-y-1/2 bg-white/60 hover:bg-white rounded-full p-2 transition-colors focus:outline-none z-20">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                </svg>
+            </button>
+            <button id="nextBtn" class="absolute top-1/2 right-2 transform -translate-y-1/2 bg-white/60 hover:bg-white rounded-full p-2 transition-colors focus:outline-none z-20">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+            </button>
+
+            <!-- 페이지 표시기 (Dots) -->
+            <div id="dots-container" class="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2 z-20">
+                <!-- JavaScript로 동적으로 생성됩니다. -->
+            </div>
+        </div>
+    </div>
 
 
         <!-- Section 1: 2025 주택시장 안정화 대책 -->
@@ -907,6 +968,101 @@
                 }
             });
         });
+         // 이 스크립트는 캐러셀이 포함된 부모 요소 안에서 실행되어야 합니다.
+        // 고유한 ID를 사용하기 위해 캐러셀 컨테이너를 변수로 지정합니다.
+        const carouselComponent = document.getElementById('carousel-container').parentElement;
+
+        const carouselContainer = carouselComponent.querySelector('#carousel-container');
+        const wrapper = carouselComponent.querySelector('#carousel-wrapper');
+        const slides = carouselComponent.querySelectorAll('.carousel-slide');
+        const prevBtn = carouselComponent.querySelector('#prevBtn');
+        const nextBtn = carouselComponent.querySelector('#nextBtn');
+        const dotsContainer = carouselComponent.querySelector('#dots-container');
+
+        let currentIndex = 0;
+        const totalSlides = slides.length;
+        const gap = 16; // CSS에서 설정한 gap 값 (1rem)
+
+        // 페이지 표시기(dot) 생성
+        for (let i = 0; i < totalSlides; i++) {
+            const dot = document.createElement('button');
+            dot.classList.add('w-3', 'h-3', 'rounded-full', 'transition-colors', 'duration-300');
+            dot.addEventListener('click', () => {
+                goToSlide(i);
+            });
+            dotsContainer.appendChild(dot);
+        }
+        const dots = dotsContainer.children;
+        
+        // 높이 조절 함수
+        function adjustContainerHeight() {
+            const currentSlide = slides[currentIndex];
+            if (currentSlide) {
+                carouselContainer.style.height = currentSlide.offsetHeight + 'px';
+            }
+        }
+
+        // 레이아웃 업데이트 함수
+        function updateCarouselLayout() {
+            const containerWidth = carouselContainer.offsetWidth;
+            const slideWidth = slides[0].offsetWidth;
+            const offset = (containerWidth - slideWidth) / 2;
+
+            wrapper.style.paddingLeft = `${offset}px`;
+            wrapper.style.paddingRight = `${offset}px`;
+
+            positionSlides();
+        }
+
+        // 슬라이드 위치 계산 함수
+        function positionSlides() {
+            const slideWidth = slides[0].offsetWidth;
+            const step = slideWidth + gap;
+            const newTransform = -currentIndex * step;
+            wrapper.style.transform = `translateX(${newTransform}px)`;
+            adjustContainerHeight();
+        }
+
+        // 슬라이드 이동 및 UI 업데이트 함수
+        function goToSlide(index) {
+            if (index < 0 || index >= totalSlides) {
+                return;
+            }
+            currentIndex = index;
+            positionSlides();
+
+            slides.forEach(slide => slide.classList.remove('is-active'));
+            slides[currentIndex].classList.add('is-active');
+
+            for (let i = 0; i < totalSlides; i++) {
+                dots[i].classList.remove('bg-gray-800');
+                dots[i].classList.add('bg-gray-300');
+            }
+            dots[currentIndex].classList.remove('bg-gray-300');
+            dots[currentIndex].classList.add('bg-gray-800');
+
+            // 버튼 보이기/숨기기
+            prevBtn.classList.toggle('hidden', currentIndex === 0);
+            nextBtn.classList.toggle('hidden', currentIndex === totalSlides - 1);
+        }
+
+        // 이벤트 리스너
+        nextBtn.addEventListener('click', () => goToSlide(currentIndex + 1));
+        prevBtn.addEventListener('click', () => goToSlide(currentIndex - 1));
+        window.addEventListener('resize', updateCarouselLayout);
+
+        // 초기 설정
+        // 모든 이미지가 로드된 후 레이아웃을 계산해야 정확한 높이를 얻을 수 있습니다.
+        window.addEventListener('load', () => {
+            updateCarouselLayout();
+            goToSlide(0);
+        });
+
+        // 만약 load 이벤트가 이미 발생했다면 즉시 실행
+        if (document.readyState === 'complete') {
+            updateCarouselLayout();
+            goToSlide(0);
+        }
     </script>
 </body>
 </html>
