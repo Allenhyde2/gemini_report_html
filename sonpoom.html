@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>손품 리스트 - 부동산 실거래 정보</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+        .chart-container {
+            position: relative;
+            height: 40vh;
+            width: 100%;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+
+    <div class="container mx-auto p-4 sm:p-6 lg:p-8">
+        <header class="text-center mb-8">
+            <h1 class="text-3xl sm:text-4xl font-bold text-gray-800">손품 리스트</h1>
+            <p class="text-gray-500 mt-2">첫 번째 매물: e편한세상 금호 파크힐스</p>
+        </header>
+
+        <main>
+            <!-- 매물 정보 카드 -->
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                <div class="bg-blue-600 text-white p-5">
+                    <h2 class="text-2xl font-bold">e편한세상 금호 파크힐스 24평</h2>
+                    <p class="text-blue-200">서울시 성동구 금호동</p>
+                </div>
+
+                <div class="p-5 md:p-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- 기본 정보 -->
+                    <div class="lg:col-span-1 space-y-4">
+                        <h3 class="text-xl font-semibold text-gray-800 border-b pb-2">기본 정보</h3>
+                        <div class="flex justify-between items-center">
+                            <span class="font-medium text-gray-500">현재 매물가</span>
+                            <span class="font-bold text-lg text-blue-600">16.3억</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="font-medium text-gray-500">평수</span>
+                            <span class="text-gray-700">공급 82.26㎡ / 전용 59.97㎡ (24평)</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="font-medium text-gray-500">층수</span>
+                            <span class="text-gray-700">11층 / 16층</span>
+                        </div>
+                         <div class="flex justify-between items-center">
+                            <span class="font-medium text-gray-500">채광 방향</span>
+                            <span class="text-gray-700">남동향 (거실 기준)</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="font-medium text-gray-500">세대수</span>
+                            <span class="text-gray-700">1,330세대 (20개동)</span>
+                        </div>
+                         <div class="flex justify-between items-center">
+                            <span class="font-medium text-gray-500">난방 방식</span>
+                            <span class="text-gray-700">개별난방</span>
+                        </div>
+                         <div class="flex justify-between items-center">
+                            <span class="font-medium text-gray-500">구조</span>
+                            <span class="text-gray-700">계단식</span>
+                        </div>
+                         <div class="flex justify-between items-center">
+                            <span class="font-medium text-gray-500">주차 공간</span>
+                            <span class="text-gray-700">세대당 1.25대</span>
+                        </div>
+                         <div class="flex justify-between items-center">
+                            <span class="font-medium text-gray-500">월 관리비</span>
+                            <span class="text-gray-700">약 15~20만원 (변동 가능)</span>
+                        </div>
+                    </div>
+
+                    <!-- 입지 분석 -->
+                    <div class="lg:col-span-1 space-y-4">
+                        <h3 class="text-xl font-semibold text-gray-800 border-b pb-2">입지 분석</h3>
+                        <div class="flex justify-between items-start">
+                            <span class="font-medium text-gray-500 w-1/3">직주근접성</span>
+                            <span class="text-gray-700 w-2/3 text-right">광화문, 강남, 여의도 등 주요업무지구 30분 내 접근</span>
+                        </div>
+                         <div class="flex justify-between items-start">
+                            <span class="font-medium text-gray-500 w-1/3">주변 지하철역</span>
+                            <span class="text-gray-700 w-2/3 text-right">3호선 금호역, 5호선 신금호역 (더블 역세권)</span>
+                        </div>
+                        <div class="flex justify-between items-start">
+                            <span class="font-medium text-gray-500 w-1/3">초등학교</span>
+                            <span class="text-gray-700 w-2/3 text-right">금호초등학교 (단지 내 위치, 초품아)</span>
+                        </div>
+                         <div class="flex justify-between items-start">
+                            <span class="font-medium text-gray-500 w-1/3">주변 인프라</span>
+                            <span class="text-gray-700 w-2/3 text-right">금남시장, 성동구립도서관, 응봉산 공원, 서울숲 접근 용이</span>
+                        </div>
+                        <div class="flex justify-between items-start">
+                            <span class="font-medium text-gray-500 w-1/3">상급지 접근성</span>
+                            <span class="text-gray-700 w-2/3 text-right">동호대교 통해 압구정 현대백화점 등 강남 인프라 10분 내 접근</span>
+                        </div>
+                    </div>
+                    
+                    <!-- 투자 가치 -->
+                    <div class="lg:col-span-1 space-y-4">
+                        <h3 class="text-xl font-semibold text-gray-800 border-b pb-2">투자가치 분석</h3>
+                        <div class="flex justify-between items-start">
+                            <span class="font-medium text-gray-500 w-1/3">환금성 (거래량)</span>
+                            <span class="text-gray-700 w-2/3 text-right">높음 (성동구 내 인기 대단지로 꾸준한 거래량)</span>
+                        </div>
+                        <div class="flex justify-between items-start">
+                            <span class="font-medium text-gray-500 w-1/3">선호도</span>
+                            <span class="text-gray-700 w-2/3 text-right">로얄 평수(24평), 로얄 층(중고층)으로 선호도 높은 매물</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 실거래가 변동 추이 그래프 -->
+                <div class="p-5 md:p-8 border-t">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">지난 5년간 실거래가 변동 추이 (24평 기준)</h3>
+                    <div class="chart-container">
+                        <canvas id="priceChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const ctx = document.getElementById('priceChart').getContext('2d');
+        const priceChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['2020', '2021', '2022', '2023', '2024', '2025 (현재)'],
+                datasets: [
+                    {
+                        label: 'e편한세상 금호 파크힐스 (억원)',
+                        data: [11.5, 14.8, 15.5, 14.2, 15.8, 16.3],
+                        borderColor: 'rgb(59, 130, 246)',
+                        backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                        fill: true,
+                        tension: 0.3,
+                        pointBackgroundColor: 'rgb(59, 130, 246)',
+                        pointRadius: 5,
+
+                    },
+                    {
+                        label: '주변 대장단지 (억원)',
+                        data: [13.2, 17.1, 18.0, 16.5, 17.9, 18.5],
+                        borderColor: 'rgb(234, 179, 8)',
+                        backgroundColor: 'rgba(234, 179, 8, 0.1)',
+                        fill: true,
+                        tension: 0.3,
+                        pointBackgroundColor: 'rgb(234, 179, 8)',
+                        pointRadius: 5,
+                        borderDash: [5, 5],
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    tooltip: {
+                        mode: 'index',
+                        intersect: false,
+                        callbacks: {
+                            label: function(context) {
+                                let label = context.dataset.label || '';
+                                if (label) {
+                                    label += ': ';
+                                }
+                                if (context.parsed.y !== null) {
+                                    label += context.parsed.y + '억';
+                                }
+                                return label;
+                            }
+                        }
+                    },
+                    title: {
+                        display: true,
+                        text: '실거래가 변동 추이 비교'
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: false,
+                        ticks: {
+                            callback: function(value, index, values) {
+                                return value + '억';
+                            }
+                        },
+                        title: {
+                            display: true,
+                            text: '가격 (억원)'
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+
+</body>
+</html>
