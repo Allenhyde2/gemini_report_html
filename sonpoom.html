@@ -220,6 +220,491 @@
                     </div>
                 </div>
             </div>
+
+            <!-- 매물 정보 카드 3: 한신 -->
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden mt-8">
+                <div class="bg-orange-600 text-white p-5">
+                    <h2 class="text-2xl font-bold">한신 32평 (13동)</h2>
+                    <p class="text-orange-200">서울시 금천구 시흥동</p>
+                </div>
+
+                <div class="p-5 md:p-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- 기본 정보 -->
+                    <div class="lg:col-span-1 space-y-4">
+                        <h3 class="text-xl font-semibold text-gray-800 border-b pb-2">기본 정보</h3>
+                        <div class="flex justify-between items-center">
+                            <span class="font-medium text-gray-500">현재 매물가</span>
+                            <span class="font-bold text-lg text-orange-600">6억원</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="font-medium text-gray-500">평수</span>
+                            <span class="text-gray-700">공급 105.78㎡ / 전용 89.25㎡ (약 32평)</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="font-medium text-gray-500">층수</span>
+                            <span class="text-gray-700">1층 / 9층 (저층)</span>
+                        </div>
+                         <div class="flex justify-between items-center">
+                            <span class="font-medium text-gray-500">채광 방향</span>
+                            <span class="text-gray-700">남서향 (거실 기준)</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="font-medium text-gray-500">세대수</span>
+                            <span class="text-gray-700">1,000세대 (총 13개동)</span>
+                        </div>
+                         <div class="flex justify-between items-center">
+                            <span class="font-medium text-gray-500">난방 방식</span>
+                            <span class="text-gray-700">지역난방</span>
+                        </div>
+                         <div class="flex justify-between items-center">
+                            <span class="font-medium text-gray-500">구조</span>
+                            <span class="text-gray-700">계단식</span>
+                        </div>
+                         <div class="flex justify-between items-center">
+                            <span class="font-medium text-gray-500">주차 공간</span>
+                            <span class="text-gray-700">세대당 0.8대 (추정)</span>
+                        </div>
+                         <div class="flex justify-between items-center">
+                            <span class="font-medium text-gray-500">월 관리비</span>
+                            <span class="text-gray-700">약 20~25만원 (변동 가능)</span>
+                        </div>
+                    </div>
+
+                    <!-- 입지 분석 -->
+                    <div class="lg:col-span-1 space-y-4">
+                        <h3 class="text-xl font-semibold text-gray-800 border-b pb-2">입지 분석</h3>
+                        <div class="flex justify-between items-start">
+                            <span class="font-medium text-gray-500 w-1/3">직주근접성</span>
+                            <span class="text-gray-700 w-2/3 text-right">가산/구로디지털단지(G밸리) 10~15분</span>
+                        </div>
+                         <div class="flex justify-between items-start">
+                            <span class="font-medium text-gray-500 w-1/3">주변 지하철역</span>
+                            <span class="text-gray-700 w-2/3 text-right">1호선 금천구청역 (도보 5-10분)</span>
+                        </div>
+                        <div class="flex justify-between items-start">
+                            <span class="font-medium text-gray-500 w-1/3">초등학교</span>
+                            <span class="text-gray-700 w-2/3 text-right">문백초등학교 (인접)</span>
+                        </div>
+                         <div class="flex justify-between items-start">
+                            <span class="font-medium text-gray-500 w-1/3">주변 인프라</span>
+                            <span class="text-gray-700 w-2/3 text-right">홈플러스, 롯데빅마켓, 안양천 산책로</span>
+                        </div>
+                        <div class="flex justify-between items-start">
+                            <span class="font-medium text-gray-500 w-1/3">상급지 접근성</span>
+                            <span class="text-gray-700 w-2/3 text-right">1호선(용산/서울역), 신안산선(여의도/예정), 서부간선도로</span>
+                        </div>
+                    </div>
+                    
+                    <!-- 투자 가치 -->
+                    <div class="lg:col-span-1 space-y-4">
+                        <h3 class="text-xl font-semibold text-gray-800 border-b pb-2">투자가치 분석</h3>
+                        <div class="flex justify-between items-start">
+                            <span class="font-medium text-gray-500 w-1/3">환금성 (거래량)</span>
+                            <span class="text-gray-700 w-2/3 text-right">양호 (G밸리 배후수요 및 역세권)</span>
+                        </div>
+                        <div class="flex justify-between items-start">
+                            <span class="font-medium text-gray-500 w-1/3">선호도</span>
+                            <span class="text-gray-700 w-2/3 text-right">저층이나 개방감/일조량 양호. 리모델링 기대감.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 실거래가 변동 추이 그래프 -->
+                <div class="p-5 md:p-8 border-t">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">지난 5년간 실거래가 변동 추이 (32평 기준)</h3>
+                    <div class="chart-container">
+                        <canvas id="priceChart3"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 매물 정보 카드 4: 번동주공4단지 -->
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden mt-8">
+                <div class="bg-green-600 text-white p-5">
+                    <h2 class="text-2xl font-bold">번동주공4단지 28평 (406동)</h2>
+                    <p class="text-green-200">서울시 강북구 번동</p>
+                </div>
+
+                <div class="p-5 md:p-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- 기본 정보 -->
+                    <div class="lg:col-span-1 space-y-4">
+                        <h3 class="text-xl font-semibold text-gray-800 border-b pb-2">기본 정보</h3>
+                        <div class="flex justify-between items-center">
+                            <span class="font-medium text-gray-500">현재 매물가</span>
+                            <span class="font-bold text-lg text-green-600">5억 7,500만원</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="font-medium text-gray-500">평수</span>
+                            <span class="text-gray-700">공급 92.4㎡ / 전용 75.9㎡ (약 28평)</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="font-medium text-gray-500">층수</span>
+                            <span class="text-gray-700">중층 / 15층</span>
+                        </div>
+                         <div class="flex justify-between items-center">
+                            <span class="font-medium text-gray-500">채광 방향</span>
+                            <span class="text-gray-700">남동향 (거실 기준)</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="font-medium text-gray-500">세대수</span>
+                            <span class="text-gray-700">1,116세대 (총 10개동)</span>
+                        </div>
+                         <div class="flex justify-between items-center">
+                            <span class="font-medium text-gray-500">난방 방식</span>
+                            <span class="text-gray-700">지역난방</span>
+                        </div>
+                         <div class="flex justify-between items-center">
+                            <span class="font-medium text-gray-500">구조</span>
+                            <span class="text-gray-700">계단식</span>
+                        </div>
+                         <div class="flex justify-between items-center">
+                            <span class="font-medium text-gray-500">주차 공간</span>
+                            <span class="text-gray-700">세대당 0.65대</span>
+                        </div>
+                         <div class="flex justify-between items-center">
+                            <span class="font-medium text-gray-500">월 관리비</span>
+                            <span class="text-gray-700">약 15~20만원 (변동 가능)</span>
+                        </div>
+                    </div>
+
+                    <!-- 입지 분석 -->
+                    <div class="lg:col-span-1 space-y-4">
+                        <h3 class="text-xl font-semibold text-gray-800 border-b pb-2">입지 분석</h3>
+                        <div class="flex justify-between items-start">
+                            <span class="font-medium text-gray-500 w-1/3">직주근접성</span>
+                            <span class="text-gray-700 w-2/3 text-right">종로/광화문(4호선), 강남(7호선 환승)</span>
+                        </div>
+                         <div class="flex justify-between items-start">
+                            <span class="font-medium text-gray-500 w-1/3">주변 지하철역</span>
+                            <span class="text-gray-700 w-2/3 text-right">4호선 수유역/미아사거리역 (버스 연계)</span>
+                        </div>
+                        <div class="flex justify-between items-start">
+                            <span class="font-medium text-gray-500 w-1/3">초등학교</span>
+                            <span class="text-gray-700 w-2/3 text-right">서울번동초등학교 (단지 내)</span>
+                        </div>
+                         <div class="flex justify-between items-start">
+                            <span class="font-medium text-gray-500 w-1/3">주변 인프라</span>
+                            <span class="text-gray-700 w-2/3 text-right">북서울꿈의숲, 수유시장, 롯데/현대백화점(미아)</span>
+                        </div>
+                        <div class="flex justify-between items-start">
+                            <span class="font-medium text-gray-500 w-1/3">상급지 접근성</span>
+                            <span class="text-gray-700 w-2/3 text-right">4호선 이용 도심 접근성 우수</span>
+                        </div>
+                    </div>
+                    
+                    <!-- 투자 가치 -->
+                    <div class="lg:col-span-1 space-y-4">
+                        <h3 class="text-xl font-semibold text-gray-800 border-b pb-2">투자가치 분석</h3>
+                        <div class="flex justify-between items-start">
+                            <span class="font-medium text-gray-500 w-1/3">환금성 (거래량)</span>
+                            <span class="text-gray-700 w-2/3 text-right">양호 (대단지 및 초품아, 꾸준한 수요)</span>
+                        </div>
+                        <div class="flex justify-between items-start">
+                            <span class="font-medium text-gray-500 w-1/3">선호도</span>
+                            <span class="text-gray-700 w-2/3 text-right">중층, 남동향으로 선호도 높은 매물.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 실거래가 변동 추이 그래프 -->
+                <div class="p-5 md:p-8 border-t">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">지난 5년간 실거래가 변동 추이 (28평 기준)</h3>
+                    <div class="chart-container">
+                        <canvas id="priceChart4"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 매물 정보 카드 5: 정릉풍림아이원 -->
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden mt-8">
+                <div class="bg-teal-600 text-white p-5">
+                    <h2 class="text-2xl font-bold">정릉풍림아이원 24평 (124동)</h2>
+                    <p class="text-teal-200">서울시 성북구 정릉동</p>
+                </div>
+
+                <div class="p-5 md:p-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- 기본 정보 -->
+                    <div class="lg:col-span-1 space-y-4">
+                        <h3 class="text-xl font-semibold text-gray-800 border-b pb-2">기본 정보</h3>
+                        <div class="flex justify-between items-center">
+                            <span class="font-medium text-gray-500">현재 매물가</span>
+                            <span class="font-bold text-lg text-teal-600">5억 5,000만원</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="font-medium text-gray-500">평수</span>
+                            <span class="text-gray-700">공급 79.33㎡ / 전용 59.58㎡ (약 24평)</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="font-medium text-gray-500">층수</span>
+                            <span class="text-gray-700">7층 / 18층 (중층)</span>
+                        </div>
+                         <div class="flex justify-between items-center">
+                            <span class="font-medium text-gray-500">채광 방향</span>
+                            <span class="text-gray-700">남향 (거실 기준)</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="font-medium text-gray-500">세대수</span>
+                            <span class="text-gray-700">1,971세대 (총 28개동)</span>
+                        </div>
+                         <div class="flex justify-between items-center">
+                            <span class="font-medium text-gray-500">난방 방식</span>
+                            <span class="text-gray-700">개별난방</span>
+                        </div>
+                         <div class="flex justify-between items-center">
+                            <span class="font-medium text-gray-500">구조</span>
+                            <span class="text-gray-700">계단식</span>
+                        </div>
+                         <div class="flex justify-between items-center">
+                            <span class="font-medium text-gray-500">주차 공간</span>
+                            <span class="text-gray-700">세대당 1.09대</span>
+                        </div>
+                         <div class="flex justify-between items-center">
+                            <span class="font-medium text-gray-500">월 관리비</span>
+                            <span class="text-gray-700">약 15만원 (변동 가능)</span>
+                        </div>
+                    </div>
+
+                    <!-- 입지 분석 -->
+                    <div class="lg:col-span-1 space-y-4">
+                        <h3 class="text-xl font-semibold text-gray-800 border-b pb-2">입지 분석</h3>
+                        <div class="flex justify-between items-start">
+                            <span class="font-medium text-gray-500 w-1/3">직주근접성</span>
+                            <span class="text-gray-700 w-2/3 text-right">종로/광화문(4호선 환승), 강남(신설동 환승)</span>
+                        </div>
+                         <div class="flex justify-between items-start">
+                            <span class="font-medium text-gray-500 w-1/3">주변 지하철역</span>
+                            <span class="text-gray-700 w-2/3 text-right">우이신설선 정릉역/북한산보국문역 (버스 연계)</span>
+                        </div>
+                        <div class="flex justify-between items-start">
+                            <span class="font-medium text-gray-500 w-1/3">초등학교</span>
+                            <span class="text-gray-700 w-2/3 text-right">서울정수초등학교 (인접)</span>
+                        </div>
+                         <div class="flex justify-between items-start">
+                            <span class="font-medium text-gray-500 w-1/3">주변 인프라</span>
+                            <span class="text-gray-700 w-2/3 text-right">북한산국립공원, 정릉시장, 롯데/현대백화점(미아)</span>
+                        </div>
+                        <div class="flex justify-between items-start">
+                            <span class="font-medium text-gray-500 w-1/3">상급지 접근성</span>
+                            <span class="text-gray-700 w-2/3 text-right">내부순환로 진입 용이, 도심 접근성 양호</span>
+                        </div>
+                    </div>
+                    
+                    <!-- 투자 가치 -->
+                    <div class="lg:col-span-1 space-y-4">
+                        <h3 class="text-xl font-semibold text-gray-800 border-b pb-2">투자가치 분석</h3>
+                        <div class="flex justify-between items-start">
+                            <span class="font-medium text-gray-500 w-1/3">환금성 (거래량)</span>
+                            <span class="text-gray-700 w-2/3 text-right">매우 양호 (1900세대 대단지)</span>
+                        </div>
+                        <div class="flex justify-between items-start">
+                            <span class="font-medium text-gray-500 w-1/3">선호도</span>
+                            <span class="text-gray-700 w-2/3 text-right">정남향, 중층, 올리모델링. 선호도 높은 매물.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 실거래가 변동 추이 그래프 -->
+                <div class="p-5 md:p-8 border-t">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">지난 5년간 실거래가 변동 추이 (24평 기준)</h3>
+                    <div class="chart-container">
+                        <canvas id="priceChart5"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 매물 정보 카드 6: 벽산5단지 -->
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden mt-8">
+                <div class="bg-red-600 text-white p-5">
+                    <h2 class="text-2xl font-bold">벽산5단지 30평 (516동)</h2>
+                    <p class="text-red-200">서울시 금천구 시흥동</p>
+                </div>
+
+                <div class="p-5 md:p-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- 기본 정보 -->
+                    <div class="lg:col-span-1 space-y-4">
+                        <h3 class="text-xl font-semibold text-gray-800 border-b pb-2">기본 정보</h3>
+                        <div class="flex justify-between items-center">
+                            <span class="font-medium text-gray-500">현재 매물가</span>
+                            <span class="font-bold text-lg text-red-600">5억 2,000만원</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="font-medium text-gray-500">평수</span>
+                            <span class="text-gray-700">공급 99㎡ / 전용 84㎡ (약 30평, 전용 25평)</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="font-medium text-gray-500">층수</span>
+                            <span class="text-gray-700">1층 / 20층 (저층)</span>
+                        </div>
+                         <div class="flex justify-between items-center">
+                            <span class="font-medium text-gray-500">채광 방향</span>
+                            <span class="text-gray-700">남서향 (거실 기준)</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="font-medium text-gray-500">세대수</span>
+                            <span class="text-gray-700">2,810세대 (총 25개동)</span>
+                        </div>
+                         <div class="flex justify-between items-center">
+                            <span class="font-medium text-gray-500">난방 방식</span>
+                            <span class="text-gray-700">지역난방</span>
+                        </div>
+                         <div class="flex justify-between items-center">
+                            <span class="font-medium text-gray-500">구조</span>
+                            <span class="text-gray-700">계단식</span>
+                        </div>
+                         <div class="flex justify-between items-center">
+                            <span class="font-medium text-gray-500">주차 공간</span>
+                            <span class="text-gray-700">세대당 1.15대</span>
+                        </div>
+                         <div class="flex justify-between items-center">
+                            <span class="font-medium text-gray-500">월 관리비</span>
+                            <span class="text-gray-700">약 20만원 (변동 가능)</span>
+                        </div>
+                    </div>
+
+                    <!-- 입지 분석 -->
+                    <div class="lg:col-span-1 space-y-4">
+                        <h3 class="text-xl font-semibold text-gray-800 border-b pb-2">입지 분석</h3>
+                        <div class="flex justify-between items-start">
+                            <span class="font-medium text-gray-500 w-1/3">직주근접성</span>
+                            <span class="text-gray-700 w-2/3 text-right">가산/구로디지털단지(G밸리) 버스 20분</span>
+                        </div>
+                         <div class="flex justify-between items-start">
+                            <span class="font-medium text-gray-500 w-1/3">주변 지하철역</span>
+                            <span class="text-gray-700 w-2/3 text-right">1호선 금천구청역 (버스 연계 10분)</span>
+                        </div>
+                        <div class="flex justify-between items-start">
+                            <span class="font-medium text-gray-500 w-1/3">초등학교</span>
+                            <span class="text-gray-700 w-2/3 text-right">서울금동초등학교 (단지 내)</span>
+                        </div>
+                         <div class="flex justify-between items-start">
+                            <span class="font-medium text-gray-500 w-1/3">주변 인프라</span>
+                            <span class="text-gray-700 w-2/3 text-right">홈플러스, 롯데빅마켓, 단지 내 상가, 관악산</span>
+                        </div>
+                        <div class="flex justify-between items-start">
+                            <span class="font-medium text-gray-500 w-1/3">상급지 접근성</span>
+                            <span class="text-gray-700 w-2/3 text-right">신안산선(예정) 수혜, KTX광명역 접근성 양호</span>
+                        </div>
+                    </div>
+                    
+                    <!-- 투자 가치 -->
+                    <div class="lg:col-span-1 space-y-4">
+                        <h3 class="text-xl font-semibold text-gray-800 border-b pb-2">투자가치 분석</h3>
+                        <div class="flex justify-between items-start">
+                            <span class="font-medium text-gray-500 w-1/3">환금성 (거래량)</span>
+                            <span class="text-gray-700 w-2/3 text-right">매우 양호 (초대형 단지, 꾸준한 거래)</span>
+                        </div>
+                        <div class="flex justify-between items-start">
+                            <span class="font-medium text-gray-500 w-1/3">선호도</span>
+                            <span class="text-gray-700 w-2/3 text-right">저층이나 가격 메리트 있음. 신안산선 호재 기대.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 실거래가 변동 추이 그래프 -->
+                <div class="p-5 md:p-8 border-t">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">지난 5년간 실거래가 변동 추이 (30평 기준)</h3>
+                    <div class="chart-container">
+                        <canvas id="priceChart6"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 매물 정보 카드 7: 삼성산주공3단지 -->
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden mt-8">
+                <div class="bg-indigo-600 text-white p-5">
+                    <h2 class="text-2xl font-bold">삼성산주공3단지 32평 (302동)</h2>
+                    <p class="text-indigo-200">서울시 관악구 신림동</p>
+                </div>
+
+                <div class="p-5 md:p-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- 기본 정보 -->
+                    <div class="lg:col-span-1 space-y-4">
+                        <h3 class="text-xl font-semibold text-gray-800 border-b pb-2">기본 정보</h3>
+                        <div class="flex justify-between items-center">
+                            <span class="font-medium text-gray-500">현재 매물가</span>
+                            <span class="font-bold text-lg text-indigo-600">5억 8,200만원</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="font-medium text-gray-500">평수</span>
+                            <span class="text-gray-700">공급 105㎡ / 전용 84㎡ (약 32평, 전용 25평)</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="font-medium text-gray-500">층수</span>
+                            <span class="text-gray-700">25층 / 25층 (탑층)</span>
+                        </div>
+                         <div class="flex justify-between items-center">
+                            <span class="font-medium text-gray-500">채광 방향</span>
+                            <span class="text-gray-700">남동향 (거실 기준)</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="font-medium text-gray-500">세대수</span>
+                            <span class="text-gray-700">1,482세대 (총 9개동)</span>
+                        </div>
+                         <div class="flex justify-between items-center">
+                            <span class="font-medium text-gray-500">난방 방식</span>
+                            <span class="text-gray-700">지역난방</span>
+                        </div>
+                         <div class="flex justify-between items-center">
+                            <span class="font-medium text-gray-500">구조</span>
+                            <span class="text-gray-700">계단식</span>
+                        </div>
+                         <div class="flex justify-between items-center">
+                            <span class="font-medium text-gray-500">주차 공간</span>
+                            <span class="text-gray-700">세대당 1.05대</span>
+                        </div>
+                         <div class="flex justify-between items-center">
+                            <span class="font-medium text-gray-500">월 관리비</span>
+                            <span class="text-gray-700">약 20만원 (변동 가능)</span>
+                        </div>
+                    </div>
+
+                    <!-- 입지 분석 -->
+                    <div class="lg:col-span-1 space-y-4">
+                        <h3 class="text-xl font-semibold text-gray-800 border-b pb-2">입지 분석</h3>
+                        <div class="flex justify-between items-start">
+                            <span class="font-medium text-gray-500 w-1/3">직주근접성</span>
+                            <span class="text-gray-700 w-2/3 text-right">가산/구로디지털단지(G밸리) 20분, 강남(2호선 환승)</span>
+                        </div>
+                         <div class="flex justify-between items-start">
+                            <span class="font-medium text-gray-500 w-1/3">주변 지하철역</span>
+                            <span class="text-gray-700 w-2/3 text-right">1호선 관악역 (버스 연계 10-15분), 신림선</span>
+                        </div>
+                        <div class="flex justify-between items-start">
+                            <span class="font-medium text-gray-500 w-1/3">초등학교</span>
+                            <span class="text-gray-700 w-2/3 text-right">서울삼성초등학교 (인접)</span>
+                        </div>
+                         <div class="flex justify-between items-start">
+                            <span class="font-medium text-gray-500 w-1/3">주변 인프라</span>
+                            <span class="text-gray-700 w-2/3 text-right">삼성산, 관악산, 롯데백화점 관악점(버스)</span>
+                        </div>
+                        <div class="flex justify-between items-start">
+                            <span class="font-medium text-gray-500 w-1/3">상급지 접근성</span>
+                            <span class="text-gray-700 w-2/3 text-right">2호선 환승(신도림/신대방)으로 강남/여의도 접근</span>
+                        </div>
+                    </div>
+                    
+                    <!-- 투자 가치 -->
+                    <div class="lg:col-span-1 space-y-4">
+                        <h3 class="text-xl font-semibold text-gray-800 border-b pb-2">투자가치 분석</h3>
+                        <div class="flex justify-between items-start">
+                            <span class="font-medium text-gray-500 w-1/3">환금성 (거래량)</span>
+                            <span class="text-gray-700 w-2/3 text-right">양호 (1400세대 대단지, 꾸준한 수요)</span>
+                        </div>
+                        <div class="flex justify-between items-start">
+                            <span class="font-medium text-gray-500 w-1/3">선호도</span>
+                            <span class="text-gray-700 w-2/3 text-right">탑층이나 수리 여부 확인 필요. 가격 경쟁력 있음.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 실거래가 변동 추이 그래프 -->
+                <div class="p-5 md:p-8 border-t">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">지난 5년간 실거래가 변동 추이 (32평 기준)</h3>
+                    <div class="chart-container">
+                        <canvas id="priceChart7"></canvas>
+                    </div>
+                </div>
+            </div>
         </main>
     </div>
 
@@ -227,6 +712,7 @@
         // Chart for 구로두산
         const ctx1 = document.getElementById('priceChart1').getContext('2d');
         const priceChart1 = new Chart(ctx1, {
+            // ... existing chart code ...
             type: 'line',
             data: {
                 labels: ['2020', '2021', '2022', '2023', '2024', '2025 (현재)'],
@@ -281,6 +767,7 @@
         // Chart for 철산리버빌주공
         const ctx2 = document.getElementById('priceChart2').getContext('2d');
         const priceChart2 = new Chart(ctx2, {
+            // ... existing chart code ...
             type: 'line',
             data: {
                 labels: ['2020', '2021', '2022', '2023', '2024', '2025 (현재)'],
@@ -299,6 +786,285 @@
                     {
                         label: '주변 대장단지 (억원)',
                         data: [8.5, 11.0, 10.0, 9.5, 10.2, 10.5],
+                        borderColor: 'rgb(234, 179, 8)',
+                        backgroundColor: 'rgba(234, 179, 8, 0.1)',
+                        fill: true,
+                        tension: 0.3,
+                        pointBackgroundColor: 'rgb(234, 179, 8)',
+                        pointRadius: 5,
+                        borderDash: [5, 5],
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'top' },
+                    tooltip: {
+                        mode: 'index',
+                        intersect: false,
+                        callbacks: {
+                            label: function(context) { return `${context.dataset.label}: ${context.parsed.y}억`; }
+                        }
+                    },
+                    title: { display: true, text: '실거래가 변동 추이 비교' }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: false,
+                        ticks: { callback: function(value) { return value + '억'; } },
+                        title: { display: true, text: '가격 (억원)' }
+                    }
+                }
+            }
+        });
+
+        // Chart for 한신
+        const ctx3 = document.getElementById('priceChart3').getContext('2d');
+        const priceChart3 = new Chart(ctx3, {
+            // ... existing chart code ...
+            type: 'line',
+            data: {
+                labels: ['2020', '2021', '2022', '2023', '2024', '2025 (현재)'],
+                datasets: [
+                    {
+                        label: '한신 (억원)',
+                        data: [5.5, 7.0, 6.5, 6.0, 6.3, 6.0],
+                        borderColor: 'rgb(234, 88, 12)',
+                        backgroundColor: 'rgba(234, 88, 12, 0.1)',
+                        fill: true,
+                        tension: 0.3,
+                        pointBackgroundColor: 'rgb(234, 88, 12)',
+                        pointRadius: 5,
+
+                    },
+                    {
+                        label: '주변 대장단지 (억원)',
+                        data: [9.0, 12.0, 11.0, 10.0, 10.5, 11.0],
+                        borderColor: 'rgb(234, 179, 8)',
+                        backgroundColor: 'rgba(234, 179, 8, 0.1)',
+                        fill: true,
+                        tension: 0.3,
+                        pointBackgroundColor: 'rgb(234, 179, 8)',
+                        pointRadius: 5,
+                        borderDash: [5, 5],
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'top' },
+                    tooltip: {
+                        mode: 'index',
+                        intersect: false,
+                        callbacks: {
+                            label: function(context) { return `${context.dataset.label}: ${context.parsed.y}억`; }
+                        }
+                    },
+                    title: { display: true, text: '실거래가 변동 추이 비교' }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: false,
+                        ticks: { callback: function(value) { return value + '억'; } },
+                        title: { display: true, text: '가격 (억원)' }
+                    }
+                }
+            }
+        });
+
+        // Chart for 번동주공4단지
+        const ctx4 = document.getElementById('priceChart4').getContext('2d');
+        const priceChart4 = new Chart(ctx4, {
+            // ... existing chart code ...
+            type: 'line',
+            data: {
+                labels: ['2020', '2021', '2022', '2023', '2024', '2025 (현재)'],
+                datasets: [
+                    {
+                        label: '번동주공4단지 (억원)',
+                        data: [4.0, 5.5, 5.8, 5.3, 5.5, 5.75],
+                        borderColor: 'rgb(22, 163, 74)',
+                        backgroundColor: 'rgba(22, 163, 74, 0.1)',
+                        fill: true,
+                        tension: 0.3,
+                        pointBackgroundColor: 'rgb(22, 163, 74)',
+                        pointRadius: 5,
+
+                    },
+                    {
+                        label: '주변 대장단지 (억원)',
+                        data: [6.5, 8.5, 8.0, 7.5, 7.8, 8.2],
+                        borderColor: 'rgb(234, 179, 8)',
+                        backgroundColor: 'rgba(234, 179, 8, 0.1)',
+                        fill: true,
+                        tension: 0.3,
+                        pointBackgroundColor: 'rgb(234, 179, 8)',
+                        pointRadius: 5,
+                        borderDash: [5, 5],
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'top' },
+                    tooltip: {
+                        mode: 'index',
+                        intersect: false,
+                        callbacks: {
+                            label: function(context) { return `${context.dataset.label}: ${context.parsed.y}억`; }
+                        }
+                    },
+                    title: { display: true, text: '실거래가 변동 추이 비교' }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: false,
+                        ticks: { callback: function(value) { return value + '억'; } },
+                        title: { display: true, text: '가격 (억원)' }
+                    }
+                }
+            }
+        });
+
+        // Chart for 정릉풍림아이원
+        const ctx5 = document.getElementById('priceChart5').getContext('2d');
+        const priceChart5 = new Chart(ctx5, {
+            // ... existing chart code ...
+            type: 'line',
+            data: {
+                labels: ['2020', '2021', '2022', '2023', '2024', '2025 (현재)'],
+                datasets: [
+                    {
+                        label: '정릉풍림아이원 (억원)',
+                        data: [4.0, 5.0, 5.2, 4.2, 5.0, 5.5],
+                        borderColor: 'rgb(13, 148, 136)',
+                        backgroundColor: 'rgba(13, 148, 136, 0.1)',
+                        fill: true,
+                        tension: 0.3,
+                        pointBackgroundColor: 'rgb(13, 148, 136)',
+                        pointRadius: 5,
+
+                    },
+                    {
+                        label: '주변 대장단지 (억원)',
+                        data: [6.0, 7.5, 7.0, 6.5, 7.0, 7.2],
+                        borderColor: 'rgb(234, 179, 8)',
+                        backgroundColor: 'rgba(234, 179, 8, 0.1)',
+                        fill: true,
+                        tension: 0.3,
+                        pointBackgroundColor: 'rgb(234, 179, 8)',
+                        pointRadius: 5,
+                        borderDash: [5, 5],
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'top' },
+                    tooltip: {
+                        mode: 'index',
+                        intersect: false,
+                        callbacks: {
+                            label: function(context) { return `${context.dataset.label}: ${context.parsed.y}억`; }
+                        }
+                    },
+                    title: { display: true, text: '실거래가 변동 추이 비교' }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: false,
+                        ticks: { callback: function(value) { return value + '억'; } },
+                        title: { display: true, text: '가격 (억원)' }
+                    }
+                }
+            }
+        });
+
+        // Chart for 벽산5단지
+        const ctx6 = document.getElementById('priceChart6').getContext('2d');
+        const priceChart6 = new Chart(ctx6, {
+            // ... existing chart code ...
+            type: 'line',
+            data: {
+                labels: ['2020', '2021', '2022', '2023', '2024', '2025 (현재)'],
+                datasets: [
+                    {
+                        label: '벽산5단지 (억원)',
+                        data: [4.8, 6.5, 6.0, 5.0, 5.4, 5.2],
+                        borderColor: 'rgb(220, 38, 38)',
+                        backgroundColor: 'rgba(220, 38, 38, 0.1)',
+                        fill: true,
+                        tension: 0.3,
+                        pointBackgroundColor: 'rgb(220, 38, 38)',
+                        pointRadius: 5,
+
+                    },
+                    {
+                        label: '주변 대장단지 (억원)',
+                        data: [9.0, 12.0, 11.0, 10.0, 10.5, 11.0],
+                        borderColor: 'rgb(234, 179, 8)',
+                        backgroundColor: 'rgba(234, 179, 8, 0.1)',
+                        fill: true,
+                        tension: 0.3,
+                        pointBackgroundColor: 'rgb(234, 179, 8)',
+                        pointRadius: 5,
+                        borderDash: [5, 5],
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'top' },
+                    tooltip: {
+                        mode: 'index',
+                        intersect: false,
+                        callbacks: {
+                            label: function(context) { return `${context.dataset.label}: ${context.parsed.y}억`; }
+                        }
+                    },
+                    title: { display: true, text: '실거래가 변동 추이 비교' }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: false,
+                        ticks: { callback: function(value) { return value + '억'; } },
+                        title: { display: true, text: '가격 (억원)' }
+                    }
+                }
+            }
+        });
+
+        // Chart for 삼성산주공3단지
+        const ctx7 = document.getElementById('priceChart7').getContext('2d');
+        const priceChart7 = new Chart(ctx7, {
+            type: 'line',
+            data: {
+                labels: ['2020', '2021', '2022', '2023', '2024', '2025 (현재)'],
+                datasets: [
+                    {
+                        label: '삼성산주공3단지 (억원)',
+                        data: [5.0, 6.8, 6.2, 5.5, 5.9, 5.82],
+                        borderColor: 'rgb(79, 70, 229)',
+                        backgroundColor: 'rgba(79, 70, 229, 0.1)',
+                        fill: true,
+                        tension: 0.3,
+                        pointBackgroundColor: 'rgb(79, 70, 229)',
+                        pointRadius: 5,
+
+                    },
+                    {
+                        label: '주변 대장단지 (억원)',
+                        data: [8.0, 10.0, 9.5, 8.8, 9.2, 9.5],
                         borderColor: 'rgb(234, 179, 8)',
                         backgroundColor: 'rgba(234, 179, 8, 0.1)',
                         fill: true,
