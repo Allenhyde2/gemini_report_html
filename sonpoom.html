@@ -224,7 +224,9 @@
             <!-- 매물 정보 카드 3: 한신 -->
             <div class="bg-white rounded-xl shadow-lg overflow-hidden mt-8">
                 <div class="bg-orange-600 text-white p-5">
-                    <h2 class="text-2xl font-bold">한신 32평 (13동)</h2>
+                    <a href="https://fin.land.naver.com/complexes/162?tab=complex-info&articleTradeTypes=A1&articleSortingType=PRICE_ASC&transactionPyeongTypeNumber=1&transactionTradeType=A1" target="_blank" rel="noopener noreferrer">
+                        <h2 class="text-2xl font-bold hover:underline">한신 32평 (13동)</h2>
+                    </a>
                     <p class="text-orange-200">서울시 금천구 시흥동</p>
                 </div>
 
@@ -321,7 +323,9 @@
             <!-- 매물 정보 카드 4: 번동주공4단지 -->
             <div class="bg-white rounded-xl shadow-lg overflow-hidden mt-8">
                 <div class="bg-green-600 text-white p-5">
-                    <h2 class="text-2xl font-bold">번동주공4단지 28평 (406동)</h2>
+                    <a href="https://fin.land.naver.com/complexes/1302?tab=complex-info" target="_blank" rel="noopener noreferrer">
+                        <h2 class="text-2xl font-bold hover:underline">번동주공4단지 28평 (406동)</h2>
+                    </a>
                     <p class="text-green-200">서울시 강북구 번동</p>
                 </div>
 
@@ -418,7 +422,9 @@
             <!-- 매물 정보 카드 5: 정릉풍림아이원 -->
             <div class="bg-white rounded-xl shadow-lg overflow-hidden mt-8">
                 <div class="bg-teal-600 text-white p-5">
-                    <h2 class="text-2xl font-bold">정릉풍림아이원 24평 (124동)</h2>
+                    <a href="https://fin.land.naver.com/complexes/3426?tab=article&transactionPyeongTypeNumber=4&transactionTradeType=A1&articleTradeTypes=A1&articleSortingType=PRICE_ASC" target="_blank" rel="noopener noreferrer">
+                        <h2 class="text-2xl font-bold hover:underline">정릉풍림아이원 24평 (124동)</h2>
+                    </a>
                     <p class="text-teal-200">서울시 성북구 정릉동</p>
                 </div>
 
@@ -515,7 +521,9 @@
             <!-- 매물 정보 카드 6: 벽산5단지 -->
             <div class="bg-white rounded-xl shadow-lg overflow-hidden mt-8">
                 <div class="bg-red-600 text-white p-5">
-                    <h2 class="text-2xl font-bold">벽산5단지 30평 (516동)</h2>
+                    <a href="https://fin.land.naver.com/complexes/3359?tab=complex-info&transactionPyeongTypeNumber=3&transactionTradeType=A1&articleSortingType=PRICE_ASC&articleTradeTypes=A1&articlePyeongTypeNumbers=3%2C4" target="_blank" rel="noopener noreferrer">
+                        <h2 class="text-2xl font-bold hover:underline">벽산5단지 30평 (516동)</h2>
+                    </a>
                     <p class="text-red-200">서울시 금천구 시흥동</p>
                 </div>
 
@@ -612,7 +620,9 @@
             <!-- 매물 정보 카드 7: 삼성산주공3단지 -->
             <div class="bg-white rounded-xl shadow-lg overflow-hidden mt-8">
                 <div class="bg-indigo-600 text-white p-5">
-                    <h2 class="text-2xl font-bold">삼성산주공3단지 32평 (302동)</h2>
+                    <a href="https://fin.land.naver.com/complexes/3174?tab=complex-info&transactionPyeongTypeNumber=2&transactionTradeType=A1&articleTradeTypes=A1&articlePyeongTypeNumbers=2%2C3&articleSortingType=PRICE_ASC" target="_blank" rel="noopener noreferrer">
+                        <h2 class="text-2xl font-bold hover:underline">삼성산주공3단지 32평 (302동)</h2>
+                    </a>
                     <p class="text-indigo-200">서울시 관악구 신림동</p>
                 </div>
 
@@ -712,7 +722,6 @@
         // Chart for 구로두산
         const ctx1 = document.getElementById('priceChart1').getContext('2d');
         const priceChart1 = new Chart(ctx1, {
-            // ... existing chart code ...
             type: 'line',
             data: {
                 labels: ['2020', '2021', '2022', '2023', '2024', '2025 (현재)'],
@@ -767,7 +776,6 @@
         // Chart for 철산리버빌주공
         const ctx2 = document.getElementById('priceChart2').getContext('2d');
         const priceChart2 = new Chart(ctx2, {
-            // ... existing chart code ...
             type: 'line',
             data: {
                 labels: ['2020', '2021', '2022', '2023', '2024', '2025 (현재)'],
@@ -823,7 +831,6 @@
         // Chart for 한신
         const ctx3 = document.getElementById('priceChart3').getContext('2d');
         const priceChart3 = new Chart(ctx3, {
-            // ... existing chart code ...
             type: 'line',
             data: {
                 labels: ['2020', '2021', '2022', '2023', '2024', '2025 (현재)'],
@@ -879,7 +886,6 @@
         // Chart for 번동주공4단지
         const ctx4 = document.getElementById('priceChart4').getContext('2d');
         const priceChart4 = new Chart(ctx4, {
-            // ... existing chart code ...
             type: 'line',
             data: {
                 labels: ['2020', '2021', '2022', '2023', '2024', '2025 (현재)'],
@@ -935,7 +941,6 @@
         // Chart for 정릉풍림아이원
         const ctx5 = document.getElementById('priceChart5').getContext('2d');
         const priceChart5 = new Chart(ctx5, {
-            // ... existing chart code ...
             type: 'line',
             data: {
                 labels: ['2020', '2021', '2022', '2023', '2024', '2025 (현재)'],
@@ -991,7 +996,6 @@
         // Chart for 벽산5단지
         const ctx6 = document.getElementById('priceChart6').getContext('2d');
         const priceChart6 = new Chart(ctx6, {
-            // ... existing chart code ...
             type: 'line',
             data: {
                 labels: ['2020', '2021', '2022', '2023', '2024', '2025 (현재)'],
