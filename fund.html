@@ -95,6 +95,20 @@
             body { padding: 0; }
             .container { border: none; }
         }
+        
+        /* Guide Table Style */
+        .guide-table th {
+            text-align: left; 
+            padding: 8px; 
+            background-color: #f9f9f9;
+            font-weight: bold;
+            border-bottom: 1px solid #ccc;
+        }
+        .guide-table td {
+            padding: 8px;
+            border-bottom: 1px solid #ccc;
+            line-height: 1.5;
+        }
     </style>
 </head>
 <body>
@@ -246,44 +260,6 @@
             </td>
             <td colspan="2" class="bg-gray"></td>
         </tr>
-
-        <tr>
-            <th class="bg-gray" rowspan="6">차입금<br>등</th>
-            <td class="row-header">⑧ 금융기관 대출액 합계</td>
-            <td><input type="text" class="input-number" value="400,000,000"></td>
-            <td colspan="2" style="font-size:8pt;">
-                (대출 종류: <input type="text" style="width:60px; border-bottom:1px solid #ccc; border-top:none; border-left:none; border-right:none;" value="주택담보대출">)<br>
-                기존 주택 보유 여부: 
-                <span class="check-box"></span>보유( 건) 
-                <span class="check-box checked"></span>미보유
-            </td>
-        </tr>
-        <tr>
-            <td class="row-header">⑨ 임대보증금</td>
-            <td><input type="text" class="input-number" value="0"></td>
-            <td colspan="2"><input type="text" class="input-text"></td>
-        </tr>
-        <tr>
-            <td class="row-header">⑩ 회사지원금·사채</td>
-            <td><input type="text" class="input-number" value="0"></td>
-            <td colspan="2"><input type="text" class="input-text"></td>
-        </tr>
-        <tr>
-            <td class="row-header">⑪ 그 밖의 차입금</td>
-            <td><input type="text" class="input-number" value="0"></td>
-            <td colspan="2">
-                <span class="check-box"></span>부부 
-                <span class="check-box"></span>직계존비속
-                <span class="check-box"></span>그 밖의 관계
-            </td>
-        </tr>
-        <tr>
-            <td class="bg-gray">⑫ 소계 (⑧~⑪)</td>
-            <td class="bg-gray" style="text-align:right; background-color: #e0e0e0;">
-                <input type="text" class="input-number" value="400,000,000" style="font-weight:bold;">
-            </td>
-            <td colspan="2" class="bg-gray"></td>
-        </tr>
         
         <tr>
             <td class="bg-gray" style="font-size:10pt;">⑬ 합계 (⑦+⑫)</td>
@@ -360,6 +336,49 @@
 
     <div style="margin-top: 20px; font-weight: bold; font-size: 11pt;">
         시장·군수·구청장 귀하
+    </div>
+
+    <!-- 증빙서류 안내 섹션 추가 -->
+    <div style="margin-top: 30px; border-top: 2px dashed #888; padding-top: 20px;">
+        <h3 style="font-size: 12pt; margin-bottom: 10px;">[참고] 자금조달계획서 소명 시 준비해야 할 증빙 서류 목록</h3>
+        <p style="font-size: 9pt; color: #555; margin-bottom: 10px;">※ 본 계획서에 기재된 내용을 바탕으로 추후 소명 요청 시 제출해야 할 서류입니다.</p>
+        <table class="guide-table" style="width: 100%; border-collapse: collapse; border: 1px solid #ccc;">
+            <colgroup>
+                <col style="width: 25%;">
+                <col style="width: 75%;">
+            </colgroup>
+            <tr>
+                <th>1. 증여 (1억 원)</th>
+                <td>
+                    - <strong>증여세 신고서</strong> (홈택스 신고 내역 접수증)<br>
+                    - <strong>가족관계증명서</strong> (증여자와의 관계 입증)<br>
+                    - <strong>혼인관계증명서</strong> (혼인 증여재산 공제 적용 시 필수, 예식장 계약서 등 대체 가능 여부 확인 필요)
+                </td>
+            </tr>
+            <tr>
+                <th>2. 미래소득 (1.3억 원)</th>
+                <td>
+                    - <strong>근로소득원천징수영수증</strong> (최근 1~2년 분, 연소득 증빙)<br>
+                    - <strong>재직증명서</strong> (현재 소득 활동 증빙)<br>
+                    - <strong>소득금액증명원</strong>
+                </td>
+            </tr>
+            <tr>
+                <th>3. 주택담보대출 (4억 원)</th>
+                <td>
+                    - <strong>금융거래확인서</strong> 또는 <strong>부채증명서</strong> (대출 실행 후 제출)<br>
+                    - <strong>대출신청서</strong> 또는 <strong>대출승인서</strong> (대출 실행 전 제출 시)
+                </td>
+            </tr>
+            <tr>
+                <th>4. 부모님 차용 (2,772만 원)</th>
+                <td>
+                    - <strong>차용증 (금전소비대차계약서)</strong> (이자율, 변제기일 등 명시 필수, 공증/내용증명 권장)<br>
+                    - <strong>이자 이체 내역</strong> (매월 약정된 이자를 지급한 통장 내역)<br>
+                    - <strong>금융자료</strong> (부모님 계좌 출금 내역 → 본인 계좌 입금 내역)
+                </td>
+            </tr>
+        </table>
     </div>
 
 </div>
