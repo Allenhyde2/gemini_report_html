@@ -168,8 +168,8 @@
         <tr>
             <th class="bg-gray" rowspan="6">자기<br>자금</th>
             <td class="row-header">② 금융기관 예금액</td>
-            <td><input type="text" class="input-number" value="130,000,000"></td>
-            <td colspan="2"><input type="text" class="input-text" value="예금, 적금 등 (미래소득 저축분 포함)"></td>
+            <td><input type="text" class="input-number" value="0"></td>
+            <td colspan="2"><input type="text" class="input-text" value="예금, 적금 등"></td>
         </tr>
         <tr>
             <td class="row-header">③ 주식·채권 매각대금</td>
@@ -178,17 +178,20 @@
         </tr>
         <tr>
             <td class="row-header">④ 증여·상속</td>
-            <td><input type="text" class="input-number" value="0"></td>
+            <td><input type="text" class="input-number" value="100,000,000"></td>
             <td colspan="2">
                 <span class="check-box"></span>부부 
-                <span class="check-box"></span>직계존비속
+                <span class="check-box checked"></span>직계존비속(관계: 부/모)
                 <span class="check-box"></span>기타
             </td>
         </tr>
         <tr>
             <td class="row-header">⑤ 현금 등 그 밖의 자금</td>
-            <td><input type="text" class="input-number" value="0"></td>
-            <td colspan="2"><input type="text" class="input-text" placeholder="현금 및 기타자산"></td>
+            <td><input type="text" class="input-number" value="130,000,000"></td>
+            <td colspan="2">
+                <span class="check-box"></span>보유 현금
+                <span class="check-box checked"></span>그 밖의 자산(종류: <input type="text" style="width:100px; border-bottom:1px solid #ccc; border-top:none; border-left:none; border-right:none;" value="미래소득"> )
+            </td>
         </tr>
         <tr>
             <td class="row-header">⑥ 부동산 처분대금 등</td>
@@ -201,7 +204,7 @@
         <tr>
             <td class="bg-gray">⑦ 소계 (②~⑥)</td>
             <td class="bg-gray" style="text-align:right; background-color: #e0e0e0;">
-                <input type="text" class="input-number" value="130,000,000" style="font-weight:bold;">
+                <input type="text" class="input-number" value="230,000,000" style="font-weight:bold;">
             </td>
             <td colspan="2" class="bg-gray"></td>
         </tr>
@@ -229,7 +232,7 @@
         </tr>
         <tr>
             <td class="row-header">⑪ 그 밖의 차입금</td>
-            <td><input type="text" class="input-number" value="127,720,000"></td>
+            <td><input type="text" class="input-number" value="27,720,000"></td>
             <td colspan="2">
                 <span class="check-box"></span>부부 
                 <span class="check-box checked"></span>직계존비속(관계: 부/모)<br>
@@ -239,7 +242,45 @@
         <tr>
             <td class="bg-gray">⑫ 소계 (⑧~⑪)</td>
             <td class="bg-gray" style="text-align:right; background-color: #e0e0e0;">
-                <input type="text" class="input-number" value="527,720,000" style="font-weight:bold;">
+                <input type="text" class="input-number" value="427,720,000" style="font-weight:bold;">
+            </td>
+            <td colspan="2" class="bg-gray"></td>
+        </tr>
+
+        <tr>
+            <th class="bg-gray" rowspan="6">차입금<br>등</th>
+            <td class="row-header">⑧ 금융기관 대출액 합계</td>
+            <td><input type="text" class="input-number" value="400,000,000"></td>
+            <td colspan="2" style="font-size:8pt;">
+                (대출 종류: <input type="text" style="width:60px; border-bottom:1px solid #ccc; border-top:none; border-left:none; border-right:none;" value="주택담보대출">)<br>
+                기존 주택 보유 여부: 
+                <span class="check-box"></span>보유( 건) 
+                <span class="check-box checked"></span>미보유
+            </td>
+        </tr>
+        <tr>
+            <td class="row-header">⑨ 임대보증금</td>
+            <td><input type="text" class="input-number" value="0"></td>
+            <td colspan="2"><input type="text" class="input-text"></td>
+        </tr>
+        <tr>
+            <td class="row-header">⑩ 회사지원금·사채</td>
+            <td><input type="text" class="input-number" value="0"></td>
+            <td colspan="2"><input type="text" class="input-text"></td>
+        </tr>
+        <tr>
+            <td class="row-header">⑪ 그 밖의 차입금</td>
+            <td><input type="text" class="input-number" value="0"></td>
+            <td colspan="2">
+                <span class="check-box"></span>부부 
+                <span class="check-box"></span>직계존비속
+                <span class="check-box"></span>그 밖의 관계
+            </td>
+        </tr>
+        <tr>
+            <td class="bg-gray">⑫ 소계 (⑧~⑪)</td>
+            <td class="bg-gray" style="text-align:right; background-color: #e0e0e0;">
+                <input type="text" class="input-number" value="400,000,000" style="font-weight:bold;">
             </td>
             <td colspan="2" class="bg-gray"></td>
         </tr>
