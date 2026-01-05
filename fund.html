@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>주택취득자금 조달 및 입주계획서</title>
+    <style>
+        body {
+            font-family: "Malgun Gothic", "Dotum", sans-serif;
+            font-size: 10pt;
+            line-height: 1.3;
+            margin: 0;
+            padding: 20px;
+            width: 210mm; /* A4 Width */
+            box-sizing: border-box;
+            background-color: #fff;
+        }
+        .container {
+            width: 100%;
+            border: 2px solid #000;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+        h1 {
+            text-align: center;
+            font-size: 18pt;
+            margin-bottom: 5px;
+        }
+        .header-info {
+            font-size: 8pt;
+            text-align: right;
+            margin-bottom: 10px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 10px;
+            table-layout: fixed;
+        }
+        th, td {
+            border: 1px solid #000;
+            padding: 3px 5px;
+            font-size: 9pt;
+            vertical-align: middle;
+        }
+        .bg-gray {
+            background-color: #f0f0f0;
+            text-align: center;
+            font-weight: bold;
+        }
+        .input-text {
+            border: none;
+            width: 95%;
+            font-family: inherit;
+            font-size: 9pt;
+            background: transparent;
+        }
+        .input-number {
+            border: none;
+            width: 90%;
+            text-align: right;
+            font-family: inherit;
+            font-size: 9pt;
+            background: transparent;
+        }
+        .section-title {
+            font-weight: bold;
+            margin-top: 10px;
+            margin-bottom: 5px;
+            font-size: 10pt;
+        }
+        .check-box {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border: 1px solid #000;
+            margin-right: 3px;
+            vertical-align: middle;
+            text-align: center;
+            line-height: 10px;
+            font-size: 10px;
+        }
+        .checked::after {
+            content: "V";
+        }
+        .row-header {
+            text-align: center;
+            background-color: #f9f9f9;
+        }
+        .small-text {
+            font-size: 7pt;
+        }
+        /* Hide print button on print */
+        @media print {
+            .no-print { display: none; }
+            body { padding: 0; }
+            .container { border: none; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="no-print" style="text-align:center; margin-bottom:20px;">
+    <button onclick="window.print()" style="padding:10px 20px; font-size:16px; cursor:pointer;">이 문서를 인쇄/PDF로 저장하기</button>
+    <p style="color:red; font-size:12px;">※ 내용을 수정하려면 아래 칸을 클릭하여 직접 입력하세요.</p>
+</div>
+
+<div class="container">
+    <div class="header-info">
+        [별지 제1호의2서식]
+    </div>
+    <h1>주택취득자금 조달 및 입주계획서</h1>
+    
+    <table>
+        <colgroup>
+            <col style="width: 15%;">
+            <col style="width: 35%;">
+            <col style="width: 15%;">
+            <col style="width: 35%;">
+        </colgroup>
+        <tr>
+            <th class="bg-gray">접수번호</th>
+            <td><input type="text" class="input-text"></td>
+            <th class="bg-gray">접수일시</th>
+            <td><input type="text" class="input-text"></td>
+        </tr>
+    </table>
+
+    <table>
+        <colgroup>
+            <col style="width: 20%;">
+            <col style="width: 30%;">
+            <col style="width: 20%;">
+            <col style="width: 30%;">
+        </colgroup>
+        <tr>
+            <th class="bg-gray" rowspan="3">제출인<br>(매수인)</th>
+            <th class="bg-gray">성명(법인명)</th>
+            <td><input type="text" class="input-text" placeholder="성명을 입력하세요"></td>
+            <th class="bg-gray">생년월일<br>(사업자등록번호)</th>
+            <td><input type="text" class="input-text" placeholder="주민번호 앞자리"></td>
+        </tr>
+        <tr>
+            <th class="bg-gray">주소(법인소재지)</th>
+            <td colspan="3"><input type="text" class="input-text" placeholder="주소를 입력하세요"></td>
+        </tr>
+        <tr>
+            <th class="bg-gray">전화번호</th>
+            <td colspan="3"><input type="text" class="input-text" placeholder="휴대폰 번호 입력"></td>
+        </tr>
+    </table>
+
+    <div class="section-title">1. 자금조달계획 (금액 단위: 원)</div>
+    <table>
+        <colgroup>
+            <col style="width: 10%;">
+            <col style="width: 20%;">
+            <col style="width: 20%;">
+            <col style="width: 20%;">
+            <col style="width: 30%;">
+        </colgroup>
+        
+        <tr>
+            <th class="bg-gray" colspan="2">구분</th>
+            <th class="bg-gray">금액</th>
+            <th class="bg-gray" colspan="2">비고</th>
+        </tr>
+
+        <tr>
+            <th class="bg-gray" rowspan="6">자기<br>자금</th>
+            <td class="row-header">② 금융기관 예금액</td>
+            <td><input type="text" class="input-number" value="130,000,000"></td>
+            <td colspan="2"><input type="text" class="input-text" value="예금, 적금 등 (미래소득 저축분 포함)"></td>
+        </tr>
+        <tr>
+            <td class="row-header">③ 주식·채권 매각대금</td>
+            <td><input type="text" class="input-number" value="0"></td>
+            <td colspan="2"><input type="text" class="input-text"></td>
+        </tr>
+        <tr>
+            <td class="row-header">④ 증여·상속</td>
+            <td><input type="text" class="input-number" value="0"></td>
+            <td colspan="2">
+                <span class="check-box"></span>부부 
+                <span class="check-box"></span>직계존비속
+                <span class="check-box"></span>기타
+            </td>
+        </tr>
+        <tr>
+            <td class="row-header">⑤ 현금 등 그 밖의 자금</td>
+            <td><input type="text" class="input-number" value="0"></td>
+            <td colspan="2"><input type="text" class="input-text" placeholder="현금 및 기타자산"></td>
+        </tr>
+        <tr>
+            <td class="row-header">⑥ 부동산 처분대금 등</td>
+            <td><input type="text" class="input-number" value="0"></td>
+            <td colspan="2">
+                <span class="check-box"></span>재건축·재개발
+                <span class="check-box"></span>기존부동산 처분
+            </td>
+        </tr>
+        <tr>
+            <td class="bg-gray">⑦ 소계 (②~⑥)</td>
+            <td class="bg-gray" style="text-align:right; background-color: #e0e0e0;">
+                <input type="text" class="input-number" value="130,000,000" style="font-weight:bold;">
+            </td>
+            <td colspan="2" class="bg-gray"></td>
+        </tr>
+
+        <tr>
+            <th class="bg-gray" rowspan="6">차입금<br>등</th>
+            <td class="row-header">⑧ 금융기관 대출액 합계</td>
+            <td><input type="text" class="input-number" value="400,000,000"></td>
+            <td colspan="2" style="font-size:8pt;">
+                (대출 종류: <input type="text" style="width:60px; border-bottom:1px solid #ccc; border-top:none; border-left:none; border-right:none;" value="주택담보대출">)<br>
+                기존 주택 보유 여부: 
+                <span class="check-box"></span>보유( 건) 
+                <span class="check-box checked"></span>미보유
+            </td>
+        </tr>
+        <tr>
+            <td class="row-header">⑨ 임대보증금</td>
+            <td><input type="text" class="input-number" value="0"></td>
+            <td colspan="2"><input type="text" class="input-text"></td>
+        </tr>
+        <tr>
+            <td class="row-header">⑩ 회사지원금·사채</td>
+            <td><input type="text" class="input-number" value="0"></td>
+            <td colspan="2"><input type="text" class="input-text"></td>
+        </tr>
+        <tr>
+            <td class="row-header">⑪ 그 밖의 차입금</td>
+            <td><input type="text" class="input-number" value="127,720,000"></td>
+            <td colspan="2">
+                <span class="check-box"></span>부부 
+                <span class="check-box checked"></span>직계존비속(관계: 부/모)<br>
+                <span class="check-box"></span>그 밖의 관계
+            </td>
+        </tr>
+        <tr>
+            <td class="bg-gray">⑫ 소계 (⑧~⑪)</td>
+            <td class="bg-gray" style="text-align:right; background-color: #e0e0e0;">
+                <input type="text" class="input-number" value="527,720,000" style="font-weight:bold;">
+            </td>
+            <td colspan="2" class="bg-gray"></td>
+        </tr>
+        
+        <tr>
+            <td class="bg-gray" style="font-size:10pt;">⑬ 합계 (⑦+⑫)</td>
+            <td class="bg-gray" style="text-align:right; background-color: #d0d0d0;">
+                <input type="text" class="input-number" value="657,720,000" style="font-weight:bold; font-size:10pt;">
+            </td>
+            <td colspan="2" class="bg-gray" style="font-size:8pt;">※ 총 거래금액과 일치해야 함</td>
+        </tr>
+    </table>
+
+    <div class="section-title">2. 조달자금 지급방식 (금액 단위: 원)</div>
+    <table>
+        <colgroup>
+            <col style="width: 30%;">
+            <col style="width: 70%;">
+        </colgroup>
+        <tr>
+            <th class="bg-gray">⑭ 계좌이체 금액</th>
+            <td><input type="text" class="input-number" value="657,720,000"></td>
+        </tr>
+        <tr>
+            <th class="bg-gray">⑮ 보증금·대출 승계 금액</th>
+            <td><input type="text" class="input-number" value="0"></td>
+        </tr>
+        <tr>
+            <th class="bg-gray">⑯ 현금 및 그 밖의 지급방식 금액</th>
+            <td>
+                <input type="text" class="input-number" value="0" style="width: 40%; display:inline-block;">
+                <span class="small-text">(사유: <input type="text" style="width:40%; border-bottom:1px solid #ccc; border:none;" placeholder="입력"> )</span>
+            </td>
+        </tr>
+    </table>
+
+    <div class="section-title">3. 입주계획</div>
+    <table>
+        <colgroup>
+            <col style="width: 25%;">
+            <col style="width: 25%;">
+            <col style="width: 25%;">
+            <col style="width: 25%;">
+        </colgroup>
+        <tr>
+            <td>
+                <span class="check-box checked"></span>본인 입주
+            </td>
+            <td>
+                <span class="check-box"></span>본인 외 가족 입주
+            </td>
+            <td colspan="2">
+                입주 예정 시기: <input type="text" value="2030" style="width:40px; text-align:center; border:none;">년 <input type="text" value="1" style="width:20px; text-align:center; border:none;">월
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span class="check-box"></span>임대 (전·월세)
+            </td>
+            <td colspan="3">
+                <span class="check-box"></span>그 밖의 경우 ( <input type="text" style="width:100px; border-bottom:1px solid #ccc; border:none;"> )
+            </td>
+        </tr>
+    </table>
+
+    <div style="margin-top: 15px; font-size: 8pt; line-height: 1.4;">
+        「부동산 거래신고 등에 관한 법률 시행령」 제3조 및 같은 법 시행규칙 제2조에 따라 위와 같이 주택취득자금 조달 및 입주계획서를 제출합니다.
+    </div>
+
+    <div style="margin-top: 20px; text-align: right;">
+        2025년 <input type="text" style="width:30px; text-align:center; border-bottom:1px solid #000; border:none;">월 <input type="text" style="width:30px; text-align:center; border-bottom:1px solid #000; border:none;">일
+    </div>
+
+    <div style="margin-top: 20px; text-align: right; padding-right: 20px;">
+        제출인: <input type="text" style="width:100px; text-align:center; border-bottom:1px solid #000; border:none;"> (서명 또는 인)
+    </div>
+
+    <div style="margin-top: 20px; font-weight: bold; font-size: 11pt;">
+        시장·군수·구청장 귀하
+    </div>
+
+</div>
+
+</body>
+</html>
