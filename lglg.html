@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SolutionApp V3</title>
+    <title>SolutionApp V3 - 기능 명세 뷰어</title>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -11,125 +11,300 @@
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
     
+    <!-- Google Fonts (Noto Sans KR) -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+
     <style>
-        /* 기본 스타일 (Tailwind 로드 실패 시 대비) */
-        body { font-family: -apple-system, sans-serif; margin: 0; padding: 0; color: #333; }
-        .fallback-btn { padding: 8px 16px; background: #2563eb; color: white; border: none; border-radius: 4px; cursor: pointer; }
+        /* 기본 스타일 */
+        body { font-family: 'Noto Sans KR', sans-serif; margin: 0; padding: 0; color: #333; }
         
         /* 유틸리티 */
         .scrollbar-hide::-webkit-scrollbar { display: none; }
         .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
         #sidebar { transition: transform 0.3s ease-in-out; }
         
-        /* 로딩/에러 화면 스타일 */
-        #loading-overlay { position: fixed; inset: 0; background: white; z-index: 9999; display: flex; justify-content: center; align-items: center; font-size: 1.2rem; }
-        #error-msg { color: red; display: none; text-align: center; padding: 20px; }
+        /* 하이라이트 애니메이션 */
+        @keyframes highlight-pulse {
+            0% { box-shadow: 0 0 0 0 rgba(250, 204, 21, 0.7); border-color: #EAB308; background-color: #FEFCE8; }
+            50% { box-shadow: 0 0 0 10px rgba(250, 204, 21, 0); border-color: #EAB308; background-color: #FEFCE8; }
+            100% { box-shadow: 0 0 0 0 rgba(250, 204, 21, 0); }
+        }
+        .highlight-box {
+            animation: highlight-pulse 2s ease-in-out infinite;
+            border-width: 2px !important;
+            border-color: #EAB308 !important; /* Yellow-500 */
+            background-color: #FEFCE8 !important; /* Yellow-50 */
+            z-index: 10;
+        }
+
+        /* 테이블 스타일 */
+        .spec-table th { position: sticky; top: 0; background: #f8fafc; z-index: 10; border-bottom: 2px solid #e2e8f0; white-space: nowrap; }
+        .spec-table td { border-bottom: 1px solid #f1f5f9; vertical-align: top; }
+        .spec-table tr:hover td { background-color: #eff6ff; cursor: pointer; }
+        
+        /* 스크롤바 커스텀 */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800 h-screen overflow-hidden flex flex-col md:flex-row">
 
-    <!-- 로딩 화면 -->
-    <div id="loading-overlay">
-        <div>
-            <div>앱을 준비 중입니다...</div>
-            <div id="error-msg"></div>
-        </div>
-    </div>
-
     <!-- Mobile Header -->
     <div class="md:hidden bg-white border-b p-4 flex items-center justify-between sticky top-0 z-20 shrink-0 h-16">
-        <div class="font-bold text-xl text-blue-600">SolutionApp</div>
-        <button id="mobile-menu-btn" class="p-2 hover:bg-gray-100 rounded">
+        <div class="font-bold text-xl text-blue-600 flex items-center gap-2">
+            <i data-lucide="layout"></i> SolutionApp
+        </div>
+        <button id="mobile-menu-btn" class="p-2 hover:bg-gray-100 rounded text-gray-600">
             <i data-lucide="menu"></i>
         </button>
     </div>
 
     <!-- Sidebar -->
-    <div id="sidebar" class="fixed inset-y-0 left-0 z-10 w-64 bg-white border-r border-gray-200 transform -translate-x-full md:relative md:translate-x-0 flex flex-col shadow-lg md:shadow-none bg-white h-full">
-        <div class="p-6 border-b border-gray-100 hidden md:block shrink-0 h-20">
+    <div id="sidebar" class="fixed inset-y-0 left-0 z-20 w-72 bg-white border-r border-gray-200 transform -translate-x-full md:relative md:translate-x-0 flex flex-col shadow-2xl md:shadow-none transition-transform duration-300">
+        <!-- Sidebar Header -->
+        <div class="p-6 border-b border-gray-100 shrink-0 h-20 flex items-center cursor-pointer hover:bg-gray-50 transition-colors" onclick="goHome()">
             <div class="font-bold text-xl text-blue-600 flex items-center gap-2">
-                <i data-lucide="layout" class="w-6 h-6"></i> SolutionSpec
+                <div class="bg-blue-600 text-white p-1.5 rounded-lg">
+                    <i data-lucide="layers" class="w-5 h-5"></i>
+                </div>
+                <span>SolutionSpec</span>
             </div>
-            <div class="text-xs text-gray-500 mt-1">기능 명세 통합 뷰어</div>
         </div>
 
-        <div id="sidebar-content" class="p-4 space-y-8 overflow-y-auto flex-1 pb-20 md:pb-4">
+        <!-- Sidebar Content (Menu) -->
+        <div id="sidebar-content" class="px-3 py-4 space-y-6 overflow-y-auto flex-1">
             <!-- Menu items injected by JS -->
+        </div>
+
+        <!-- Sidebar Footer (기능 명세서 원문보기) -->
+        <div class="p-4 border-t border-gray-100 shrink-0 bg-gray-50/50">
+            <button onclick="showSpecTable()" class="w-full flex items-center gap-3 text-sm text-gray-700 font-medium p-3 rounded-xl bg-white border border-gray-200 shadow-sm hover:border-blue-300 hover:ring-2 hover:ring-blue-100 hover:text-blue-600 transition-all group">
+                <div class="bg-gray-50 text-gray-500 group-hover:text-blue-600 group-hover:bg-blue-50 p-2 rounded-lg transition-colors">
+                    <i data-lucide="file-spreadsheet" class="w-5 h-5"></i>
+                </div>
+                <div class="text-left">
+                    <div class="font-bold">기능 명세서 원문보기</div>
+                    <div class="text-[10px] text-gray-400 font-normal">전체 목록 도표로 확인</div>
+                </div>
+                <i data-lucide="chevron-right" class="w-4 h-4 text-gray-300 ml-auto group-hover:text-blue-400"></i>
+            </button>
         </div>
     </div>
 
     <!-- Main Content -->
     <div class="flex-1 flex flex-col h-full overflow-hidden relative bg-gray-50 w-full" id="main-wrapper">
         <!-- Top Navbar -->
-        <header class="bg-white border-b border-gray-200 shrink-0 px-6 py-3 flex items-center justify-between z-10 h-16">
+        <header class="bg-white border-b border-gray-200 shrink-0 px-6 py-3 flex items-center justify-between z-10 h-16 shadow-sm">
             <div class="flex items-center gap-4 w-full max-w-xl">
-                <div class="relative w-full hidden md:block">
-                    <i data-lucide="search" class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4"></i>
-                    <input 
-                        type="text" 
-                        placeholder="기능 검색..." 
-                        class="w-full pl-10 pr-4 py-2 bg-gray-100 border-none rounded-lg text-sm focus:ring-2 focus:ring-blue-500 outline-none"
-                    >
-                </div>
+                <h2 id="page-title" class="font-bold text-lg hidden md:flex items-center gap-2 text-gray-800">
+                    <!-- Title injected by JS -->
+                </h2>
             </div>
             
             <div class="flex items-center gap-4">
-                <button class="relative p-2 text-gray-500 hover:bg-gray-100 rounded-full">
-                    <i data-lucide="bell" class="w-5 h-5"></i>
-                    <span class="absolute top-1.5 right-1.5 w-2 h-2 bg-red-500 rounded-full"></span>
-                </button>
-                <div class="w-8 h-8 bg-gradient-to-tr from-blue-500 to-purple-500 rounded-full"></div>
+                <div class="hidden md:flex items-center gap-2 text-xs font-medium bg-gray-100 px-3 py-1.5 rounded-full text-gray-600">
+                    <span class="w-2 h-2 rounded-full bg-green-500"></span>
+                    Live Preview
+                </div>
+                <div class="w-9 h-9 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-full shadow-md flex items-center justify-center text-white font-bold text-xs">
+                    AD
+                </div>
             </div>
         </header>
 
         <!-- Dynamic Page Content -->
-        <main id="main-content" class="p-6 max-w-7xl mx-auto w-full overflow-y-auto flex-1 pb-20">
+        <main id="main-content" class="p-6 max-w-7xl mx-auto w-full overflow-y-auto flex-1 pb-20 relative scroll-smooth">
             <!-- Content injected by JS -->
         </main>
     </div>
 
     <!-- Overlay -->
-    <div id="sidebar-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-0 hidden md:hidden transition-opacity opacity-0 pointer-events-none"></div>
+    <div id="sidebar-overlay" class="fixed inset-0 bg-black/50 z-10 hidden md:hidden transition-opacity opacity-0 pointer-events-none backdrop-blur-sm"></div>
 
     <script>
-        // 에러 핸들링
-        window.onerror = function(msg) {
-            document.getElementById('error-msg').style.display = 'block';
-            document.getElementById('error-msg').innerText = "오류 발생: " + msg;
-            return false;
-        };
-
-        // 데이터 정의
+        // 전체 데이터 (요청하신 1~166번 데이터)
         const FEATURES_DATA = [
-            { id: 1, l1: 'User', l2: '외부 시스템 연동', l3: 'SNS 공유하기', l4: 'SNS 공유하기', desc: 'SNS 플랫폼(인스타그램) 공유하기 API를 연동한다.' },
-            { id: 8, l1: 'User', l2: '공통', l3: '좋아요/취소', l4: '컨텐츠 좋아요/취소', desc: '컨텐츠를 좋아요/취소한다.' },
-            { id: 9, l1: 'User', l2: '공통', l3: '팔로우/취소', l4: '회원 팔로우/취소', desc: '다른 회원을 팔로우/취소한다.' },
-            { id: 26, l1: 'User', l2: '메인', l3: '인기 컨텐츠', l4: '인기 A/B 조회', desc: '인기 A/B를 조회한다.' },
-            { id: 30, l1: 'User', l2: '메인', l3: '인기 컨텐츠', l4: '인기 Q&A 조회', desc: '메인 화면에 노출되는 Q&A 목록 조회' },
-            { id: 59, l1: 'User', l2: '커뮤니티-포스트', l3: '포스트', l4: '목록 조회', desc: '최신/인기/팔로잉 등 조건과 카테고리에 따라 조회한다.' },
-            { id: 61, l1: 'User', l2: '커뮤니티-포스트', l3: '포스트', l4: '등록', desc: '텍스트, 사진, 동영상, 상품 태그를 포함한 포스트 등록' },
-            { id: 31, l1: 'User', l2: '마이홈', l3: '활동정보', l4: '조회', desc: '게시글 수, 팔로우/팔로잉 수, 배지 등을 조회한다.' },
-            { id: 46, l1: 'User', l2: '마이홈', l3: '포인트', l4: '조회/내역', desc: '보유 포인트 및 사용 내역을 조회한다.' },
-            { id: 102, l1: 'Admin', l2: '회원 관리', l3: '크리에이터', l4: '목록/상세', desc: '크리에이터 회원 목록 및 상세 정보를 조회한다.' },
-            { id: 142, l1: 'Admin', l2: '신고 게시물 관리', l3: '신고', l4: '처리', desc: '신고된 게시물 및 회원을 조회하고 노출 여부를 처리한다.' },
-            { id: 2, l1: '배치', l2: '시스템', l3: '포인트', l4: '소멸 배치', desc: '포인트 소멸 배치 모듈.' }
+            { "id": 1, "l1": "User", "l2": "외부 시스템 연동", "l3": "SNS 공유하기", "l4": "SNS 공유하기(FE)", "desc": "SNS 플랫폼(인스타그램) 공유하기 API를 연동한다." },
+            { "id": 2, "l1": "User", "l2": "배치", "l3": "포인트", "l4": "포인트 소멸", "desc": "포인트 소멸 배치 모듈을 개발한다." },
+            { "id": 3, "l1": "User", "l2": "배치", "l3": "회원", "l4": "탈퇴 회원 배치", "desc": "회원 탈퇴 시 활동 이력을 삭제하는 배치를 생성한다." },
+            { "id": 4, "l1": "User", "l2": "배치", "l3": "이벤트", "l4": "이벤트 당첨 결과 알림 배치", "desc": "이벤트 참여자에게 당첨 여부를 푸시 알림 발송하는 배치를 생성한다." },
+            { "id": 5, "l1": "User", "l2": "배치", "l3": "A/B 투표", "l4": "A/B 투표 종료 알림 배치", "desc": "A/B 투표에 참여한 회원에게 투표 종료 푸시 알림 발송하는 배치를 생성한다." },
+            { "id": 6, "l1": "User", "l2": "공통", "l3": "포인트", "l4": "포인트 적립", "desc": "포인트 적립 모듈을 개발한다." },
+            { "id": 7, "l1": "User", "l2": "공통", "l3": "포인트", "l4": "포인트 사용", "desc": "포인트 사용 모듈을 개발한다." },
+            { "id": 8, "l1": "User", "l2": "공통", "l3": "좋아요/취소", "l4": "좋아요/취소", "desc": "컨텐츠를 좋아요/취소한다." },
+            { "id": 9, "l1": "User", "l2": "공통", "l3": "팔로우/취소", "l4": "팔로우/취소", "desc": "다른 회원을 팔로우/취소한다." },
+            { "id": 11, "l1": "User", "l2": "공통", "l3": "북마크 등록/해제", "l4": "북마크 등록/해제", "desc": "컨텐츠를 북마크/취소한다." },
+            { "id": 12, "l1": "User", "l2": "공통", "l3": "삭제", "l4": "컨텐츠 삭제", "desc": "본인이 작성한 컨텐츠를 삭제한다." },
+            { "id": 13, "l1": "User", "l2": "공통", "l3": "신고", "l4": "컨텐츠 신고", "desc": "부적절한 컨텐츠를 운영자에게 신고한다." },
+            { "id": 14, "l1": "User", "l2": "공통", "l3": "댓글 목록", "l4": "댓글 목록 조회", "desc": "댓글 목록을 조회한다.(작성자에 따라 비밀글 노출 여부 결정)" },
+            { "id": 15, "l1": "User", "l2": "공통", "l3": "댓글 목록", "l4": "댓글 등록", "desc": "댓글 목록에서 댓글 또는 대댓글을 작성한다." },
+            { "id": 16, "l1": "User", "l2": "공통", "l3": "댓글 목록", "l4": "댓글 수정", "desc": "내가 작성한 댓글 또는 대댓글을 수정한다." },
+            { "id": 17, "l1": "User", "l2": "공통", "l3": "댓글 목록", "l4": "비밀 댓글 등록", "desc": "댓글 목록에서 비밀 댓글 또는 비밀 대댓글을 작성한다." },
+            { "id": 18, "l1": "User", "l2": "공통", "l3": "댓글 목록", "l4": "추천 댓글 조회", "desc": "댓글 작성 시 추천 댓글을 조회한다." },
+            { "id": 19, "l1": "User", "l2": "공통", "l3": "댓글 목록", "l4": "댓글 삭제", "desc": "본인이 작성한 댓글/대댓글을 삭제한다." },
+            { "id": 20, "l1": "User", "l2": "공통", "l3": "댓글 목록", "l4": "댓글 신고", "desc": "타인의 댓글을 신고한다." },
+            { "id": 21, "l1": "User", "l2": "공통", "l3": "댓글 목록", "l4": "댓글 좋아요/취소", "desc": "댓글을 좋아요/취소한다." },
+            { "id": 22, "l1": "User", "l2": "공통", "l3": "댓글 목록", "l4": "베스트 픽 선정", "desc": "내 피드의 댓글 목록 중에서 마음에 드는 댓글을 베스트픽으로 선정한다." },
+            { "id": 23, "l1": "User", "l2": "공통", "l3": "좋아요 목록", "l4": "좋아요 목록 조회", "desc": "좋아요 목록을 조회한다." },
+            { "id": 24, "l1": "User", "l2": "공통", "l3": "좋아요 목록", "l4": "좋아요 목록에서 팔로우/취소", "desc": "좋아요 목록에서 팔로우/취소" },
+            { "id": 25, "l1": "User", "l2": "온보딩", "l3": "프로필", "l4": "프로필 등록", "desc": "프로필(닉네임, 자기소개, 성별, 출생연도)를 입력한다." },
+            { "id": 26, "l1": "User", "l2": "메인", "l3": "인기 A/B", "l4": "인기 A/B 조회", "desc": "인기 A/B를 조회한다." },
+            { "id": 27, "l1": "User", "l2": "메인", "l3": "인기 A/B", "l4": "인기 A/B 연관 매거진 조회", "desc": "인기 A/B에 연관되어 있는 매거진(레시피)를 조회한다." },
+            { "id": 28, "l1": "User", "l2": "메인", "l3": "인기 영상", "l4": "인기 영상 목록 조회", "desc": "인기 영상 목록을 조회한다." },
+            { "id": 29, "l1": "User", "l2": "메인", "l3": "인기 영상", "l4": "인기 영상 상세 조회", "desc": "인기 영상 상세를 조회한다." },
+            { "id": 30, "l1": "User", "l2": "메인", "l3": "인기 Q&A", "l4": "인기 Q&A 조회", "desc": "메인 화면에 노출되는 현재 가장 인기있는 Q&A 게시글 목록을 조회한다." },
+            { "id": 31, "l1": "User", "l2": "마이홈", "l3": "활동정보", "l4": "활동정보 조회", "desc": "활동정보(게시글 수, 팔로우/팔로잉 수, 내가전 수, 자기소개, 배지 등)를 조회한다." },
+            { "id": 32, "l1": "User", "l2": "마이홈", "l3": "내 컨텐츠", "l4": "내가 작성한 포스트 목록 조회", "desc": "내가 작성한 포스트를 조회한다." },
+            { "id": 33, "l1": "User", "l2": "마이홈", "l3": "내 컨텐츠", "l4": "내가 작성한 Q&A 목록 조회", "desc": "내가 작성한 Q&A를 조회한다." },
+            { "id": 34, "l1": "User", "l2": "마이홈", "l3": "내 컨텐츠", "l4": "내가 답변한 Q&A 목록 조회", "desc": "내가 답변한 Q&A를 조회한다." },
+            { "id": 35, "l1": "User", "l2": "마이홈", "l3": "내 컨텐츠", "l4": "내가 투표한 A/B 목록 조회", "desc": "내가 투표한 A/B 목록을 조회한다." },
+            { "id": 36, "l1": "User", "l2": "마이홈", "l3": "내 컨텐츠", "l4": "북마크한 컨텐츠 목록 조회", "desc": "내가 북마크한 컨텐츠를 모아서 조회한다." },
+            { "id": 37, "l1": "User", "l2": "마이홈", "l3": "내 컨텐츠", "l4": "북마크한 컨텐츠 취소", "desc": "내가 북마크한 컨텐츠들을 북마크 취소한다.(다중 선택/취소)" },
+            { "id": 38, "l1": "User", "l2": "마이홈", "l3": "팔로우", "l4": "팔로워 목록 조회", "desc": "나를 팔로우한 회원들의 리스트를 조회한다." },
+            { "id": 39, "l1": "User", "l2": "마이홈", "l3": "팔로우", "l4": "팔로워 삭제", "desc": "나를 팔로우한 회원을 삭제한다." },
+            { "id": 40, "l1": "User", "l2": "마이홈", "l3": "팔로우", "l4": "팔로워 목록 검색", "desc": "나를 팔로우한 회원들의 리스트를 검색한다.(LIKE 검색)" },
+            { "id": 41, "l1": "User", "l2": "마이홈", "l3": "팔로잉", "l4": "팔로잉 목록 조회", "desc": "내가 팔로우한 회원들의 리스트를 조회한다." },
+            { "id": 42, "l1": "User", "l2": "마이홈", "l3": "팔로잉", "l4": "팔로잉 목록 검색", "desc": "내가 팔로우한 회원들의 리스트를 검색한다.(LIKE 검색)" },
+            { "id": 43, "l1": "User", "l2": "마이홈", "l3": "보유 제품", "l4": "보유 제품 목록 조회", "desc": "내가 등록한 보유 제품 목록을 조회한다." },
+            { "id": 44, "l1": "User", "l2": "마이홈", "l3": "배지", "l4": "배지 목록 조회", "desc": "내가 보유한 배지의 목록을 조회한다." },
+            { "id": 45, "l1": "User", "l2": "마이홈", "l3": "배지", "l4": "배지 정책 조회", "desc": "배지 정책을 조회한다." },
+            { "id": 46, "l1": "User", "l2": "마이홈", "l3": "포인트", "l4": "포인트 조회", "desc": "내가 보유한 포인트를 조회한다." },
+            { "id": 47, "l1": "User", "l2": "마이홈", "l3": "포인트", "l4": "포인트 사용 내역 조회", "desc": "내가 사용(적립, 사용, 소멸예정) 포인트를 조회한다." },
+            { "id": 48, "l1": "User", "l2": "마이홈", "l3": "포인트", "l4": "포인트 안내 페이지 조회", "desc": "포인트 안내 페이지를 조회한다." },
+            { "id": 49, "l1": "User", "l2": "마이홈", "l3": "신고하기", "l4": "타인 마이홈 신고하기", "desc": "타인의 마이홈을 신고한다." },
+            { "id": 50, "l1": "User", "l2": "매거진", "l3": "가전M 매거진 목록", "l4": "가전M 매거진 목록 조회", "desc": "가전M 매거진 목록을 조회한다." },
+            { "id": 51, "l1": "User", "l2": "매거진", "l3": "라이프M 매거진 목록", "l4": "라이프M 매거진 목록 조회", "desc": "라이프M 매거진 목록을 조회한다." },
+            { "id": 52, "l1": "User", "l2": "매거진", "l3": "매거진 상세", "l4": "매거진 상세 조회", "desc": "매거진 상세 내용을 본다." },
+            { "id": 53, "l1": "User", "l2": "매거진", "l3": "매거진 상세", "l4": "추천 매거진 조회", "desc": "매거진 상세 페이지 하단에서 추천/연관 매거진을 조회한다." },
+            { "id": 54, "l1": "User", "l2": "매거진", "l3": "매거진 상세", "l4": "매거진 북마크 등록/해제", "desc": "매거진을 북마크 등록/취소한다." },
+            { "id": 55, "l1": "User", "l2": "매거진", "l3": "매거진 상세", "l4": "매거진 북마크 등록/해제", "desc": "매거진을 북마크 등록/취소한다." },
+            { "id": 56, "l1": "User", "l2": "매거진", "l3": "매거진 상세", "l4": "매거진 공유하기", "desc": "매거진을 공유한다." },
+            { "id": 57, "l1": "User", "l2": "LG Story", "l3": "가전 체험기 목록 조회", "l4": "가전 체험기 목록 조회", "desc": "가전 체험기 컨텐츠 목록을 조회한다." },
+            { "id": 58, "l1": "User", "l2": "LG Story", "l3": "가전 체험기 목록 조회", "l4": "가전 체험기 상세 조회", "desc": "가전 체험기 컨텐츠 상세를 조회한다." },
+            { "id": 59, "l1": "User", "l2": "커뮤니티 - 포스트", "l3": "포스트 목록 조회", "l4": "포스트 목록 조회", "desc": "최신/인기/팔로잉 등 조건과 카테고리(가전, 라이프스타일 등) 필터에 따라 포스트 목록을 조회한다." },
+            { "id": 60, "l1": "User", "l2": "커뮤니티 - 포스트", "l3": "포스트 상세 조회", "l4": "포스트 상세 조회", "desc": "특정 포스트의 전체 내용, 태그된 상품, 좋아요 수, 댓글 목록 등을 상세히 조회한다." },
+            { "id": 61, "l1": "User", "l2": "커뮤니티 - 포스트", "l3": "포스트 등록", "l4": "포스트 등록", "desc": "회원(고객)이 텍스트, 사진, 동영상, 상품 태그를 포함한 새로운 포스트를 등록한다." },
+            { "id": 62, "l1": "User", "l2": "커뮤니티 - 포스트", "l3": "포스트 임시 저장", "l4": "포스트 임시 저장", "desc": "작성 중인 포스트를 서버에 임시로 저장하고, 나중에 이어 쓸 수 있도록 한다." },
+            { "id": 63, "l1": "User", "l2": "커뮤니티 - 포스트", "l3": "포스트 좋아요 목록 조회", "l4": "포스트 좋아요 목록 조회", "desc": "포스트에서 좋아요 목록을 조회한다." },
+            { "id": 64, "l1": "User", "l2": "커뮤니티 - 포스트", "l3": "포스트 좋아요/취소", "l4": "포스트 좋아요/취소", "desc": "포스트를 좋아요/취소한다." },
+            { "id": 65, "l1": "User", "l2": "커뮤니티 - 포스트", "l3": "포스트 북마크 등록/해제", "l4": "포스트 북마크 등록/해제", "desc": "포스트를 북마크 등록/취소한다." },
+            { "id": 66, "l1": "User", "l2": "커뮤니티 - 포스트", "l3": "포스트 팔로우/취소", "l4": "팔로우/취소", "desc": "포스트 작성자를 팔로우/취소한다." },
+            { "id": 67, "l1": "User", "l2": "커뮤니티 - 포스트", "l3": "포스트 공유하기", "l4": "포스트 공유하기", "desc": "포스트를 공유한다." },
+            { "id": 68, "l1": "User", "l2": "커뮤니티 - 포스트", "l3": "포스트 신고하기", "l4": "포스트 신고하기", "desc": "다른 회원이 작성한 포스트를 신고한다." },
+            { "id": 69, "l1": "User", "l2": "커뮤니티 - 포스트", "l3": "포스트 삭제", "l4": "포스트 삭제하기", "desc": "본인이 작성한 포스트를 삭제한다." },
+            { "id": 70, "l1": "User", "l2": "커뮤니티 - A/B", "l3": "인기 A/B 조회", "l4": "인기 A/B 조회", "desc": "인기 A/B를 조회한다." },
+            { "id": 71, "l1": "User", "l2": "커뮤니티 - Q&A", "l3": "인기 Q&A 조회", "l4": "인기 Q&A 조회", "desc": "인기 Q&A를 조회한다." },
+            { "id": 72, "l1": "User", "l2": "커뮤니티 - Q&A", "l3": "Q&A 질문 등록", "l4": "Q&A 질문 등록", "desc": "사용자가 제품이나 일상에 대해 궁금한 점을 질문으로 등록한다." },
+            { "id": 73, "l1": "User", "l2": "커뮤니티 - Q&A", "l3": "Q&A 목록 조회", "l4": "Q&A 목록 조회", "desc": "카테고리별 질문 목록을 조회한다." },
+            { "id": 74, "l1": "User", "l2": "커뮤니티 - Q&A", "l3": "Q&A 상세 조회", "l4": "Q&A 상세 조회", "desc": "카테고리별 질문의 상세 내용과 전체 답변 목록을 조회한다." },
+            { "id": 75, "l1": "User", "l2": "커뮤니티 - Q&A", "l3": "Q&A 댓글 목록 조회", "l4": "Q&A 댓글 목록 조회", "desc": "Q&A에서 댓글 목록을 조회한다." },
+            { "id": 76, "l1": "User", "l2": "커뮤니티 - Q&A", "l3": "Q&A 좋아요 목록 조회", "l4": "Q&A 좋아요 목록 조회", "desc": "Q&A에서 좋아요 목록을 조회한다." },
+            { "id": 77, "l1": "User", "l2": "커뮤니티 - Q&A", "l3": "Q&A 좋아요/취소", "l4": "Q&A 좋아요/취소", "desc": "Q&A를 좋아요/취소한다." },
+            { "id": 78, "l1": "User", "l2": "커뮤니티 - Q&A", "l3": "Q&A 북마크 등록/해제", "l4": "Q&A 북마크 등록/해제", "desc": "Q&A를 북마크 등록/취소한다." },
+            { "id": 79, "l1": "User", "l2": "커뮤니티 - Q&A", "l3": "팔로우/취소", "l4": "팔로우/취소", "desc": "Q&A 작성자를 팔로우/취소한다." },
+            { "id": 80, "l1": "User", "l2": "커뮤니티 - Q&A", "l3": "Q&A 공유하기", "l4": "Q&A 공유하기", "desc": "Q&A를 공유한다." },
+            { "id": 81, "l1": "User", "l2": "커뮤니티 - Q&A", "l3": "Q&A 신고하기", "l4": "Q&A 신고하기", "desc": "다른 회원이 작성한 Q&A를 신고한다." },
+            { "id": 82, "l1": "User", "l2": "커뮤니티 - Q&A", "l3": "Q&A 삭제하기", "l4": "Q&A 삭제하기", "desc": "본인이 작성한 Q&A를 삭제한다." },
+            { "id": 83, "l1": "User", "l2": "커뮤니티 - A/B", "l3": "A/B 댓글 목록 조회", "l4": "A/B 댓글 목록 조회", "desc": "A/B에서 댓글 목록을 조회한다." },
+            { "id": 84, "l1": "User", "l2": "커뮤니티 - A/B", "l3": "A/B 좋아요 목록 조회", "l4": "A/B 좋아요 목록 조회", "desc": "A/B에서 좋아요 목록을 조회한다." },
+            { "id": 85, "l1": "User", "l2": "커뮤니티 - A/B", "l3": "A/B 좋아요/취소", "l4": "A/B 좋아요/취소", "desc": "A/B을 좋아요/취소한다." },
+            { "id": 86, "l1": "User", "l2": "커뮤니티 - A/B", "l3": "A/B 북마크 등록/해제", "l4": "A/B 북마크 등록/해제", "desc": "A/B을 북마크 등록/취소한다." },
+            { "id": 87, "l1": "User", "l2": "커뮤니티 - A/B", "l3": "A/B 팔로우/취소", "l4": "팔로우/취소", "desc": "A/B 작성자를 팔로우/취소한다." },
+            { "id": 88, "l1": "User", "l2": "커뮤니티 - A/B", "l3": "A/B 공유하기", "l4": "A/B 공유하기(FE_Mobile", "desc": "A/B을 공유한다." },
+            { "id": 89, "l1": "User", "l2": "커뮤니티 - A/B", "l3": "A/B 신고하기", "l4": "A/B 신고하기", "desc": "다른 회원이 작성한 A/B를 신고한다." },
+            { "id": 90, "l1": "User", "l2": "이벤트", "l3": "이벤트 목록", "l4": "이벤트 목록 조회", "desc": "이벤트 페이지 목록을 조회한다." },
+            { "id": 91, "l1": "User", "l2": "이벤트", "l3": "이벤트 상세", "l4": "이벤트 상세 조회", "desc": "이벤트 상세 페이지를 조회한다." },
+            { "id": 92, "l1": "User", "l2": "이벤트", "l3": "이벤트 상세", "l4": "이벤트 참여", "desc": "이벤트에 참여한다." },
+            { "id": 93, "l1": "User", "l2": "이벤트", "l3": "이벤트 상세", "l4": "이벤트 참여 개인 정보 입력", "desc": "이벤트 참여 시 개인 정보를 입력한다." },
+            { "id": 94, "l1": "User", "l2": "이벤트", "l3": "이벤트 상세", "l4": "이벤트 당첨자 발표", "desc": "이벤트 당첨자를 조회한다." },
+            { "id": 95, "l1": "User", "l2": "검색(컨텐츠홈)", "l3": "매거진 검색", "l4": "가전M 검색", "desc": "키워드 검색을 통해 가전M 컨텐츠 목록을 검색한다." },
+            { "id": 96, "l1": "User", "l2": "검색(컨텐츠홈)", "l3": "매거진 검색", "l4": "라이프M 검색", "desc": "키워드 검색을 통해 라이프M 컨텐츠 목록을 검색한다." },
+            { "id": 97, "l1": "User", "l2": "검색(컨텐츠홈)", "l3": "매거진 검색", "l4": "LG스토리 검색", "desc": "키워드 검색을 통해 LG스토리 컨텐츠 목록을 검색한다." },
+            { "id": 98, "l1": "User", "l2": "검색(컨텐츠홈)", "l3": "포스트 검색", "l4": "포스트 검색", "desc": "키워드 검색을 통해 포스트 목록을 검색한다." },
+            { "id": 99, "l1": "User", "l2": "검색(컨텐츠홈)", "l3": "Q&A 검색", "l4": "Q&A 검색", "desc": "키워드 검색을 통해 Q&A 목록을 검색한다." },
+            { "id": 100, "l1": "User", "l2": "검색(컨텐츠홈)", "l3": "A/B 검색", "l4": "A/B 검색", "desc": "키워드 검색을 통해 A/B 목록을 검색한다." },
+            { "id": 101, "l1": "User", "l2": "검색(컨텐츠홈)", "l3": "회원 검색", "l4": "회원 검색", "desc": "키워드 검색을 통해 회원 목록을 검색한다." },
+            { "id": 102, "l1": "Admin", "l2": "회원 관리", "l3": "크리에이터 관리", "l4": "크리에이터 회원 목록 조회", "desc": "크리에이터 목록을 조회한다." },
+            { "id": 103, "l1": "Admin", "l2": "회원 관리", "l3": "크리에이터 관리", "l4": "크리에이터 회원 상세 조회", "desc": "특정 크리에이터 그룹의 소속된 회원, 플래그, 기간을 조회한다." },
+            { "id": 104, "l1": "Admin", "l2": "회원 활동 관리", "l3": "포스트 관리", "l4": "포스트 목록 조회", "desc": "회원(고객)이 작성한 포스트 목록을 조회한다." },
+            { "id": 105, "l1": "Admin", "l2": "회원 활동 관리", "l3": "포스트 관리", "l4": "포스트 상세 조회", "desc": "회원(고객)이 작성한 포스트 상세정보를 조회한다." },
+            { "id": 106, "l1": "Admin", "l2": "회원 활동 관리", "l3": "포스트 관리", "l4": "포스트 승인/취소", "desc": "회원(고객)이 작성한 포스트를 승인/취소 처리한다." },
+            { "id": 107, "l1": "Admin", "l2": "회원 활동 관리", "l3": "Q&A 관리", "l4": "Q&A 목록 조회", "desc": "회원(고객)이 작성한 Q&A 목록을 조회한다." },
+            { "id": 108, "l1": "Admin", "l2": "회원 활동 관리", "l3": "Q&A 관리", "l4": "Q&A 답변 등록", "desc": "사용자가 작성한 Q&A에 답변을 등록한다." },
+            { "id": 109, "l1": "Admin", "l2": "회원 활동 관리", "l3": "활동 Q&A 관리", "l4": "Q&A 상세 조회", "desc": "회원(고객)이 작성한 Q&A 상세내용을 조회한다." },
+            { "id": 110, "l1": "Admin", "l2": "회원 활동 관리", "l3": "참여 Q&A 관리", "l4": "Q&A 참여 내역 조회", "desc": "회원이 응답한 Q&A 내역 조회한다." },
+            { "id": 111, "l1": "Admin", "l2": "회원 활동 관리", "l3": "참여 A/B 투표 관리", "l4": "A/B 참여 내역 조회", "desc": "회원이 참여한 A/B 투표 내역 조회한다." },
+            { "id": 112, "l1": "Admin", "l2": "회원 활동 관리", "l3": "활동 관리", "l4": "A/B 생성/수정", "desc": "A/B 투표 컨텐츠를 생성/수정한다." },
+            { "id": 113, "l1": "Admin", "l2": "회원 활동 관리", "l3": "활동 관리", "l4": "A/B 목록 조회", "desc": "A/B 투표 목록을 조회한다." },
+            { "id": 114, "l1": "Admin", "l2": "회원 활동 관리", "l3": "활동 관리", "l4": "A/B 상세 조회", "desc": "A/B 투표 상세내용을 조회한다." },
+            { "id": 115, "l1": "Admin", "l2": "회원 활동 관리", "l3": "활동 관리", "l4": "A/B 참여 내역 조회", "desc": "A/B별 회원 투표 내역을 조회한다." },
+            { "id": 116, "l1": "Admin", "l2": "이벤트 관리", "l3": "이벤트 관리", "l4": "이벤트 목록 조회", "desc": "이벤트 목록을 조회한다.(검색 포함)" },
+            { "id": 117, "l1": "Admin", "l2": "이벤트 관리", "l3": "이벤트 관리", "l4": "이벤트 상세 조회", "desc": "이벤트 상세 내역을 조회한다." },
+            { "id": 118, "l1": "Admin", "l2": "이벤트 관리", "l3": "이벤트 관리", "l4": "이벤트 참여자 목록 조회", "desc": "이벤트 참여자 목록을 조회한다." },
+            { "id": 119, "l1": "Admin", "l2": "이벤트 관리", "l3": "이벤트 관리", "l4": "이벤트 생성/수정", "desc": "이벤트 내용을 생성/수정한다." },
+            { "id": 120, "l1": "Admin", "l2": "메타데이터 관리", "l3": "태그 관리", "l4": "태그 목록 조회", "desc": "태그 목록 조회한다.(검색 포함)" },
+            { "id": 121, "l1": "Admin", "l2": "메타데이터 관리", "l3": "태그 관리", "l4": "태그 상세 조회", "desc": "태그 상세 내용 조회한다." },
+            { "id": 122, "l1": "Admin", "l2": "메타데이터 관리", "l3": "태그 관리", "l4": "태그 생성/수정", "desc": "태그 내용 생성/수정한다." },
+            { "id": 123, "l1": "Admin", "l2": "배지 관리", "l3": "배지 관리", "l4": "배지 목록 조회", "desc": "회원(고객) 활동 배지 목록 조회한다.(검색 포함)" },
+            { "id": 124, "l1": "Admin", "l2": "배지 관리", "l3": "배지 관리", "l4": "배지 상세 조회", "desc": "회원(고객) 활동 배지 상세 내용 조회한다." },
+            { "id": 125, "l1": "Admin", "l2": "배지 관리", "l3": "배지 관리", "l4": "배지 생성/수정", "desc": "회원(고객) 활동 배지 내용 생성/수정한다." },
+            { "id": 126, "l1": "Admin", "l2": "포인트 정책 관리", "l3": "포인트 정책 관리", "l4": "포인트 정책 목록 조회", "desc": "회원(고객) 활동 포인트 정책 목록 조회한다.(검색 포함)" },
+            { "id": 127, "l1": "Admin", "l2": "포인트 정책 관리", "l3": "포인트 정책 관리", "l4": "포인트 정책 상세 조회", "desc": "회원(고객) 활동 포인트 정책 상세 내용 조회한다." },
+            { "id": 128, "l1": "Admin", "l2": "포인트 정책 관리", "l3": "포인트 정책 관리", "l4": "포인트 정책 생성/수정", "desc": "회원(고객) 활동 포인트 정책 내용 생성/수정한다." },
+            { "id": 129, "l1": "Admin", "l2": "홈페이지 관리", "l3": "메인 배너 관리", "l4": "메인 배너 목록 조회", "desc": "웹 메인에 노출할 배너 목록 조회한다.(검색 포함)" },
+            { "id": 130, "l1": "Admin", "l2": "홈페이지 관리", "l3": "메인 배너 관리", "l4": "메인 배너 조회", "desc": "웹 메인에 노출할 배너 상세 내용을 조회한다." },
+            { "id": 131, "l1": "Admin", "l2": "홈페이지 관리", "l3": "메인 배너 관리", "l4": "메인 배너 생성/수정", "desc": "웹 메인에 노출할 배너를 생성/수정한다." },
+            { "id": 132, "l1": "Admin", "l2": "인기 매거진 관리", "l3": "인기 매거진 관리", "l4": "인기 매거진 목록 조회", "desc": "관리자가 수동으로 인기 매거진 목록 조회한다." },
+            { "id": 133, "l1": "Admin", "l2": "인기 매거진 관리", "l3": "인기 매거진 관리", "l4": "인기 매거진 생성", "desc": "신규 인기 매거진을 추가한다.(매거진 검색 포함)" },
+            { "id": 134, "l1": "Admin", "l2": "인기 매거진 관리", "l3": "인기 매거진 관리", "l4": "인기 매거진 수정", "desc": "기존 인기 매거진 목록을 수정(노출 여부, 노출 순서 등)한다." },
+            { "id": 135, "l1": "Admin", "l2": "인기 포스트 관리", "l3": "인기 포스트 관리", "l4": "인기 포스트 목록 조회", "desc": "관리자가 수동으로 인기 포스트 목록 조회한다." },
+            { "id": 136, "l1": "Admin", "l2": "인기 포스트 관리", "l3": "인기 포스트 관리", "l4": "인기 포스트 생성", "desc": "신규 인기 포스트를 추가한다.(포스트 검색 포함)" },
+            { "id": 137, "l1": "Admin", "l2": "인기 포스트 관리", "l3": "인기 포스트 관리", "l4": "인기 포스트 수정", "desc": "기존 인기 포스트 목록을 수정(노출 여부, 노출 순서 등)한다." },
+            { "id": 138, "l1": "Admin", "l2": "가전톡 - 인기 Q&A 관리", "l3": "가전톡 - 인기 Q&A 관리", "l4": "인기 Q&A 목록 조회", "desc": "인기 Q&A 목록을 조회한다" },
+            { "id": 139, "l1": "Admin", "l2": "가전톡 - 인기 Q&A 관리", "l3": "가전톡 - 인기 Q&A 관리", "l4": "인기 Q&A 등록/수정", "desc": "인기 Q&A 등록/수정 한다.(노출순서, 노출여부)" },
+            { "id": 140, "l1": "Admin", "l2": "가전톡 - 인기 Q&A 관리", "l3": "가전톡 - 인기 Q&A 관리", "l4": "인기 A/B 목록 조회", "desc": "인기 A/B 목록 조회" },
+            { "id": 141, "l1": "Admin", "l2": "가전톡 - 인기 Q&A 관리", "l3": "가전톡 - 인기 Q&A 관리", "l4": "인기 A/B 등록/수정", "desc": "기존 인기 A/B 목록을 수정(노출 여부, 노출 순서 등)한다." },
+            { "id": 142, "l1": "Admin", "l2": "신고 게시물 관리", "l3": "신고 게시물 관리", "l4": "신고 게시물 목록 조회", "desc": "회원(고객)이 신고한 게시물(포스트, Q&A, 댓글 등) 목록을 조회한다.(검색 포함)" },
+            { "id": 143, "l1": "Admin", "l2": "신고 게시물 관리", "l3": "신고 게시물 관리", "l4": "신고 게시물 상세 조회", "desc": "회원(고객)이 신고한 게시물(포스트, Q&A, 댓글 등) 상세 내용을 조회한다." },
+            { "id": 144, "l1": "Admin", "l2": "신고 게시물 관리", "l3": "신고 게시물 관리", "l4": "신고 게시물 처리", "desc": "회원(고객)이 신고한 게시물(포스트, Q&A, 댓글 등)에 대한 노출 여부(전체 회원(고객)에게 노출 중지, 신고 회원(고객)에게만 노출 중지) 처리한다." },
+            { "id": 145, "l1": "Admin", "l2": "신고 회원 관리", "l3": "신고 회원 관리", "l4": "신고 회원 목록 조회", "desc": "회원(고객)이 신고한 회원 목록을 조회한다.(검색 포함)" },
+            { "id": 146, "l1": "Admin", "l2": "신고 회원 관리", "l3": "신고 회원 관리", "l4": "신고 회원 상세 조회", "desc": "회원(고객)이 신고한 회원 상세 내용을 조회한다." },
+            { "id": 147, "l1": "Admin", "l2": "신고 회원 관리", "l3": "신고 회원 관리", "l4": "신고 회원 처리", "desc": "회원(고객)이 신고한 회원에 대한 노출 여부(전체 회원(고객)에게 노출 중지, 신고 회원(고객)에게만 노출 중지) 처리한다." },
+            { "id": 148, "l1": "Admin", "l2": "금칙어 관리", "l3": "금칙어 관리", "l4": "금칙어 목록 조회", "desc": "금칙어 목록을 조회한다." },
+            { "id": 149, "l1": "Admin", "l2": "금칙어 관리", "l3": "금칙어 관리", "l4": "금칙어 등록/수정", "desc": "금칙어를 등록/수정한다." },
+            { "id": 150, "l1": "User", "l2": "채팅", "l3": "채팅 목록", "l4": "채팅 목록 조회", "desc": "참여중인 1:1 및 그룹 채팅방 목록을 도회한다." },
+            { "id": 151, "l1": "User", "l2": "채팅", "l3": "채팅 목록 생성(1:1)", "l4": "채팅 목록 생성(1:1)", "desc": "다른 회원에게 1:1 대화를 요청하여 채팅방을 생성한다." },
+            { "id": 152, "l1": "User", "l2": "채팅", "l3": "채팅 목록 생성(그룹)", "l4": "채팅 목록 생성(그룹)", "desc": "여러 회원을 초대하여 그룹 채팅방을 생성한다." },
+            { "id": 153, "l1": "User", "l2": "채팅", "l3": "채팅방", "l4": "메시지 전송", "desc": "메세지를 전송한다." },
+            { "id": 154, "l1": "User", "l2": "채팅", "l3": "채팅방", "l4": "메시지 수신 알림", "desc": "새로운 메시지 수신 시 실시간 푸시 또는 인앱 알림을 받는다." },
+            { "id": 155, "l1": "User", "l2": "채팅", "l3": "채팅방", "l4": "참여자 목록 조회", "desc": "현재 태팅방에 참여 중인 회원 목록을 조회한다." },
+            { "id": 156, "l1": "User", "l2": "채팅", "l3": "채팅방", "l4": "나가기", "desc": "참여중인 채팅방에서 퇴장한다." },
+            { "id": 157, "l1": "User", "l2": "채팅", "l3": "채팅방", "l4": "채팅방/참여자 신고", "desc": "부적절한 대화 내용이나 참여자를 신고한다" },
+            { "id": 158, "l1": "Admin", "l2": "봇 관리", "l3": "서비스 봇", "l4": "신규 사용자 알림 봇", "desc": "신규 사용자 가입 시 관리자에게 알림을 발송하는 봇을 설정한다." },
+            { "id": 159, "l1": "Admin", "l2": "봇 관리", "l3": "커스텀 봇", "l4": "커스텀 봇 설정", "desc": "퀘스트 실행 등 특정 로직 수행 시 동작할 커스텀 봇을 설정 및 운영한다." },
+            { "id": 160, "l1": "User", "l2": "알림", "l3": "사용자 알림", "l4": "멘션 알림", "desc": "다른 사용자가 나를 멘션(@)했을 때 푸시 또는 인앱 알림을 수신한다." },
+            { "id": 161, "l1": "Admin", "l2": "알림 관리", "l3": "관리자 알림", "l4": "사용자 활동 알림", "desc": "모든 사용자 활동 및 관련 주요 작업에 대한 관리자용 알림을 수신한다." },
+            { "id": 162, "l1": "User", "l2": "커뮤니티 - 리뷰", "l3": "리뷰 작성", "l4": "리뷰 등록", "desc": "상품 또는 콘텐츠에 대한 리뷰를 작성한다. (댓글 및 답글 지원)" },
+            { "id": 163, "l1": "User", "l2": "커뮤니티 - 리뷰", "l3": "리뷰 목록", "l4": "리뷰 목록 조회", "desc": "작성된 리뷰 목록을 조회한다." },
+            { "id": 164, "l1": "Admin", "l2": "퀘스트 관리", "l3": "퀘스트 생성", "l4": "퀘스트 생성/수정", "desc": "커뮤니티 사용자 행동(글쓰기, 댓글 등)을 기반으로 한 퀘스트 로직을 구성한다." },
+            { "id": 165, "l1": "User", "l2": "퀘스트", "l3": "퀘스트 수행", "l4": "퀘스트 검증", "desc": "콘텐츠 등록, Q&A, 팔로잉, 좋아요 등 퀘스트 달성 조건을 검증받는다." },
+            { "id": 166, "l1": "User", "l2": "리워드", "l3": "리워드 지급", "l4": "리워드 지급", "desc": "퀘스트 달성 등 자격 있는 사용자에게 배지 및 포인트를 자동 지급받는다." }
         ];
 
         let state = {
+            view: 'default', // 'default' or 'spec-table'
             activeL1: 'User',
             activeL2: '메인',
             mobileMenuOpen: false,
-            posts: [
-                { id: 1, type: 'POST', user: 'User1', content: '오늘의 요리 완성!', likes: 12, bookmarked: false, votesA: 0, votesB: 0 },
-                { id: 2, type: 'Q&A', user: 'Newbie', content: '이 가전제품 어떤가요?', likes: 5, bookmarked: true, votesA: 0, votesB: 0 },
-                { id: 3, type: 'A/B', user: 'VoteMaster', content: '저녁 메뉴: 피자 vs 치킨', likes: 24, bookmarked: false, votesA: 15, votesB: 9 },
-            ],
-            points: { current: 1500, history: [{ desc: '포스트 작성', amount: 100 }, { desc: '굿즈 교환', amount: -500 }] }
+            highlightId: null
         };
 
         // 렌더링 함수들
         function renderSidebar() {
             const structure = {};
+            // 데이터 기반 사이드바 구조 생성 (User / Admin 등)
             FEATURES_DATA.forEach(item => {
                 if (!structure[item.l1]) structure[item.l1] = new Set();
                 structure[item.l1].add(item.l2);
@@ -137,11 +312,14 @@
             
             const html = Object.entries(structure).map(([l1, set]) => `
                 <div class="mb-6">
-                    <h3 class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2 px-3">${l1}</h3>
-                    <div class="space-y-1">
+                    <h3 class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2 px-3 flex items-center gap-1 text-gray-500">
+                        ${l1 === 'Admin' ? '<i data-lucide="shield" class="w-3 h-3"></i>' : '<i data-lucide="user" class="w-3 h-3"></i>'}
+                        ${l1}
+                    </h3>
+                    <div class="space-y-0.5">
                         ${Array.from(set).map(l2 => `
                             <button onclick="navigateTo('${l1}', '${l2}')" 
-                                class="w-full text-left px-3 py-2 rounded-lg text-sm font-medium transition-colors ${state.activeL1 === l1 && state.activeL2 === l2 ? 'bg-blue-50 text-blue-700' : 'text-gray-600 hover:bg-gray-50'}">
+                                class="w-full text-left px-3 py-2 rounded-lg text-sm font-medium transition-colors ${state.view === 'default' && state.activeL1 === l1 && state.activeL2 === l2 ? 'bg-blue-50 text-blue-700' : 'text-gray-600 hover:bg-gray-100'}">
                                 ${l2}
                             </button>
                         `).join('')}
@@ -153,105 +331,216 @@
 
         function renderMainContent() {
             const container = document.getElementById('main-content');
-            let html = '';
-
-            if (state.activeL1 === 'User' && state.activeL2 === '메인') {
-                html = `
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-                        ${['인기 A/B', '인기 Q&A', '추천', '매거진'].map(t => `
-                            <div class="bg-white p-4 rounded-xl border border-gray-200 shadow-sm">
-                                <h3 class="font-bold text-lg mb-2">${t}</h3>
-                                <div class="h-20 bg-gray-100 rounded flex items-center justify-center text-gray-400"><i data-lucide="image"></i></div>
-                            </div>
-                        `).join('')}
-                    </div>
-                    <h2 class="text-xl font-bold mb-4">최신 피드</h2>
-                    <div class="space-y-4">
-                        ${state.posts.map(p => `
-                            <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm">
-                                <div class="flex justify-between mb-2">
-                                    <span class="font-bold">${p.user}</span>
-                                    <span class="text-xs text-gray-500 bg-blue-100 text-blue-800 px-2 py-1 rounded">${p.type}</span>
-                                </div>
-                                <p class="text-lg mb-4">${p.content}</p>
-                                ${p.type === 'A/B' ? `<div class="flex gap-2 mb-4"><div class="flex-1 bg-blue-50 p-2 text-center text-blue-600 rounded">A: ${p.votesA}</div><div class="flex-1 bg-red-50 p-2 text-center text-red-600 rounded">B: ${p.votesB}</div></div>` : ''}
-                                <div class="flex gap-4 border-t pt-3">
-                                    <button onclick="like(${p.id})" class="flex gap-1 items-center text-gray-600"><i data-lucide="heart" class="w-4 h-4"></i> ${p.likes}</button>
-                                    <button class="flex gap-1 items-center text-gray-600"><i data-lucide="message-square" class="w-4 h-4"></i> 5</button>
-                                </div>
-                            </div>
-                        `).join('')}
-                    </div>
+            const pageTitle = document.getElementById('page-title');
+            
+            if (state.view === 'spec-table') {
+                pageTitle.innerHTML = `
+                    <span class="text-gray-500 font-normal cursor-pointer hover:text-gray-700 flex items-center gap-1" onclick="goHome()">
+                        <i data-lucide="home" class="w-4 h-4"></i> 홈
+                    </span>
+                    <i data-lucide="chevron-right" class="w-4 h-4 text-gray-400"></i>
+                    <span class="flex items-center gap-2">
+                        <i data-lucide="file-spreadsheet" class="w-4 h-4 text-blue-600"></i>
+                        기능 명세서 원문보기
+                    </span>
                 `;
-            } else if (state.activeL1 === 'User' && state.activeL2 === '마이홈') {
-                html = `
-                    <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm mb-6">
-                        <h2 class="text-xl font-bold mb-4">김엘지님의 마이홈</h2>
-                        <div class="flex gap-8 mb-6">
-                            <div class="text-center"><div class="font-bold text-xl">15</div><div class="text-sm text-gray-500">게시글</div></div>
-                            <div class="text-center"><div class="font-bold text-xl">120</div><div class="text-sm text-gray-500">팔로워</div></div>
-                        </div>
-                        <div class="bg-gray-50 p-4 rounded-lg">
-                            <div class="flex justify-between items-center mb-2">
-                                <span class="font-bold">보유 포인트</span>
-                                <span class="text-blue-600 font-bold text-xl">${state.points.current} P</span>
+                container.innerHTML = `
+                    <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden flex flex-col h-full animate-fade-in-up">
+                        <div class="p-4 border-b border-gray-100 flex justify-between items-center bg-gray-50/50">
+                            <h3 class="font-bold text-gray-800 flex items-center gap-2">
+                                <i data-lucide="list" class="w-4 h-4 text-gray-500"></i>
+                                전체 기능 목록 (${FEATURES_DATA.length}개)
+                            </h3>
+                            <div class="text-xs text-gray-500 bg-white px-3 py-1.5 rounded-full border border-gray-200 shadow-sm flex items-center gap-1">
+                                <i data-lucide="mouse-pointer-click" class="w-3 h-3 text-blue-500"></i>
+                                행을 클릭하면 해당 화면으로 이동합니다
                             </div>
-                            ${state.points.history.map(h => `<div class="flex justify-between text-sm py-1 border-b last:border-0"><span>${h.desc}</span><span>${h.amount} P</span></div>`).join('')}
                         </div>
-                    </div>
-                `;
-            } else if (state.activeL1 === 'Admin') {
-                html = `
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-                        <div class="bg-white p-6 rounded-xl shadow-sm border-l-4 border-blue-500">
-                            <div class="text-gray-500">오늘 가입</div>
-                            <div class="text-3xl font-bold">128명</div>
-                        </div>
-                        <div class="bg-white p-6 rounded-xl shadow-sm border-l-4 border-red-500">
-                            <div class="text-gray-500">신고 대기</div>
-                            <div class="text-3xl font-bold text-red-600">15건</div>
-                        </div>
-                    </div>
-                    <div class="bg-white p-6 rounded-xl border shadow-sm">
-                        <h3 class="font-bold mb-4">관리자 기능 목록</h3>
-                        <div class="space-y-2">
-                            ${FEATURES_DATA.filter(f => f.l1 === 'Admin').map(f => `<div class="p-3 bg-gray-50 rounded border flex justify-between"><span>${f.l3} > ${f.l4}</span><button class="text-xs bg-white border px-2 py-1 rounded">관리</button></div>`).join('')}
+                        <div class="overflow-auto flex-1">
+                            <table class="w-full text-sm text-left spec-table relative">
+                                <thead class="text-xs text-gray-500 uppercase bg-gray-50 sticky top-0 shadow-sm z-10">
+                                    <tr>
+                                        <th class="px-6 py-3 w-16 text-center">No</th>
+                                        <th class="px-6 py-3 w-28 text-center">대분류 (L1)</th>
+                                        <th class="px-6 py-3 w-36">중분류 (L2)</th>
+                                        <th class="px-6 py-3 w-40">소분류 (L3)</th>
+                                        <th class="px-6 py-3 w-48">기능명 (L4)</th>
+                                        <th class="px-6 py-3">상세 설명</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-100 bg-white">
+                                    ${FEATURES_DATA.map(f => `
+                                        <tr onclick="navigateToFeature(${f.id})" title="클릭하여 이동" class="group transition-colors hover:bg-blue-50/50">
+                                            <td class="px-6 py-3 font-medium text-gray-400 text-center group-hover:text-blue-600">${f.id}</td>
+                                            <td class="px-6 py-3 text-center">
+                                                <span class="px-2 py-1 rounded text-[10px] font-bold border ${f.l1 === 'Admin' ? 'bg-purple-50 text-purple-700 border-purple-100' : 'bg-blue-50 text-blue-700 border-blue-100'}">
+                                                    ${f.l1}
+                                                </span>
+                                            </td>
+                                            <td class="px-6 py-3 text-gray-600 font-medium">${f.l2}</td>
+                                            <td class="px-6 py-3 text-gray-500">${f.l3}</td>
+                                            <td class="px-6 py-3 font-bold text-gray-800 group-hover:text-blue-600">${f.l4}</td>
+                                            <td class="px-6 py-3 text-gray-500 text-xs leading-relaxed max-w-md truncate group-hover:whitespace-normal group-hover:overflow-visible group-hover:text-gray-700">
+                                                ${f.desc}
+                                            </td>
+                                        </tr>
+                                    `).join('')}
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 `;
             } else {
+                pageTitle.innerHTML = `
+                    <span class="text-gray-500 font-normal cursor-pointer hover:text-gray-700 flex items-center gap-1" onclick="goHome()">
+                        <i data-lucide="home" class="w-4 h-4"></i> 홈
+                    </span>
+                    <i data-lucide="chevron-right" class="w-4 h-4 text-gray-400"></i>
+                    <span class="text-gray-500">${state.activeL1}</span>
+                    <i data-lucide="chevron-right" class="w-4 h-4 text-gray-400"></i>
+                    <span class="font-bold text-gray-800">${state.activeL2}</span>
+                `;
+                
+                // 해당 카테고리의 기능들 필터링
                 const features = FEATURES_DATA.filter(f => f.l1 === state.activeL1 && f.l2 === state.activeL2);
-                html = `
-                    <h2 class="text-2xl font-bold mb-4">${state.activeL2}</h2>
-                    <div class="bg-white rounded-xl border border-gray-200 overflow-hidden">
-                        ${features.length ? features.map(f => `
-                            <div class="p-4 border-b last:border-0 flex justify-between items-center hover:bg-gray-50">
-                                <div>
-                                    <div class="font-bold">${f.l3}</div>
-                                    <div class="text-sm text-gray-600">${f.desc}</div>
+                
+                let contentHtml = '';
+                
+                // 데모용 상단 위젯 (메인 화면인 경우)
+                if (state.activeL1 === 'User' && state.activeL2 === '메인') {
+                    contentHtml = `
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                            <div class="bg-white p-4 rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-all cursor-pointer group">
+                                <h3 class="font-bold text-sm text-gray-500 mb-2 group-hover:text-blue-600">인기 A/B</h3>
+                                <div class="flex items-center gap-2">
+                                    <div class="p-2 bg-blue-50 rounded-lg text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-colors"><i data-lucide="bar-chart-2" class="w-5 h-5"></i></div>
+                                    <span class="text-2xl font-bold text-gray-800">128</span>
                                 </div>
-                                <button class="text-xs border px-3 py-1 rounded hover:bg-gray-100">상세</button>
                             </div>
-                        `).join('') : '<div class="p-8 text-center text-gray-500">표시할 기능이 없습니다.</div>'}
+                            <div class="bg-white p-4 rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-all cursor-pointer group">
+                                <h3 class="font-bold text-sm text-gray-500 mb-2 group-hover:text-green-600">오늘의 질문</h3>
+                                <div class="flex items-center gap-2">
+                                    <div class="p-2 bg-green-50 rounded-lg text-green-600 group-hover:bg-green-600 group-hover:text-white transition-colors"><i data-lucide="message-circle" class="w-5 h-5"></i></div>
+                                    <span class="text-2xl font-bold text-gray-800">45</span>
+                                </div>
+                            </div>
+                             <div class="bg-white p-4 rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-all cursor-pointer group">
+                                <h3 class="font-bold text-sm text-gray-500 mb-2 group-hover:text-purple-600">신규 매거진</h3>
+                                <div class="flex items-center gap-2">
+                                    <div class="p-2 bg-purple-50 rounded-lg text-purple-600 group-hover:bg-purple-600 group-hover:text-white transition-colors"><i data-lucide="book-open" class="w-5 h-5"></i></div>
+                                    <span class="text-2xl font-bold text-gray-800">3</span>
+                                </div>
+                            </div>
+                            <div class="bg-white p-4 rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-all cursor-pointer group">
+                                <h3 class="font-bold text-sm text-gray-500 mb-2 group-hover:text-orange-600">영상 조회수</h3>
+                                <div class="flex items-center gap-2">
+                                    <div class="p-2 bg-orange-50 rounded-lg text-orange-600 group-hover:bg-orange-600 group-hover:text-white transition-colors"><i data-lucide="play-circle" class="w-5 h-5"></i></div>
+                                    <span class="text-2xl font-bold text-gray-800">1.2k</span>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }
+
+                // 기능 리스트 렌더링
+                contentHtml += `
+                    <div class="grid grid-cols-1 gap-4">
+                        ${features.length ? features.map(f => `
+                            <div id="feature-${f.id}" class="bg-white rounded-xl border border-gray-200 p-5 shadow-sm transition-all duration-500 ${state.highlightId === f.id ? 'highlight-box scale-[1.02]' : 'hover:border-blue-300 hover:shadow-md'}">
+                                <div class="flex justify-between items-start mb-3">
+                                    <div class="flex items-center gap-2">
+                                        <span class="px-2.5 py-1 rounded text-xs font-bold bg-gray-50 text-gray-500 border border-gray-200">No. ${f.id}</span>
+                                        <span class="text-xs text-gray-400 flex items-center gap-1 bg-white border border-gray-100 px-2 py-1 rounded">
+                                            <i data-lucide="folder" class="w-3 h-3"></i> ${f.l3}
+                                        </span>
+                                    </div>
+                                    ${state.highlightId === f.id ? 
+                                        `<span class="text-xs font-bold text-yellow-700 bg-yellow-100 px-3 py-1 rounded-full flex items-center gap-1 animate-pulse border border-yellow-200">
+                                            <i data-lucide="target" class="w-3 h-3"></i> 위치 확인됨
+                                         </span>` : ''}
+                                </div>
+                                <h3 class="text-lg font-bold text-gray-900 mb-2 flex items-center gap-2">
+                                    ${f.l4}
+                                </h3>
+                                <div class="bg-gray-50 p-4 rounded-lg border border-gray-100 text-sm text-gray-600 leading-relaxed">
+                                    ${f.desc}
+                                </div>
+                                <div class="flex gap-3 mt-4 pt-4 border-t border-gray-100">
+                                    <button class="flex-1 text-xs bg-white border border-gray-200 text-gray-700 px-3 py-2.5 rounded-lg hover:bg-gray-50 hover:border-gray-300 transition flex items-center justify-center gap-2 font-medium">
+                                        <i data-lucide="file-text" class="w-3.5 h-3.5"></i> 상세 명세
+                                    </button>
+                                    <button class="flex-1 text-xs bg-blue-50 text-blue-600 border border-blue-100 px-3 py-2.5 rounded-lg hover:bg-blue-100 hover:border-blue-200 transition flex items-center justify-center gap-2 font-bold shadow-sm">
+                                        <i data-lucide="play" class="w-3.5 h-3.5 fill-current"></i> 기능 테스트
+                                    </button>
+                                </div>
+                            </div>
+                        `).join('') : `
+                            <div class="flex flex-col items-center justify-center py-20 bg-white rounded-xl border border-dashed border-gray-300 text-center">
+                                <div class="bg-gray-50 p-4 rounded-full mb-4">
+                                    <i data-lucide="folder-open" class="w-8 h-8 text-gray-400"></i>
+                                </div>
+                                <h3 class="text-lg font-medium text-gray-900 mb-1">등록된 기능이 없습니다</h3>
+                                <p class="text-sm text-gray-500">이 카테고리에는 아직 상세 기능 명세가 등록되지 않았습니다.</p>
+                            </div>
+                        `}
                     </div>
                 `;
+                
+                container.innerHTML = contentHtml;
+
+                // 하이라이트 처리 후 스크롤
+                if (state.highlightId) {
+                    setTimeout(() => {
+                        const element = document.getElementById(`feature-${state.highlightId}`);
+                        if (element) {
+                            element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                            // 3초 후 하이라이트 효과 제거 (선택적)
+                            setTimeout(() => {
+                                // element.classList.remove('highlight-box');
+                            }, 3000);
+                        }
+                    }, 100);
+                }
             }
-            container.innerHTML = html;
+            
             if(typeof lucide !== 'undefined') lucide.createIcons();
         }
 
         // Actions
         window.navigateTo = (l1, l2) => {
+            state.view = 'default';
             state.activeL1 = l1;
             state.activeL2 = l2;
+            state.mobileMenuOpen = false;
+            state.highlightId = null;
+            updateUI();
+        };
+
+        window.goHome = () => {
+            state.view = 'default';
+            state.activeL1 = 'User';
+            state.activeL2 = '메인';
+            state.highlightId = null;
+            state.mobileMenuOpen = false;
+            updateUI();
+        }
+
+        window.showSpecTable = () => {
+            state.view = 'spec-table';
             state.mobileMenuOpen = false;
             updateUI();
         };
 
-        window.like = (id) => {
-            const post = state.posts.find(p => p.id === id);
-            if(post) post.likes++;
-            renderMainContent();
+        window.navigateToFeature = (id) => {
+            const feature = FEATURES_DATA.find(f => f.id === id);
+            if (feature) {
+                state.view = 'default';
+                state.activeL1 = feature.l1;
+                state.activeL2 = feature.l2;
+                state.highlightId = id;
+                state.mobileMenuOpen = false;
+                updateUI();
+            }
         };
 
         function updateUI() {
@@ -280,8 +569,8 @@
                 updateUI();
             };
             
+            // 초기 로드
             updateUI();
-            document.getElementById('loading-overlay').style.display = 'none';
         });
     </script>
 </body>
