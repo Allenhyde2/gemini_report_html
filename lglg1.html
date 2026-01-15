@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SolutionApp V3</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <style>
+        /* 기본 스타일 (Tailwind 로드 실패 시 대비) */
+        body { font-family: -apple-system, sans-serif; margin: 0; padding: 0; color: #333; }
+        .fallback-btn { padding: 8px 16px; background: #2563eb; color: white; border: none; border-radius: 4px; cursor: pointer; }
+        
+        /* 유틸리티 */
+        .scrollbar-hide::-webkit-scrollbar { display: none; }
+        .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+        #sidebar { transition: transform 0.3s ease-in-out; }
+        
+        /* 로딩/에러 화면 스타일 */
+        #loading-overlay { position: fixed; inset: 0; background: white; z-index: 9999; display: flex; justify-content: center; align-items: center; font-size: 1.2rem; }
+        #error-msg { color: red; display: none; text-align: center; padding: 20px; }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 h-screen overflow-hidden flex flex-col md:flex-row">
+
+    <!-- 로딩 화면 -->
+    <div id="loading-overlay">
+        <div>
+            <div>앱을 준비 중입니다...</div>
+            <div id="error-msg"></div>
+        </div>
+    </div>
+
+    <!-- Mobile Header -->
+    <div class="md:hidden bg-white border-b p-4 flex items-center justify-between sticky top-0 z-20 shrink-0 h-16">
+        <div class="font-bold text-xl text-blue-600">SolutionApp</div>
+        <button id="mobile-menu-btn" class="p-2 hover:bg-gray-100 rounded">
+            <i data-lucide="menu"></i>
+        </button>
+    </div>
+
+    <!-- Sidebar -->
+    <div id="sidebar" class="fixed inset-y-0 left-0 z-10 w-64 bg-white border-r border-gray-200 transform -translate-x-full md:relative md:translate-x-0 flex flex-col shadow-lg md:shadow-none bg-white h-full">
+        <div class="p-6 border-b border-gray-100 hidden md:block shrink-0 h-20">
+            <div class="font-bold text-xl text-blue-600 flex items-center gap-2">
+                <i data-lucide="layout" class="w-6 h-6"></i> SolutionSpec
+            </div>
+            <div class="text-xs text-gray-500 mt-1">기능 명세 통합 뷰어</div>
+        </div>
+
+        <div id="sidebar-content" class="p-4 space-y-8 overflow-y-auto flex-1 pb-20 md:pb-4">
+            <!-- Menu items injected by JS -->
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="flex-1 flex flex-col h-full overflow-hidden relative bg-gray-50 w-full" id="main-wrapper">
+        <!-- Top Navbar -->
+        <header class="bg-white border-b border-gray-200 shrink-0 px-6 py-3 flex items-center justify-between z-10 h-16">
+            <div class="flex items-center gap-4 w-full max-w-xl">
+                <div class="relative w-full hidden md:block">
+                    <i data-lucide="search" class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4"></i>
+                    <input 
+                        type="text" 
+                        placeholder="기능 검색..." 
+                        class="w-full pl-10 pr-4 py-2 bg-gray-100 border-none rounded-lg text-sm focus:ring-2 focus:ring-blue-500 outline-none"
+                    >
+                </div>
+            </div>
+            
+            <div class="flex items-center gap-4">
+                <button class="relative p-2 text-gray-500 hover:bg-gray-100 rounded-full">
+                    <i data-lucide="bell" class="w-5 h-5"></i>
+                    <span class="absolute top-1.5 right-1.5 w-2 h-2 bg-red-500 rounded-full"></span>
+                </button>
+                <div class="w-8 h-8 bg-gradient-to-tr from-blue-500 to-purple-500 rounded-full"></div>
+            </div>
+        </header>
+
+        <!-- Dynamic Page Content -->
+        <main id="main-content" class="p-6 max-w-7xl mx-auto w-full overflow-y-auto flex-1 pb-20">
+            <!-- Content injected by JS -->
+        </main>
+    </div>
+
+    <!-- Overlay -->
+    <div id="sidebar-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-0 hidden md:hidden transition-opacity opacity-0 pointer-events-none"></div>
+
+    <script>
+        // 에러 핸들링
+        window.onerror = function(msg) {
+            document.getElementById('error-msg').style.display = 'block';
+            document.getElementById('error-msg').innerText = "오류 발생: " + msg;
+            return false;
+        };
+
+        // 데이터 정의
+        const FEATURES_DATA = [
+            { id: 1, l1: 'User', l2: '외부 시스템 연동', l3: 'SNS 공유하기', l4: 'SNS 공유하기', desc: 'SNS 플랫폼(인스타그램) 공유하기 API를 연동한다.' },
+            { id: 8, l1: 'User', l2: '공통', l3: '좋아요/취소', l4: '컨텐츠 좋아요/취소', desc: '컨텐츠를 좋아요/취소한다.' },
+            { id: 9, l1: 'User', l2: '공통', l3: '팔로우/취소', l4: '회원 팔로우/취소', desc: '다른 회원을 팔로우/취소한다.' },
+            { id: 26, l1: 'User', l2: '메인', l3: '인기 컨텐츠', l4: '인기 A/B 조회', desc: '인기 A/B를 조회한다.' },
+            { id: 30, l1: 'User', l2: '메인', l3: '인기 컨텐츠', l4: '인기 Q&A 조회', desc: '메인 화면에 노출되는 Q&A 목록 조회' },
+            { id: 59, l1: 'User', l2: '커뮤니티-포스트', l3: '포스트', l4: '목록 조회', desc: '최신/인기/팔로잉 등 조건과 카테고리에 따라 조회한다.' },
+            { id: 61, l1: 'User', l2: '커뮤니티-포스트', l3: '포스트', l4: '등록', desc: '텍스트, 사진, 동영상, 상품 태그를 포함한 포스트 등록' },
+            { id: 31, l1: 'User', l2: '마이홈', l3: '활동정보', l4: '조회', desc: '게시글 수, 팔로우/팔로잉 수, 배지 등을 조회한다.' },
+            { id: 46, l1: 'User', l2: '마이홈', l3: '포인트', l4: '조회/내역', desc: '보유 포인트 및 사용 내역을 조회한다.' },
+            { id: 102, l1: 'Admin', l2: '회원 관리', l3: '크리에이터', l4: '목록/상세', desc: '크리에이터 회원 목록 및 상세 정보를 조회한다.' },
+            { id: 142, l1: 'Admin', l2: '신고 게시물 관리', l3: '신고', l4: '처리', desc: '신고된 게시물 및 회원을 조회하고 노출 여부를 처리한다.' },
+            { id: 2, l1: '배치', l2: '시스템', l3: '포인트', l4: '소멸 배치', desc: '포인트 소멸 배치 모듈.' }
+        ];
+
+        let state = {
+            activeL1: 'User',
+            activeL2: '메인',
+            mobileMenuOpen: false,
+            posts: [
+                { id: 1, type: 'POST', user: 'User1', content: '오늘의 요리 완성!', likes: 12, bookmarked: false, votesA: 0, votesB: 0 },
+                { id: 2, type: 'Q&A', user: 'Newbie', content: '이 가전제품 어떤가요?', likes: 5, bookmarked: true, votesA: 0, votesB: 0 },
+                { id: 3, type: 'A/B', user: 'VoteMaster', content: '저녁 메뉴: 피자 vs 치킨', likes: 24, bookmarked: false, votesA: 15, votesB: 9 },
+            ],
+            points: { current: 1500, history: [{ desc: '포스트 작성', amount: 100 }, { desc: '굿즈 교환', amount: -500 }] }
+        };
+
+        // 렌더링 함수들
+        function renderSidebar() {
+            const structure = {};
+            FEATURES_DATA.forEach(item => {
+                if (!structure[item.l1]) structure[item.l1] = new Set();
+                structure[item.l1].add(item.l2);
+            });
+            
+            const html = Object.entries(structure).map(([l1, set]) => `
+                <div class="mb-6">
+                    <h3 class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2 px-3">${l1}</h3>
+                    <div class="space-y-1">
+                        ${Array.from(set).map(l2 => `
+                            <button onclick="navigateTo('${l1}', '${l2}')" 
+                                class="w-full text-left px-3 py-2 rounded-lg text-sm font-medium transition-colors ${state.activeL1 === l1 && state.activeL2 === l2 ? 'bg-blue-50 text-blue-700' : 'text-gray-600 hover:bg-gray-50'}">
+                                ${l2}
+                            </button>
+                        `).join('')}
+                    </div>
+                </div>
+            `).join('');
+            document.getElementById('sidebar-content').innerHTML = html;
+        }
+
+        function renderMainContent() {
+            const container = document.getElementById('main-content');
+            let html = '';
+
+            if (state.activeL1 === 'User' && state.activeL2 === '메인') {
+                html = `
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+                        ${['인기 A/B', '인기 Q&A', '추천', '매거진'].map(t => `
+                            <div class="bg-white p-4 rounded-xl border border-gray-200 shadow-sm">
+                                <h3 class="font-bold text-lg mb-2">${t}</h3>
+                                <div class="h-20 bg-gray-100 rounded flex items-center justify-center text-gray-400"><i data-lucide="image"></i></div>
+                            </div>
+                        `).join('')}
+                    </div>
+                    <h2 class="text-xl font-bold mb-4">최신 피드</h2>
+                    <div class="space-y-4">
+                        ${state.posts.map(p => `
+                            <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm">
+                                <div class="flex justify-between mb-2">
+                                    <span class="font-bold">${p.user}</span>
+                                    <span class="text-xs text-gray-500 bg-blue-100 text-blue-800 px-2 py-1 rounded">${p.type}</span>
+                                </div>
+                                <p class="text-lg mb-4">${p.content}</p>
+                                ${p.type === 'A/B' ? `<div class="flex gap-2 mb-4"><div class="flex-1 bg-blue-50 p-2 text-center text-blue-600 rounded">A: ${p.votesA}</div><div class="flex-1 bg-red-50 p-2 text-center text-red-600 rounded">B: ${p.votesB}</div></div>` : ''}
+                                <div class="flex gap-4 border-t pt-3">
+                                    <button onclick="like(${p.id})" class="flex gap-1 items-center text-gray-600"><i data-lucide="heart" class="w-4 h-4"></i> ${p.likes}</button>
+                                    <button class="flex gap-1 items-center text-gray-600"><i data-lucide="message-square" class="w-4 h-4"></i> 5</button>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+            } else if (state.activeL1 === 'User' && state.activeL2 === '마이홈') {
+                html = `
+                    <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm mb-6">
+                        <h2 class="text-xl font-bold mb-4">김엘지님의 마이홈</h2>
+                        <div class="flex gap-8 mb-6">
+                            <div class="text-center"><div class="font-bold text-xl">15</div><div class="text-sm text-gray-500">게시글</div></div>
+                            <div class="text-center"><div class="font-bold text-xl">120</div><div class="text-sm text-gray-500">팔로워</div></div>
+                        </div>
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="font-bold">보유 포인트</span>
+                                <span class="text-blue-600 font-bold text-xl">${state.points.current} P</span>
+                            </div>
+                            ${state.points.history.map(h => `<div class="flex justify-between text-sm py-1 border-b last:border-0"><span>${h.desc}</span><span>${h.amount} P</span></div>`).join('')}
+                        </div>
+                    </div>
+                `;
+            } else if (state.activeL1 === 'Admin') {
+                html = `
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                        <div class="bg-white p-6 rounded-xl shadow-sm border-l-4 border-blue-500">
+                            <div class="text-gray-500">오늘 가입</div>
+                            <div class="text-3xl font-bold">128명</div>
+                        </div>
+                        <div class="bg-white p-6 rounded-xl shadow-sm border-l-4 border-red-500">
+                            <div class="text-gray-500">신고 대기</div>
+                            <div class="text-3xl font-bold text-red-600">15건</div>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl border shadow-sm">
+                        <h3 class="font-bold mb-4">관리자 기능 목록</h3>
+                        <div class="space-y-2">
+                            ${FEATURES_DATA.filter(f => f.l1 === 'Admin').map(f => `<div class="p-3 bg-gray-50 rounded border flex justify-between"><span>${f.l3} > ${f.l4}</span><button class="text-xs bg-white border px-2 py-1 rounded">관리</button></div>`).join('')}
+                        </div>
+                    </div>
+                `;
+            } else {
+                const features = FEATURES_DATA.filter(f => f.l1 === state.activeL1 && f.l2 === state.activeL2);
+                html = `
+                    <h2 class="text-2xl font-bold mb-4">${state.activeL2}</h2>
+                    <div class="bg-white rounded-xl border border-gray-200 overflow-hidden">
+                        ${features.length ? features.map(f => `
+                            <div class="p-4 border-b last:border-0 flex justify-between items-center hover:bg-gray-50">
+                                <div>
+                                    <div class="font-bold">${f.l3}</div>
+                                    <div class="text-sm text-gray-600">${f.desc}</div>
+                                </div>
+                                <button class="text-xs border px-3 py-1 rounded hover:bg-gray-100">상세</button>
+                            </div>
+                        `).join('') : '<div class="p-8 text-center text-gray-500">표시할 기능이 없습니다.</div>'}
+                    </div>
+                `;
+            }
+            container.innerHTML = html;
+            if(typeof lucide !== 'undefined') lucide.createIcons();
+        }
+
+        // Actions
+        window.navigateTo = (l1, l2) => {
+            state.activeL1 = l1;
+            state.activeL2 = l2;
+            state.mobileMenuOpen = false;
+            updateUI();
+        };
+
+        window.like = (id) => {
+            const post = state.posts.find(p => p.id === id);
+            if(post) post.likes++;
+            renderMainContent();
+        };
+
+        function updateUI() {
+            renderSidebar();
+            renderMainContent();
+            
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('sidebar-overlay');
+            if(state.mobileMenuOpen) {
+                sidebar.classList.remove('-translate-x-full');
+                overlay.classList.remove('hidden', 'opacity-0');
+            } else {
+                sidebar.classList.add('-translate-x-full');
+                overlay.classList.add('hidden', 'opacity-0');
+            }
+        }
+
+        // Init
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('mobile-menu-btn').onclick = () => {
+                state.mobileMenuOpen = !state.mobileMenuOpen;
+                updateUI();
+            };
+            document.getElementById('sidebar-overlay').onclick = () => {
+                state.mobileMenuOpen = false;
+                updateUI();
+            };
+            
+            updateUI();
+            document.getElementById('loading-overlay').style.display = 'none';
+        });
+    </script>
+</body>
+</html>
