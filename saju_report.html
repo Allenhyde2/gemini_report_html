@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>사주 분석 리포트</title>
+    <style>
+        @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+        
+        body {
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+            background-color: #f7f9fa;
+            color: #333;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            word-break: keep-all;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            padding-bottom: 50px;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-top: 20px;
+        }
+        .header h1 {
+            color: #1a202c;
+            font-size: 24px;
+            margin: 0;
+            font-weight: 700;
+        }
+        .header p {
+            color: #718096;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+        .card {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+            border: 1px solid #edf2f7;
+        }
+        .main-title {
+            color: #2b6cb0;
+            font-size: 18px;
+            font-weight: 700;
+            border-bottom: 2px solid #ebf8ff;
+            padding-bottom: 12px;
+            margin-top: 0;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+        }
+        .main-title::before {
+            content: '';
+            display: inline-block;
+            width: 4px;
+            height: 18px;
+            background-color: #3182ce;
+            margin-right: 8px;
+            border-radius: 2px;
+        }
+        .sub-title {
+            color: #2d3748;
+            font-size: 16px;
+            margin: 20px 0 10px 0;
+            font-weight: 600;
+            background-color: #f7fafc;
+            padding: 6px 12px;
+            border-radius: 6px;
+            display: inline-block;
+        }
+        .highlight {
+            color: #dd6b20;
+            font-weight: 600;
+        }
+        ul {
+            padding-left: 20px;
+            margin: 10px 0;
+        }
+        li {
+            margin-bottom: 10px;
+            font-size: 15px;
+            color: #4a5568;
+            line-height: 1.5;
+        }
+        li::marker {
+            color: #a0aec0;
+        }
+        .note {
+            background-color: #fffaf0;
+            border-left: 4px solid #ed8936;
+            padding: 12px 16px;
+            border-radius: 0 8px 8px 0;
+            margin: 15px 0;
+            font-size: 14px;
+            color: #7b341e;
+        }
+        .note p {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h1>개인 사주 분석 리포트</h1>
+        <p>모바일 최적화 버전</p>
+    </div>
+
+    <!-- Section 1 -->
+    <div class="card">
+        <h2 class="main-title">고용건</h2>
+        
+        <div class="sub-title">포인트</div>
+        <ul>
+            <li>매사가 지연, 지체, 우울, 답답, 이러지도 저러지도 못하는 형상이다.</li>
+            <li>8월 7일부터 서서히 풀리고 27년 5월부터 형통한다.</li>
+        </ul>
+
+        <div class="sub-title">포인트</div>
+        <ul>
+            <li>27년 4월 새로운 시작</li>
+        </ul>
+
+        <div class="sub-title">조부모나 부모가 많은 기도를 하고 태어난 사람으로 천복을 받고 태어났다.</div>
+        <ul>
+            <li>회장을 하거나 청와대가는 팔자며 어느 조직에서도 수장이 된다.</li>
+            <li>유학, 이민, 외국기업, 해외부서, 승무원, 외교관, 통역관, 가이드 등 외국하고 인연이 많고, 국가의 녹을 먹는 공무원, 교직원, 공기업 등 안정적인 직업이 잘 어울린다.</li>
+            <li>특히 고시를 패스하면 장관, 공·사기업 사장 등을 하며 자동차에 비유를 하면 롤스로이스다.</li>
+        </ul>
+
+        <div class="sub-title">임금 자리에 있는 사람으로</div>
+        <ul>
+            <li>타인의 지배와 간섭, 통제 받는 것을 싫어함으로 타이트한 직장 생활은 어렵고 자유로운 직장, 금융, 교직원, 공직자, 공무원, 프리랜서나 독립적인 자신의 일이 좋다.</li>
+        </ul>
+
+        <div class="sub-title">중앙에 자리 잡은 사람으로</div>
+        <ul>
+            <li>지나치고, 모자라지 아니하며, 한쪽으로 치우치지도 않으며, 적을 만들지 않고, 떳떳하고 항상 변함이 없는 중용을 갖춘 사람이다.</li>
+            <li>부동산중개업, 결혼정보, 상담사, 금융, 의사, 약사, 컨설팅, 헤드헌트, 캐시어, 연예, 예술, 문화, 방송, 학원, 교수, 교사 등 지식과 사람과 사람을 연결시켜주는 직업도 잘 맞다.</li>
+        </ul>
+    </div>
+
+    <!-- Section 2 -->
+    <div class="card">
+        <h2 class="main-title">6개의 신 가운데 청룡, 주작이다</h2>
+        <p style="font-size:14px; color:#718096; margin-top:-10px;">(청룡, 주작, 구진, 등사, 백호, 현무)</p>
+        
+        <div class="sub-title">청룡이란?</div>
+        <ul>
+            <li>아침 형이며 부지런하고(단, 집에서는 꼼짝 하지 않는다) 총명하며, 지혜롭고 순수하고, 순진하며, 변함이 없고 항상 즐거움과 기쁨을 가져다주며, 법 없이 사는 사람이다.</li>
+            <li>간혹 낭만으로 흐르기 쉽고 주색으로 패가망신 하는 경우도 있으니 자기 관리를 잘 해야 한다.</li>
+            <li>중요한 약속, 계약, 미팅 등은 조찬모임으로 하고, 하루의 일과도 아침에 확정을 지으면 늘 유리하고 좋다.</li>
+        </ul>
+
+        <div class="sub-title">주작이란?</div>
+        <ul>
+            <li>입, 말, 언어, 방송, 시비, 구설, 술, 빠르다, 솔직하다는 뜻이 있다.</li>
+            <li>자신의 지식을 입으로 팔아먹는 연예, 예술, 문화, 방송, 법조인, 의사, 금융, 교수, 교사, 강사, 상담사, 부동산중개, 결혼정보, 컨설팅, 헤드헌트, 캐시어, 판매, 영업 등이나, 고객을 상대로 말을 많이 하거나, 요식업, 서비스업 등 입하고 연관된 직업이나 업종이 좋다.</li>
+            <li>구설과 시비가 많이 따르는 팔자로 절대 남의 일에 관여를 하지마라. 잘 해주고 결과는 구설과 망신을 당한다.</li>
+        </ul>
+    </div>
+
+    <!-- Section 3 -->
+    <div class="card">
+        <h2 class="main-title">자유로운 영혼이며 한량팔자다</h2>
+        <p style="font-size:14px; color:#718096; margin-top:-10px;">(한량이란? 예체능, 간호사, 의사, 약사, 변호사, 금융투자자, 연구원 등 특정한 한 분야 전문가를 뜻함)</p>
+        
+        <div class="sub-title">자유로움과 기쁨, 즐거움을 추구하는 한량팔자로 멋진 삶을 영위한다.</div>
+        <div class="sub-title">자신이 좋아 하고, 잘 하고, 하고 싶어 하는 일을 하면 최고의 능력을 발휘하고 인정을 받으며 탑이 된다.</div>
+        <ul>
+            <li>그러나 귀찮고, 하기 싫고, 힘든 일은 안 한다. 그래서 일을 추구해야지 돈을 추구하면 일, 직장, 직업의 안정성이 떨어지고 변화변동이 많다.</li>
+            <li>자신이 좋아 하는 일만 하면 돈은 자동으로 따라오는 팔자다.</li>
+            <li>한마디로 자유로운 영혼이며 어린아이의 마음과 생각을 하며 행동한다.</li>
+            <li>무병장수하고 평생을 편안하고 안락한 삶을 영위하는 한량팔자로 최고다.</li>
+        </ul>
+    </div>
+
+    <!-- Section 4 -->
+    <div class="card">
+        <h2 class="main-title">동자신이 도움을 준다</h2>
+        <ul>
+            <li>동자신이 자신을 도와주려고 본인 몸에 있으니 잠자는 방, 사무실, 호주머니, 가방, 자동차 등에 아이들이 좋아 하는 초코렛, 사탕, 젤리 등을 놓아두고 가지고 다니면 큰 도움을 받는다.</li>
+            <li>시험, 면접, 미팅, 계약 등 중요한 일에 호주머니에 젤리 등을 넣고 가면 형통한다.</li>
+        </ul>
+    </div>
+
+    <!-- Section 5 -->
+    <div class="card">
+        <h2 class="main-title">아름다움 관련 분야</h2>
+        <div class="sub-title">아름다움과 함께하는 팔자로 연예, 예술, 문화, 방송, 스포츠, 손으로 하는 예술분야도 잘 맞다.</div>
+        <ul>
+            <li>배우, 탤런트, 가수, 모델 등</li>
+            <li>직장은 삼성전자보다는 아모레퍼시픽, 방송사, 엔터테이먼트, 뷰티관련회사</li>
+            <li>화장품, 쥬얼리, 귀금속, 패션, 디자이너, 명품, 영상, 광고, 촬영, 사진, 피부, 미용, 네일아트, 반영구, 왁싱, 타투, 도예, 웨딩플래너, 플라워리스트, 스타일리스트, 설계사, 실내인테리어, 작가(문학, 시나리오, 드라마) 등 손으로 하는 예술분야.</li>
+        </ul>
+    </div>
+
+    <!-- Section 6 -->
+    <div class="card">
+        <h2 class="main-title">재복이 좋다</h2>
+        <div class="sub-title">재물을 가지고 있으니 재물 복이 대단히 많고 욕심도 많다.</div>
+        <ul>
+            <li>재물은 돈, 여자, 음식, 선물, 종업원, 관복의 뿌리다.</li>
+            <li>재물이 화수분으로 샘처럼 솟아난다. 재물 복 중에서 최고로 좋다.</li>
+            <li>재물 자랑을 하지 않으며 우물 속에 숨겨놓고 쓰는 알부자다.</li>
+        </ul>
+
+        <h2 class="main-title" style="margin-top: 20px;">부동산, 투자, 문서 운이 좋다.</h2>
+        <div class="sub-title">학문, 부동산, 문서로 재물을 만들고 재물로 부동산과 문서를 잡는 팔자다.</div>
+    </div>
+
+    <!-- Section 7 -->
+    <div class="card">
+        <h2 class="main-title">직장과 승진, 명예와 권리와 권력 등 관복이 좋다.</h2>
+        <div class="sub-title">관을 가지고 있다. (관이란?)</div>
+        <ul>
+            <li>남편, 애정, 직장, 승진, 명예 등 관복, 부동산, 문서의 뿌리다.</li>
+            <li>자존심, 승부욕, 명예욕, 배짱, 추진력, 돌파력이 강하고 개성이 있는 사람이다.</li>
+            <li>생명하고는 지장이 없는 잔병, 고질병, 근심걱정, 심신불안 등 마음고생을 한다.</li>
+            <li>자신의 의지와 상관없이 관재구설이 많이 따르는 팔자로 남의 일에 관여를 하지마라.</li>
+            <li>승진, 영전 등 어느 조직에서도 인정을 받으며 능력 발휘를 잘 한다.</li>
+            <li>고관대작, 직장인은 관을 가지고 있어야 승승장구한다.</li>
+        </ul>
+
+        <div class="sub-title">포인트</div>
+        <ul>
+            <li>몸이 재물과 같이 있으니 재복이 대단히 많고 욕심도 많다.</li>
+            <li>재물을 외국, 회장, 제왕이 밀어준다.</li>
+            <li>재물은 돈, 여자, 음식, 종업원 등이다.</li>
+            <li>재물이 오행으로 수, 물이다.</li>
+        </ul>
+    </div>
+
+    <!-- Section 8 -->
+    <div class="card">
+        <h2 class="main-title">주역 / 문제 핵심</h2>
+        <div class="sub-title">64괘/43번째 택천쾌</div>
+        <ul>
+            <li>결단, 단호함</li>
+        </ul>
+
+        <div class="sub-title">뱀이 공망이다. (공망이란?)</div>
+        <ul>
+            <li>없다. 비워있거나 비워진다. 아직 준비가 덜 되어있다. 진실이 아니다. 헤어진 상태. 건강과 사고, 배신과 사기, 정지, 지연과 지체, 게으르다 등을 뜻하며 부정적인 의미다.</li>
+        </ul>
+
+        <div class="sub-title">팔자에는 12마리 동물이 있다.</div>
+        <ul>
+            <li>본인은 지금까지 12마리 동물 가운데 뱀이 없이 살아가고 있다는 뜻이다.</li>
+            <li>뱀이 뜻하는 복을 못 찾아 먹고 있거나, 30%~40% 찾아먹으면서 살아간다는 뜻이다.</li>
+        </ul>
+
+        <div class="sub-title">뱀이 뜻하는 것은?</div>
+        <ul>
+            <li>생각, 모든 복이다.</li>
+            <li>생각이 공망으로 착각, 고정관념, 합리화, 정체성혼란</li>
+            <li>생각이 공망으로 몸과 마음과 컨디션이 좋았다 나빴다 하며, 자신의 자리를 지키지 못하고 실속이 없고 남 좋은 일시키며 헛수고를 하고, 사람 볼 줄 모르고, 믿지 않으며, 스스로 착각을 하고, 자기 합리화를 하며, 고정관념과 자신만의 틀 속에 갇혀 있으며, 항상 마음이 공허하고 허전하며, 심신이 불안 초조하고, 결정 장애, 두 마음, 정체성을 잃기도 한다.</li>
+            <li>내면에 불안과 초조, 의심, 우울증, 조울증, 공황장애, 강박증 등을 품고 있다.</li>
+        </ul>
+    </div>
+
+    <!-- Section 9 -->
+    <div class="card">
+        <h2 class="main-title">뱀 개운법</h2>
+        <div class="sub-title">뱀을 이용하여 공망을 채운다. 뱀은 사물로 태양이다.</div>
+        <ul>
+            <li>1. 잠자는 방이나 거실에 태양, 일출, 일몰 사진이나 조각상을 놓아두거나, 폰 바탕에 깔고 다닌다.</li>
+            <li>2. 목걸이, 반지, 팔지 등에 태양을 새겨서 차고 다닌다.</li>
+            <li>3. 잠잘 때 머리를 서, 북, 서북쪽으로 두고 잔다.</li>
+            <li>4. 청색, 붉은색 계통을 활용한다.(의상, 속옷, 자동차, 폰 케이스, 신발, 가방 등)</li>
+            <li>5. 2, 3, 4, 7, 8 숫자를 활용한다.(폰 번호, 자동차넘버, 비밀번호 등)</li>
+            <li>6. 태양, 뱀 타투를 해도 좋다.</li>
+            <li>7. 뱀 가죽으로 제작한 가방, 신발, 지갑, 벨트 등을 착용하고 다닌다.</li>
+        </ul>
+        <div class="note">
+            <p><strong># 내년 5월부터 형통한다.</strong></p>
+        </div>
+
+        <div class="sub-title">응용</div>
+        <ul>
+            <li>쓴맛을 즐겨라.</li>
+            <li>붉은색 계열 식음료를 활용한다.(토마토, 석류 등)</li>
+            <li>미팅 좌석배치는 본인은 서, 북, 서북방향, 상대방은 동, 남, 동남쪽방향에 앉게 한다.</li>
+        </ul>
+    </div>
+
+    <!-- Section 10 -->
+    <div class="card">
+        <h2 class="main-title">정신건강 및 종교</h2>
+        <div class="sub-title">예지와 직관력이 탁월하여 스트레스를 많이 받고 정신건강에 어려움이 따르며 무당 팔자라고 한다.</div>
+        <ul>
+            <li>예지와 직관력이 탁월하고, 감각과 감수성이, 발달 되어 있는 사람으로 연예, 예술, 문화, 방송분야, 법조인, 의사, 심리, 정신분야, 범죄 심리, 수사관, 종교 등에 관련 된 사람들은 다 무당의 기가 있어야 크게 성공함으로 대단히 좋은 장점이다.</li>
+            <li>스트레스를 많이 받거나 예민해지면 밤잠을 설치고 조선에 있는 걱정을 혼자서 다하고 가위에 눌리기도 하며 우울증, 조울증, 자폐증, 공황장애, 대인기피증, 틱 증상 등 정신건강에 어려움이 따른다.</li>
+            <li>예민하고, 조선에 있는 걱정을 혼자서 다하고 있고, 재물이 생기면 사치를 즐기며(특히 여자) 특히 충동구매를 하고, 선의의 거짓말을 하며, 게으름을 피우기도 한다.</li>
+            <li>또한 성질이 나면 이성을 잃고, 괴성을 지르고, 괴팍하게 행동하며, 상식 이하의 모습을 보이며 어디를 가도 앉은 자리에 불편함을 느끼고 심신불안 초조해 한다.</li>
+            <li>특이하고, 기이하고, 괴이한 취미를 가지거나 행동을 하기도 하며 창의력과 독창성이 탁월하다.</li>
+        </ul>
+
+        <div class="sub-title">종교</div>
+        <ul>
+            <li>종교를 안 믿는 거나 모태 신앙이라고 해도 신앙심이 안 생긴다.</li>
+            <li>왜냐? 자신이 신이기 때문이다.</li>
+            <li>교회, 성당 등 종교시설도 좋음.</li>
+        </ul>
+
+        <div class="sub-title">정신건강 개운법</div>
+        <ul>
+            <li>밤 11시 30분 이후 가끔 우울증이나 조울증 현상이 일어난다.</li>
+            <li>이 때는 방, 창문을 열어 환기를 시켜놓고, 집 밖으로 나가 동네 한 바퀴 하면서 머리를 시원하게 하고 들어와 샤워를 하면, 머리가 맑아지고, 마음이 편안해 지며, 숙면을 할 수 있다.</li>
+            <li>이런 증상이 일어날 때 마다, 위와 같은 패턴으로 몇 개월만 하면, 정신이 맑아지고, 마음이 편안해지며, 매사가 즐겁고, 건강이 좋아지고, 형통하며, 운세흐름에 좋은 영향을 가져온다.</li>
+        </ul>
+        <div class="note">
+            <p><strong>포인트:</strong> 절에 가면 산신각이 있는데 산신할아버지를 만나고 오면 최고로 좋다.</p>
+            <p style="margin-top: 5px;">(참고: 서울 지역에서는 강남 선릉역 봉은사 북극보전 산신각이 기가 가장 강하고 좋다.)</p>
+        </div>
+    </div>
+
+    <!-- Section 11 -->
+    <div class="card">
+        <h2 class="main-title">신체건강</h2>
+        <ul>
+            <li>기억장애, 두통, 이명</li>
+            <li>폐, 기관지, 전립선, 허리, 신장, 간</li>
+            <li>장, 대장, 무릎, 관절, 발</li>
+        </ul>
+        <div class="note">
+            <p><strong># 뱀 개운 법을 하면 110살까지 산다.</strong></p>
+        </div>
+    </div>
+
+    <!-- Section 12 -->
+    <div class="card">
+        <h2 class="main-title">운세 흐름</h2>
+        <div class="sub-title">3년 운세흐름 (39살~41살)</div>
+        <ul>
+            <li>창업이나 자신의 노하우를 이용하여 재물을 얻는다.</li>
+            <li>자손, 종업원, 부하직원, 후배 등 아랫사람들과 외식 등으로 분주하고, 재물까지 가져다주니 즐겁고, 편안하고, 안락하다.</li>
+            <li>명예를 제외한 모든 것이 형통한다.</li>
+            <li>잃었던 물건은 타인이 찾아서 가져다주는 기쁨이 있다.</li>
+            <li>자손은 효도하며 뜻밖의 횡재수도 있다.</li>
+            <li>건강이 좋아지고 관재와 구설이 물러간다.</li>
+            <li>기도, 굿, 천도제 등을 했더니 질병, 귀신을 물리치고 재물이 들어오기도 한다.</li>
+        </ul>
+        <div class="note">
+            <p><strong># 뱀 개운 법을 하면 나쁜 작용은 멈춘다.</strong></p>
+        </div>
+
+        <div class="sub-title">26년 말띠 해</div>
+        <ul>
+            <li>학문, 자격증 등 합격, 계약, 문서 등은 길하다.</li>
+            <li>부동산, 매매, 이사, 자동차, 수술, 수리 등은 길하다.</li>
+            <li>교통사고, 낙상 등 사고 조심</li>
+            <li>가전 등 교체, 수리</li>
+            <li>신근노록과 건강</li>
+            <li>계약직, 기간제, 알바 등 자유로움과 학문</li>
+        </ul>
+    </div>
+
+    <!-- Section 13 -->
+    <div class="card">
+        <h2 class="main-title">가족 관계</h2>
+        <div class="sub-title">부인</div>
+        <ul>
+            <li>94년 개띠</li>
+            <li>본인 몸은 돼지, 마음은 닭이다.</li>
+            <li>돼지는 물, 개는 흙이다.</li>
+            <li>개띠가 마음 닭을 상생하니 이심전심한다.</li>
+            <li>개 흙이 본인 몸 물을 상극한다.</li>
+            <li>심리적 인연은 좋고 육체적이 인연은 본인이 희생해야 백년해로 한다.</li>
+        </ul>
+
+        <div class="sub-title">자식</div>
+        <ul>
+            <li>외동딸을 둔다.</li>
+            <li>부인 팔자에 아들이 있으면 아들도 낳는다.</li>
+            <li>자식을 뜻하는 동물이 원숭이, 닭이다.</li>
+            <li>28년 원숭이, 29년 닭띠 해다.</li>
+        </ul>
+    </div>
+
+</div>
+
+</body>
+</html>
